@@ -42,7 +42,7 @@ bindsym $mod+Return exec $terminal
 bindsym $mod+Shift+q kill
 
 # start dmenu and a program launcher
-bindsym $mod+space exec i3-dmenu-desktop --dmenu='rofi -dmenu'
+bindsym $mod+space exec i3-dmenu-desktop --dmenu='rofi -dmenu -p ">_ "'
 bindsym $mod+d exec --no-startup-id rofi -show run
 
 # change focus
