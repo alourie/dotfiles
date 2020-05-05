@@ -43,6 +43,9 @@ bindsym $mod+Shift+q kill
 bindsym $mod+space exec i3-dmenu-desktop --dmenu='rofi -dmenu -p ">_ "'
 bindsym $mod+d exec --no-startup-id rofi -show run
 
+# Dunst
+# bindsym $mod+Shift+d --release exec "killall dunst; exec dunst"
+
 # change focus
 #bindsym $mod+j focus left
 #bindsym $mod+k focus down
@@ -108,8 +111,8 @@ bindsym $mod+a focus parent
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1: slack"
 set $ws2 "2: term"
-set $ws3 "3: www"
-set $ws4 "4"
+set $ws3 "3: firefox"
+set $ws4 "4: chrome"
 set $ws5 "5: dev"
 set $ws6 "6"
 set $ws7 "7: msg"

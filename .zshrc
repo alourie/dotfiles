@@ -46,14 +46,17 @@ export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/sbin:/usr/sbin:/sbin/:
 
 # Dircolors
 #eval $(dircolors ~/.dir_colors)
-
-export TERM="screen-256color"
+if (( ${KITTY_WINDOW_ID} )); then
+    export TERM="xterm-kitty"
+else
+    export TERM="screen-256color"
+fi
 # User specific aliases and functions
 alias gp="cd ~/Projects/"
 alias gosrc="cd $GOSRC"
 alias app="cd ~/Projects/app"
 # alias edv='nvim ~/.config/nvim/init.vim'
-# alias edz='nvim ~/.zshrc && rl'
+alias edz='nvim ~/.zshrc && rl'
 # alias edc='nvim ~/.ssh/config'
 # alias edcp='nvim ~/.ssh/prod-config'
 # alias edct='nvim ~/.ssh/test-config'
