@@ -30,9 +30,7 @@ font pango:Fira Code Medium, 12
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
-#bindsym $mod+Shift+Return exec i3-sensible-terminal
-#set $terminal ~/.local/bin/kitty
-set $terminal /usr/bin/alacritty
+set $terminal /usr/bin/kitty
 
 # start a terminal
 bindsym $mod+Shift+Return exec gnome-terminal
@@ -230,14 +228,13 @@ exec "setxkbmap -option 'grp:alt_shift_toggle'"
 for_window [title="^Authy$"] floating enable
 
 # Gaps
-#
 gaps inner 5
 gaps outer 2
 # Border
 for_window [class=".*"] border pixel 2
 client.focused  #4c7899 #285577 #ffffff #2e9ef4 #d08770
 client.focused_inactive #333333 #5f676a #ffffff #484e50 #d08770
-client.unfocused #333333 #5f676a #ffffff #484e50 #4c566a
+client.unfocused #333333 #5f676a #ffffff #484e50 #2e3440
 
 # Only enable gaps on a workspace when there is at least one container
 smart_gaps on

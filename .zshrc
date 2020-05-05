@@ -53,16 +53,16 @@ alias gp="cd ~/Projects/"
 alias gosrc="cd $GOSRC"
 alias app="cd ~/Projects/app"
 # alias edv='nvim ~/.config/nvim/init.vim'
-alias edz='nvim ~/.zshrc && rl'
-alias edc='nvim ~/.ssh/config'
-alias edcp='nvim ~/.ssh/prod-config'
-alias edct='nvim ~/.ssh/test-config'
-alias edkh='nvim ~/.ssh/known_hosts'
-alias edf='nvim ~/Projects/zsh_functions'
-alias edi3='nvim ~/.config/i3/config'
-alias edik='nvim ~/.config/kitty/kitty.conf'
-alias eda='nvim ~/.config/alacritty/alacritty.yml'
-alias edd='nvim ~/.config/dunst/dunstrc'
+# alias edz='nvim ~/.zshrc && rl'
+# alias edc='nvim ~/.ssh/config'
+# alias edcp='nvim ~/.ssh/prod-config'
+# alias edct='nvim ~/.ssh/test-config'
+# alias edkh='nvim ~/.ssh/known_hosts'
+# alias edf='nvim ~/Projects/zsh_functions'
+# alias edi3='nvim ~/.config/i3/config'
+# alias edik='nvim ~/.config/kitty/kitty.conf'
+# alias eda='nvim ~/.config/alacritty/alacritty.yml'
+# alias edd='nvim ~/.config/dunst/dunstrc'
 alias t=~/Projects/todo.txt-cli/todo.sh
 alias vim='nvim'
 alias rl='source ~/.zshrc'
@@ -92,6 +92,9 @@ source ~/Projects/zsh_functions/local
 
 # Editing nvim
 source ~/Projects/zsh_functions/edv
+
+# Edit configs
+source ~/Projects/zsh_functions/edco
 
 # DBload
 source ~/Projects/zsh_functions/dbload

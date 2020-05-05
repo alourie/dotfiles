@@ -1,12 +1,18 @@
 " For some reason home and end keys are not mapping properly.
 " Home key
-" imap <esc>OH <esc>0i
-" cmap <esc>OH <home>
-" nmap <esc>OH 0
+imap <esc>OH <esc>0i
+cmap <esc>OH <home>
+nmap <esc>OH 0
+imap <esc>[1~ <esc>0i
+cmap <esc>[1~ <home>
+nmap <esc>[1~ 0
 " "" End key
-" nmap <esc>OF $
-" imap <esc>OF <esc>$a
-" cmap <esc>OF <end>
+nmap <esc>OF $
+imap <esc>OF <esc>$a
+cmap <esc>OF <end>
+nmap <esc>[4~ $
+imap <esc>[4~ <esc>$a
+cmap <esc>[4~ <end>
 
 " Remap leader
 let mapleader=","
