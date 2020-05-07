@@ -1,0 +1,63 @@
+# vim:ft=zsh
+burst() {
+  filename=$(basename "$1")
+  ext="${filename##*.}"
+  name="${filename%.*}"
+  pdftk ${filename} burst output "${name}-%04d.pdf"
+}
+
+dofi() {
+  filename=$(basename "$1")
+  ext="${filename##*.}"
+  name="${filename%.*}"
+
+  mv "$name.$ext" "$name - Done.$ext"
+}
+
+dofo() {
+  mv "$1" "$1 - Done"
+}
+
+fin() {
+  find . ! -name final.pdf -type f -exec rm {} + && n=$(basename "`pwd`") && mv final.pdf "$n.pdf" && cd .. && dofo $n
+}
+
+mer() {
+  perl ~/Projects/PDFWork/mer.pl "$@"
+  xdg-open final.pdf
+}
+
+mod() {
+  python3 ~/Projects/PDFWork/mod.py "$@"
+}
+
+modify() {
+   pdf=$2
+   if [ "x" == "${pdf}x" ]
+   then
+       pdf="final.pdf"
+   fi
+   mod "${pdf}" 1-end${1}
+   xdg-open ${pdf}
+}
+
+modl() {
+    modify "L" "$@"
+}
+
+modr() {
+    modify "R" "$@"
+}
+
+mods() {
+    modify "S" "$@"
+}
+
+pdfall() {
+  qpdf --empty --pages * -- final.pdf
+  xdg-open final.pdf
+}
+
+pdf() {
+  qpdf --empty --pages "$@"
+}

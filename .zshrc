@@ -39,6 +39,9 @@ DISABLE_AUTO_TITLE="true"
 plugins=(git docker notify z colorize command-not-found pip)
 ZSH_COLORIZE_STYLE="solarized-dark"
 
+# Cursor shape first, or other things will be fucked
+source ~/Projects/zsh_functions/cursor_shape
+
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
@@ -88,19 +91,19 @@ alias config='/usr/bin/git --git-dir=$HOME/.dots/ --work-tree=$HOME'
 
 
 # Go nodes
-source ~/Projects/zsh_functions/local_go
+# source ~/Projects/zsh_functions/local_go
 
 # Local aliases
-source ~/Projects/zsh_functions/local
+# source ~/Projects/zsh_functions/local
 
-# Editing nvim
+# Editing nvim settings
 source ~/Projects/zsh_functions/edv
 
 # Edit configs
 source ~/Projects/zsh_functions/edco
 
 # DBload
-source ~/Projects/zsh_functions/dbload
+# source ~/Projects/zsh_functions/dbload
 
 # Z
 source ~/Projects/z/z.sh

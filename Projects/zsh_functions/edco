@@ -1,0 +1,43 @@
+# vim: filetype=zsh
+# Shamelessly stolen from:
+#!/bin/bash
+#  ____ _____
+# |  _ \_   _|  Derek Taylor (DistroTube)
+# | | | || |    http://www.youtube.com/c/DistroTube
+# | |_| || |    http://www.gitlab.com/dwt1/
+# |____/ |_|
+#
+# Dmenu script for editing some of my more frequently edited config files.
+
+function c() {
+    case "$1" in
+        a|alacritty)
+            choice="$HOME/.config/alacritty/alacritty.yml"
+        ;;
+        d|dunst)
+            choice="$HOME/.config/dunst/dunstrc"
+        ;;
+        i3)
+            choice="$HOME/.config/i3/config"
+        ;;
+        nvim)
+            choice="$HOME/.config/nvim/init.vim"
+        ;;
+        p|polybar)
+            choice="$HOME/.config/polybar/config"
+        ;;
+        k|kitty)
+            choice="$HOME/.config/kitty/kitty.conf"
+        ;;
+        r|rofi)
+            choice="$HOME/.config/rofi/config"
+        ;;
+        s|ssh)
+            choice="$HOME/.ssh/config"
+        ;;
+        *)
+            choice="$HOME/Projects/zsh_functions/edco"
+        ;;
+    esac
+    nvim "$choice"
+}
