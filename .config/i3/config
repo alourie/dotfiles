@@ -40,8 +40,8 @@ bindsym $mod+Return exec $terminal
 bindsym $mod+Shift+q kill
 
 # start dmenu and a program launcher
-bindsym $mod+space exec i3-dmenu-desktop --dmenu='rofi -dmenu -p ">_ "'
-bindsym $mod+d exec --no-startup-id rofi -show run
+bindsym $mod+space exec i3-dmenu-desktop --dmenu='rofi -i -dmenu -p ">_ "'
+bindsym $mod+d exec --no-startup-id rofi -i -show run
 
 # Dunst
 # bindsym $mod+Shift+d --release exec "killall dunst; exec dunst"
@@ -109,15 +109,15 @@ bindsym $mod+a focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1: slack"
-set $ws2 "2: term"
-set $ws3 "3: firefox"
-set $ws4 "4: chrome"
-set $ws5 "5: dev"
+set $ws1 "1:slack"
+set $ws2 "2:term"
+set $ws3 "3:firefox"
+set $ws4 "4:chrome"
+set $ws5 "5:dev"
 set $ws6 "6"
-set $ws7 "7: msg"
-set $ws8 "8: music"
-set $ws9 "9: mail"
+set $ws7 "7:msg"
+set $ws8 "8:music"
+set $ws9 "9:mail"
 set $ws10 "10"
 
 # Switch monitors
@@ -214,18 +214,16 @@ bindsym $mod+r mode "resize"
 
 # Start things when loading
 # exec --no-startup-id picom -C
+exec --no-startup-id polybar main
 exec --no-startup-id nm-applet
 exec --no-startup-id pasystray
 exec --no-startup-id /home/alourie/.local/bin/update-monitors
+exec --no-startup-id /home/alourie/.local/bin/update-keys
 exec --no-startup-id /home/alourie/.local/bin/dunst
 exec --no-startup-id /usr/libexec/geoclue-2.0/demos/agent
 exec --no-startup-id redshift-gtk
-exec --no-startup-id feh --bg-scale ~/.config/i3/background-night.png
+exec --no-startup-id feh --bg-scale ~/.config/i3/background-frost.png
 
-
-# Keyboard
-exec "setxkbmap -layout us,il,ru"
-exec "setxkbmap -option 'grp:alt_shift_toggle'"
 
 # Set authy as floating
 for_window [title="^Authy$"] floating enable
@@ -252,19 +250,19 @@ hide_edge_borders smart_no_gaps
 #        status_command i3status
 #      status_command i3blocks
 #}
-bar {
-      font pango:FiraCode Nerd Mono Font, 12
-      tray_output HDMI-0
-      status_command ~/Projects/i3status-rust/target/release/i3status-rs ~/.config/i3/i3status-rust-config.toml
-      #status_command py3status -c ~/.config/i3/i3status.conf
-      position top
-      colors {
-            separator #666666
-            background #2e3440
-            statusline #dddddd
-            focused_workspace #0088CC #0088CC #ffffff
-            active_workspace #333333 #333333 #ffffff
-            inactive_workspace #2e3440 #2e3440 #888888
-            urgent_workspace #2f343a #900000 #ffffff
-      }
-}
+#bar {
+#      font pango:JetBrains Mono, FontAwesome 12
+#      tray_output HDMI-0
+#      status_command ~/Projects/i3status-rust/target/release/i3status-rs ~/.config/i3/i3status-rust-config.toml
+#      #status_command py3status -c ~/.config/i3/i3status.conf
+#      position top
+#      colors {
+#            separator #4c566a
+#            background #2e3440
+#            statusline #2e3440
+#            focused_workspace #5e81ac #5e81ac #ffffff
+#            active_workspace #5e81ac #5e81ac #ffffff
+#            inactive_workspace #2e3440 #2e3440 #888888
+#            urgent_workspace #2f343a #900000 #ffffff
+#      }
+#}

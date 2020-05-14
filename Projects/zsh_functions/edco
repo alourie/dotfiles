@@ -20,6 +20,9 @@ function c() {
         i3)
             choice="$HOME/.config/i3/config"
         ;;
+        i3b)
+            choice="$HOME/.config/i3/i3status-rust-config.toml"
+        ;;
         nvim)
             choice="$HOME/.config/nvim/init.vim"
         ;;

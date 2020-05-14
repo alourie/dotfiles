@@ -15,3 +15,4 @@ source $HOME/.config/nvim/plug-config/ctrlp.vim
 source $HOME/.config/nvim/plug-config/syntastic.vim
 source $HOME/.config/nvim/plug-config/kite.vim
 source $HOME/.config/nvim/plug-config/coc.vim
+source $HOME/.config/nvim/plug-config/emmet.vim
