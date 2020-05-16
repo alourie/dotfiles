@@ -59,6 +59,7 @@ bindsym $mod+u exec ~/.local/bin/update-monitors
 # Apps
 bindsym $mod+F2 exec firefox
 bindsym $mod+F3 exec code
+bindsym $mod+p  exec ~/.config/polybar/launch.sh
 bindsym $mod+Shift+f exec nautilus
 
 
@@ -214,7 +215,7 @@ bindsym $mod+r mode "resize"
 
 # Start things when loading
 # exec --no-startup-id picom -C
-exec --no-startup-id polybar main
+exec --no-startup-id /home/alourie/.config/polybar/launch.sh
 exec --no-startup-id nm-applet
 exec --no-startup-id pasystray
 exec --no-startup-id /home/alourie/.local/bin/update-monitors
