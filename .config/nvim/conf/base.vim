@@ -9,6 +9,12 @@ autocmd BufWritePre *.tf :TerraformFmt
 "autocmd FileType go autocmd BufWritePre <buffer> GoFmt
 autocmd FileType go compiler golang
 
+" HTML/CSS/JS stuff
+autocmd FileType html set tabstop=2
+autocmd FileType html set shiftwidth=2
+autocmd FileType css set tabstop=2
+autocmd FileType css set shiftwidth=2
+
 " Remove trailing whitespaces
 autocmd BufWritePre * :%s/\s\+$//e
 
@@ -23,15 +29,18 @@ au FileType html setlocal formatprg=js-beautify\ --type\ html
 au FileType scss setlocal formatprg=prettier\ --parser\ css
 au FileType css setlocal formatprg=prettier\ --parser\ css
 
+" Highlighter
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
 filetype indent on
 filetype plugin on
 
-
 set nocompatible
+set termguicolors
 set scrolloff=1
 set sidescrolloff=5
 set display+=lastline
-set shell=bash
+set shell=zsh
 
 
 " general stuff
@@ -56,7 +65,7 @@ set smartindent                         " Makes indenting smart
 set autoindent                          " Good auto indent
 set laststatus=0                        " Always display the status line
 set number                              " Line numbers
-set cursorline                          " Enable highlighting of the current line
+" set cursorline                          " Enable highlighting of the current line
 set background=dark                     " tell vim what the background color looks like
 set showtabline=2                       " Always show tabs
 set noshowmode                          " We don't need to see things like -- INSERT -- anymore

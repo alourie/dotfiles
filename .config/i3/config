@@ -44,7 +44,7 @@ bindsym $mod+space exec i3-dmenu-desktop --dmenu='rofi -i -dmenu -p ">_ "'
 bindsym $mod+d exec --no-startup-id rofi -i -show run
 
 # Dunst
-# bindsym $mod+Shift+d --release exec "killall dunst; exec dunst"
+bindsym $mod+Shift+d --release exec "killall dunst; exec dunst"
 
 # change focus
 #bindsym $mod+j focus left
