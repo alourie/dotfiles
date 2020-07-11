@@ -84,7 +84,7 @@ format = <label-layout>
 format-spacing = 0
 
 label-layout = %layout% %icon%
-label-layout-padding = 1
+label-layout-padding = 0
 label-layout-foreground = ${colors.foreground}
 label-layout-background = ${colors.background}
 

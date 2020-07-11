@@ -136,6 +136,7 @@ export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))
 eval $(keychain -q --agents ssh --eval alourie-ssh)
 eval $(keychain -q --agents ssh --eval alourie.code)
 eval $(keychain -q --agents ssh --eval flockin_gitlab)
+eval $(keychain -q --agents ssh --eval github-flockin)
 
 # Local bin
 export PATH="${PATH}:/home/alourie/.local/bin"
