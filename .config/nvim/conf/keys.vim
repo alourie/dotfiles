@@ -36,8 +36,8 @@ nnoremap <Leader>g :Goyo<CR>
 " next/prev buffers
 " nnoremap <M-]> :bnext<CR>
 " nnoremap <M-[> :bprev<CR>
-nnoremap <TAB> :bnext<CR>
-nnoremap <S-TAB> :bprev<CR>
+nnoremap <M-]> :bnext<CR>
+nnoremap <M-[> :bprev<CR>
 
 " Todo list toggle
 nnoremap <Leader>t :TlistToggle<CR>
@@ -68,3 +68,6 @@ nnoremap <M-h> :vertical resize +2<cr>
 " Golang stuff, currently off
 " map <Leader>a :GoAlternate<CR>
 " map <Leader>. :GoDeclsDir<CR>
+"
+" Emmet
+let g:user_emmet_leader_key='<TAB>'

@@ -98,8 +98,8 @@ Plug 'Glench/Vim-Jinja2-Syntax'
 " Plug 'vim-scripts/groovy.vim'
 
 " Golang, currently off
-" Plug 'fatih/vim-go'
-" Plug 'rjohnsondev/vim-compiler-go'
+Plug 'fatih/vim-go'
+Plug 'rjohnsondev/vim-compiler-go'
 
 " Scala
 " Plug 'derekwyatt/vim-scala'

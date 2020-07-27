@@ -94,6 +94,8 @@ cmap w!! w !sudo tee %
 set background=dark
 colorscheme nord
 
+set guifont=JetBrains\ Mono-16
+
 " taglist - shows signatures (classes, methods, vars) in the open buffer
 " Gain focus on class browser on open
 " let Tlist_GainFocus_On_ToggleOpen = 1
@@ -104,7 +106,7 @@ colorscheme nord
 " " MiniBufExpl setup
 " let g:miniBufExplMapWindowNavVim = 1
 " let g:miniBufExplMapWindowNavArrows = 1
-" let g:miniBufExplMapCTabSwitchBufs = 1
+" let g:miniBufExplMapCTabSwitchBufs = 0
 " let g:miniBufExplModSelTarget = 1
 
 " Stuff that goes nowhere else
