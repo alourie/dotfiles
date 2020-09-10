@@ -71,3 +71,6 @@ nnoremap <M-h> :vertical resize +2<cr>
 "
 " Emmet
 let g:user_emmet_leader_key='<TAB>'
+
+" FZF
+nnoremap <C-p> :<C-u>FZF<CR>

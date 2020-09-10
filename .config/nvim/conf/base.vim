@@ -50,7 +50,7 @@ set encoding=utf-8                      " The encoding displayed
 set pumheight=10                        " Makes popup menu smaller
 set fileencoding=utf-8                  " The encoding written to file
 set ruler              			            " Show the cursor position all the time
-set cmdheight=2                         " More space for displaying messages
+set cmdheight=1                         " More space for displaying messages
 set iskeyword+=-                      	" treat dash separated words as a word text object"
 set mouse=a                             " Enable your mouse
 set splitbelow                          " Horizontal splits will automatically be below
@@ -119,7 +119,7 @@ set guifont=JetBrains\ Mono-16
 
 " GoLang
 " " use goimports for formatting
-" let g:go_fmt_command = "goimports"
+let g:go_fmt_command = "goimports"
 
 " " turn highlighting on
 " let g:go_highlight_functions = 1

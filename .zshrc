@@ -70,7 +70,7 @@ alias edz='nvim ~/.zshrc && rl'
 # alias eda='nvim ~/.config/alacritty/alacritty.yml'
 # alias edd='nvim ~/.config/dunst/dunstrc'
 alias t=~/Projects/todo.txt-cli/todo.sh
-alias vim='nvim'
+alias vim='nvim-nightly'
 alias rl='source ~/.zshrc'
 alias run=xdg-open
 alias ci='HOST=jenkins ssh citadeltunnel-d2 -L 8080:localhost:8080'
@@ -169,3 +169,8 @@ export PATH=${PATH}:${GOOGLE_TOOLS}/ndk-bundle:${GOOGLE_TOOLS}/platform-tools
 
 # IntelliJ
 export PATH=${PATH}:/opt/GoLand/bin:/opt/PyCharm/bin
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Cargo
+export PATH=${PATH}:$HOME/.cargo/bin

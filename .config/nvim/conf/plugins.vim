@@ -41,8 +41,14 @@ Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-commentary'
 " Nerdtree
 Plug 'preservim/nerdtree'
-" Ctrl-P
-Plug 'kien/ctrlp.vim'
+Plug 'ryanoasis/vim-devicons'
+" ChadTree
+Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': ':UpdateRemotePlugins'}
+"Ctrl-P
+"Plug 'kien/ctrlp.vim'
+"FZF
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 " Syntastic
 Plug 'vim-syntastic/syntastic'
 " Use :Ack from vim
@@ -52,6 +58,8 @@ Plug 'wakatime/vim-wakatime'
 " Formatter, i.e. for prettier, black, etc
 Plug 'sbdchd/neoformat'
 Plug 'sheerun/vim-polyglot'
+" Python
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 " Multiple cursor
 Plug 'terryma/vim-multiple-cursors'
 " Improve shit in VTE-based terminals
@@ -84,6 +92,10 @@ Plug 'davidhalter/jedi-vim'
 " Plug 'vim-scripts/TaskList.vim'
 
 """""" Languages
+" Svelte
+"Plug 'evanleck/vim-svelte'
+Plug 'leafOfTree/vim-svelte-plugin'
+
 " Js/Typescript
 Plug 'leafgarland/typescript-vim'
 Plug 'MaxMEllon/vim-jsx-pretty'
