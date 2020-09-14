@@ -25,6 +25,9 @@ Plug 'arcticicestudio/nord-vim'
 " Colouriser
 Plug 'norcalli/nvim-colorizer.lua'
 
+" Tree
+Plug 'nvim-treesitter/nvim-treesitter'
+
 " Emmet
 Plug 'mattn/emmet-vim'
 
@@ -58,6 +61,7 @@ Plug 'wakatime/vim-wakatime'
 " Formatter, i.e. for prettier, black, etc
 Plug 'sbdchd/neoformat'
 Plug 'sheerun/vim-polyglot'
+" Plug 'prettier/vim-prettier', {'do': 'yarn install'}
 " Python
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 " Multiple cursor
@@ -109,8 +113,8 @@ Plug 'Glench/Vim-Jinja2-Syntax'
 " Groovy, currently off
 " Plug 'vim-scripts/groovy.vim'
 
-" Golang, currently off
-Plug 'fatih/vim-go'
+" Golang
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'rjohnsondev/vim-compiler-go'
 
 " Scala
