@@ -70,7 +70,7 @@ alias edz='nvim ~/.zshrc && rl'
 # alias eda='nvim ~/.config/alacritty/alacritty.yml'
 # alias edd='nvim ~/.config/dunst/dunstrc'
 alias t=~/Projects/todo.txt-cli/todo.sh
-alias vim='nvim-nightly'
+alias vim='nvim'
 alias rl='source ~/.zshrc'
 alias run=xdg-open
 alias ci='HOST=jenkins ssh citadeltunnel-d2 -L 8080:localhost:8080'
@@ -133,10 +133,7 @@ export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))
 #else
 #    start_agent;
 #fi
-eval $(keychain -q --agents ssh --eval alourie-ssh)
-eval $(keychain -q --agents ssh --eval alourie.code)
-eval $(keychain -q --agents ssh --eval flockin_gitlab)
-eval $(keychain -q --agents ssh --eval github-flockin)
+eval $(keychain -q --agents ssh --eval zb_bb)
 
 # Local bin
 export PATH="${PATH}:/home/alourie/.local/bin"
@@ -174,3 +171,6 @@ export PATH=${PATH}:/opt/GoLand/bin:/opt/PyCharm/bin
 
 # Cargo
 export PATH=${PATH}:$HOME/.cargo/bin
+
+# Haskel
+export PATH=${PATH}:$HOME/.cabal/bin

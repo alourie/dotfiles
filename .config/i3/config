@@ -57,6 +57,7 @@ bindsym $mod+u exec ~/.local/bin/update-monitors
 #bindsym $mod+semicolon focus right
 
 # Apps
+bindsym $mod+F1 exec slack
 bindsym $mod+F2 exec firefox
 bindsym $mod+F3 exec code
 bindsym $mod+p  exec ~/.config/polybar/launch.sh
@@ -115,11 +116,11 @@ set $ws2 "2:term"
 set $ws3 "3:firefox"
 set $ws4 "4:chrome"
 set $ws5 "5:dev"
-set $ws6 "6"
+set $ws6 "6:dev"
 set $ws7 "7:msg"
 set $ws8 "8:music"
 set $ws9 "9:mail"
-set $ws10 "10"
+set $ws10 "10:vm"
 
 # Switch monitors
 bindsym $mod+Mod1+r exec ~/.config/i3/update_monitors.sh
@@ -130,7 +131,7 @@ bindsym Control+Mod1+Left workspace prev
 
 # Assign Workspaces:
 assign [class="Slack"] $ws1
-assign [class="IntelliJ"] $ws2
+assign [class="IntelliJ"] $ws6
 assign [class="GoLand"] $ws2
 assign [class="Vivaldi"] $ws3
 assign [class="Firefox"] $ws3
@@ -224,6 +225,7 @@ exec --no-startup-id /home/alourie/.local/bin/dunst
 exec --no-startup-id /usr/libexec/geoclue-2.0/demos/agent
 exec --no-startup-id redshift-gtk
 exec --no-startup-id feh --bg-scale ~/.config/i3/background-frost.png
+exec --no-startup-id xss-lock -- i3lock -n -i ~/.config/i3/background-frost.png
 
 
 # Set authy as floating
