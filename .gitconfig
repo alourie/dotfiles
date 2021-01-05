@@ -1,0 +1,60 @@
+[core]
+    editor = nvim
+    excludesfile = /Users/alexlourie/.gitignore
+    whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
+    ignorecase = false
+[alias]
+    co = checkout
+    br = branch
+    ci = commit
+    st = status
+    stu = status -uno
+    renames = true
+    logb = log origin/staging..
+    lo = log --pretty=oneline
+    lob = log --pretty=oneline origin/staging..
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    lgb = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit origin/staging..
+    ls = diff --name-only origin/master
+    rp = rev-parse
+    nb = checkout -b
+    compare = difftool -t meld -y HEAD~
+    review = !sh -c 'git fetch $1 $2:$3_$2' -
+    update = !sh -c 'git fetch -v origin && git rebase origin'
+    brname=!git br | grep '*' | awk '{print $2}'
+    save=!git stash save `git br | grep '*' | awk '{print $2}'`
+    replay=!git stash apply `git br | grep '*' | awk '{print $2}'`
+    amend = commit -a --amend --signoff
+    ch=!git st -s | grep -v ?? | awk '{print $2}'
+    ribbon = tag --force _ribbon
+    catchup = log _ribbon
+    last = for-each-ref --sort=-committerdate refs/heads --format='%(committerdate:relative) %(refname:short)' --count 10
+[user]
+    email = djay.il@gmail.com
+    name = Alex Lourie
+[color]
+    ui = auto
+[sendemail]
+    smtpserverport = 25
+    smtpencryption = tls
+[giggle]
+    main-window-maximized = true
+    main-window-geometry = 0x0+0+0
+    history-view-vpane-position = 556
+    file-view-vpane-position = 700
+    main-window-view = HistoryView
+    file-view-hpane-position = 237
+[push]
+    default = simple
+
+[hub]
+protocol = https
+
+[diff]
+	tool = icdiff
+[difftool "icdiff"]
+    cmd = icdiff $LOCAL $REMOTE
+[difftool "meld"]
+	cmd = meld $LOCAL $REMOTE
+[credential]
+	helper = cache
