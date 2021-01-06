@@ -98,7 +98,7 @@ myEditor :: String
 myEditor = myTerminal ++ " -e nvim "    -- Sets vim as editor for tree select
 
 myBorderWidth :: Dimension
-myBorderWidth = 4          -- Sets border width for windows
+myBorderWidth = 2          -- Sets border width for windows
 
 myNormColor :: String
 myNormColor   = "#d08770"  -- Border color of normal windows
@@ -118,7 +118,8 @@ myStartupHook = do
           spawnOnce "~/.local/bin/update-keys &"
           spawnOnce "feh --bg-scale ~/.config/i3/background-frost.png"
           spawnOnce "nm-applet &"
-          spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 --tint 0x2e3440  --height 22 &"
+          spawnOnce "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --transparent true --alpha 0 --tint 0x2e3440  --height 30 &"
+          spawnOnce "picom -CGb --config ~/.config/picom/picom.conf &"
           setWMName "LG3D"
 
 myColorizer :: Window -> Bool -> X (String, String)
