@@ -165,7 +165,7 @@ time = %H:%M
 time-alt = %H:%M:%S
 
 format =  <label>
-; format-foreground = ${colors.foreground-alt}
+format-foreground = #46d9ff
 ; format-underline = #0a6cf5
 
 label = %date% %time%

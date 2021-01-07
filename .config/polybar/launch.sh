@@ -9,7 +9,7 @@ killall -q polybar
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
 # Launch bar on all screens
-sleep 5;
+sleep 1;
 for m in $(polybar --list-monitors | cut -d":" -f1); do
     echo "Launch for $m"
     MONITOR=$m polybar --reload main -r&

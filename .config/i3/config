@@ -215,7 +215,7 @@ bindsym $mod+r mode "resize"
 
 
 # Start things when loading
-exec --no-startup-id picom -CGb
+exec --no-startup-id picom -CGb --config /home/alourie/.config/picom/picom.conf
 exec --no-startup-id /home/alourie/.config/polybar/launch.sh
 exec --no-startup-id nm-applet
 exec --no-startup-id pasystray
