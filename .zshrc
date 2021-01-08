@@ -133,6 +133,10 @@ export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))
 #else
 #    start_agent;
 #fi
+eval $(keychain -q --agents ssh --eval alourie-ssh)
+eval $(keychain -q --agents ssh --eval alourie.code)
+eval $(keychain -q --agents ssh --eval flockin_gitlab)
+eval $(keychain -q --agents ssh --eval github-flockin)
 eval $(keychain -q --agents ssh --eval zb_bb)
 
 # Local bin

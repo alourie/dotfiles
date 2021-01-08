@@ -16,3 +16,6 @@ source $HOME/.config/nvim/plug-config/syntastic.vim
 source $HOME/.config/nvim/plug-config/kite.vim
 source $HOME/.config/nvim/plug-config/coc.vim
 source $HOME/.config/nvim/plug-config/emmet.vim
+
+" TreeSetter
+" source $HOME/.config/nvim/plug-config/treesetter.vim

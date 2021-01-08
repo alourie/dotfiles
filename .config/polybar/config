@@ -20,7 +20,7 @@ alert = #bd2c40
 bar_bg = #5e81ac
 
 [bar/main]
-monitor = ${env:MONITOR:HDMI-0}
+monitor = ${env:MONITOR:HDMI-1}
 width = 100%
 height = 25
 ;offset-x = 1%
@@ -88,7 +88,7 @@ label-layout-padding = 0
 label-layout-foreground = ${colors.foreground}
 label-layout-background = ${colors.background}
 
-;
+; icon for keyboard indicator
 layout-icon-default = 
 
 [module/filesystem]

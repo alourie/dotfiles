@@ -26,7 +26,7 @@ Plug 'arcticicestudio/nord-vim'
 Plug 'norcalli/nvim-colorizer.lua'
 
 " Tree
-Plug 'nvim-treesitter/nvim-treesitter'
+" Plug 'nvim-treesitter/nvim-treesitter'
 
 " Emmet
 Plug 'mattn/emmet-vim'

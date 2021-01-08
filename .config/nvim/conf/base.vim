@@ -18,9 +18,10 @@ autocmd FileType css set shiftwidth=2
 " Remove trailing whitespaces
 autocmd BufWritePre * :%s/\s\+$//e
 
-" React
+" TypeScript
 au BufNewFile,BufRead *.ts setlocal filetype=typescript
 au BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx
+
 " FORMATTERS
 au FileType javascript setlocal formatprg=prettier
 au FileType javascript.jsx setlocal formatprg=prettier
@@ -96,18 +97,8 @@ colorscheme nord
 
 set guifont=JetBrains\ Mono-16
 
-" taglist - shows signatures (classes, methods, vars) in the open buffer
-" Gain focus on class browser on open
-" let Tlist_GainFocus_On_ToggleOpen = 1
-
 " " YCM
 " let g:ycm_auto_trigger = 1
-
-" " MiniBufExpl setup
-" let g:miniBufExplMapWindowNavVim = 1
-" let g:miniBufExplMapWindowNavArrows = 1
-" let g:miniBufExplMapCTabSwitchBufs = 0
-" let g:miniBufExplModSelTarget = 1
 
 " Stuff that goes nowhere else
 " " Jedi stuff
@@ -120,11 +111,10 @@ set guifont=JetBrains\ Mono-16
 " GoLang
 " " use goimports for formatting
 let g:go_fmt_command = "goimports"
-
 " " turn highlighting on
-" let g:go_highlight_functions = 1
-" let g:go_highlight_methods = 1
-" let g:go_highlight_structs = 1
-" let g:go_highlight_operators = 1
-" let g:go_highlight_build_constraints = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
 

@@ -4,22 +4,22 @@ edv() {
 
         case $1 in
         plugins)
-            nvim ~/.config/nvim/conf/plugins.vim
+            vim ~/.config/nvim/conf/plugins.vim
         ;;
         line)
-            nvim ~/.config/nvim/plug-config/airline.vim
+            vim ~/.config/nvim/plug-config/airline.vim
         ;;
         coc)
-            nvim ~/.config/nvim/plug-config/coc.vim
+            vim ~/.config/nvim/plug-config/coc.vim
         ;;
         base)
-            nvim ~/.config/nvim/conf/base.vim
+            vim ~/.config/nvim/conf/base.vim
         ;;
         keys)
-            nvim ~/.config/nvim/conf/keys.vim
+            vim ~/.config/nvim/conf/keys.vim
         ;;
         esac
     else
-        nvim ~/.config/nvim/init.vim
+        vim ~/.config/nvim/init.vim
     fi
 }
