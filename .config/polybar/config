@@ -22,7 +22,7 @@ bar_bg = #5e81ac
 [bar/main]
 monitor = ${env:MONITOR:HDMI-1}
 width = 100%
-height = 25
+height = 2.2%
 ;offset-x = 1%
 ;offset-y = 1%
 ; radius = 2.0
@@ -44,18 +44,22 @@ padding-right = 0
 module-margin-left = 0
 module-margin-right = 0
 
-font-0 = JetBrains Mono:pixelsize=12;3
+font-0 = JetBrains Mono:pixelsize=11;4
 font-1 = FontAwesome:pixelsize=12;3
 font-2 = siji:pixelsize=12;3
 
 modules-left = i3
 modules-center = date
-modules-right = xkeyboard
+modules-right = cpu filesystem xkeyboard
 
 tray-position = right
 tray-padding = 5
+tray-maxsize = 24
 ; tray-transparent = true
 tray-background = ${colors.background}
+
+dpi-x = 0
+dpi-y = 0
 
 ;wm-restack = bspwm
 ;wm-restack = i3
@@ -71,10 +75,6 @@ tray-background = ${colors.background}
 cursor-click = pointer
 cursor-scroll = ns-resize
 
-[module/xwindow]
-type = internal/xwindow
-label = %title:0:30:...%
-
 [module/xkeyboard]
 type = internal/xkeyboard
 blacklist-0 = num lock
@@ -83,21 +83,29 @@ blacklist-0 = num lock
 format = <label-layout>
 format-spacing = 0
 
-label-layout = %layout% %icon%
+label-layout = %icon% %layout%
 label-layout-padding = 0
-label-layout-foreground = ${colors.foreground}
+label-layout-foreground = "#f5a70a"
 label-layout-background = ${colors.background}
 
 ; icon for keyboard indicator
 layout-icon-default = 
 
+[module/cpu]
+type = internal/cpu
+
+; Seconds to sleep between updates
+; Default: 1
+interval = 10
+label = %{F#51afef} %percentage%% %{F#666666}| %{}
+
 [module/filesystem]
 type = internal/fs
 interval = 25
 
-mount-0 = /
+mount-0 = /home
 
-label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
+label-mounted = %{F#0a81f5} %free% %{F#666666}| %{}
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
 
