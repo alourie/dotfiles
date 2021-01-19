@@ -53,15 +53,23 @@ bindsym $mod+Shift+d --release exec "killall dunst; exec dunst"
 bindsym $mod+l exec i3lock -e -t -f -i ~/.config/i3/sky.png
 bindsym $mod+i exec i3exit suspend
 bindsym $mod+F12 exec ~/Projects/scripts/i3exit suspend
-bindsym $mod+u exec ~/.local/bin/update-monitors
+#bindsym $mod+u exec ~/.local/bin/update-monitors
 #bindsym $mod+semicolon focus right
 
 # Apps
-bindsym $mod+F1 exec slack
-bindsym $mod+F2 exec firefox
-bindsym $mod+F3 exec code
-bindsym $mod+p  exec ~/.config/polybar/launch.sh
-bindsym $mod+Shift+f exec nautilus
+bindsym $mod+F1 exec "slack --force-device-scale-factor=2"
+bindsym $mod+F2 exec $terminal
+bindsym $mod+F3 exec firefox
+bindsym $mod+F4 exec "brave-browser --force-device-scale-factor=1.6"
+bindsym $mod+F6 exec /opt/IntelliJ/bin/idea.sh
+bindsym $mod+Shift+F6 exec /home/alourie/Projects/scrips/start_code.sh
+bindsym $mod+F10 exec virt-manager
+bindsym $mod+p exec ~/.config/polybar/launch.sh
+bindsym $mod+Shift+p exec "killall picom; picom -CGb --config /home/alourie/.config/picom/picom.conf"
+bindsym $mod+Shift+f exec "GDK_SCALE=2 nautilus"
+
+bindsym $mod+a exec /home/alourie/Projects/scripts/start_vm.sh
+bindsym $mod+c exec /home/alourie/Projects/scripts/start_code.sh
 
 
 # alternatively, you can use the cursor keys:
@@ -99,28 +107,24 @@ bindsym $mod+e layout toggle split
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
-# change focus between tiling / floating windows
-# bindsym $mod+space focus mode_toggle
-
-
 # focus the parent container
-bindsym $mod+a focus parent
+bindsym $mod+Shift+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1:slack"
-set $ws2 "2:term"
-set $ws3 "3:firefox"
-set $ws4 "4:chrome"
-set $ws5 "5:dev"
-set $ws6 "6:dev"
-set $ws7 "7:msg"
-set $ws8 "8:music"
-set $ws9 "9:mail"
-set $ws10 "10:vm"
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
 
 # Switch monitors
 bindsym $mod+Mod1+r exec ~/.config/i3/update_monitors.sh
@@ -215,7 +219,7 @@ bindsym $mod+r mode "resize"
 
 
 # Start things when loading
-exec --no-startup-id picom -CGb --config /home/alourie/.config/picom/picom.conf
+# exec --no-startup-id picom -CGb --config /home/alourie/.config/picom/picom.conf
 exec --no-startup-id /home/alourie/.config/polybar/launch.sh
 exec --no-startup-id nm-applet
 exec --no-startup-id pasystray

@@ -33,7 +33,7 @@ function c() {
             choice="$HOME/.config/kitty/kitty.conf"
         ;;
         r|rofi)
-            choice="$HOME/.config/rofi/config"
+            choice="$HOME/.config/rofi/config.rasi"
         ;;
         s|ssh)
             choice="$HOME/.ssh/config"
