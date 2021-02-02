@@ -1,3 +1,13 @@
+## Make sure config is setup
+export DOTS="$HOME/.dots"
+if [ ! -d "${DOTS}" ]; then
+	git clone --bare http://gitlab.com/alourie/dotfiles "${DOTS}"
+fi
+
+if [ ! -e "${HOME}/.zshrc_personal" ]; then
+	echo "Don't forget getting the personal file"
+fi
+
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
     print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
@@ -60,9 +70,6 @@ zinit wait lucid for \
 # Themes
 setopt promptsubst
 
-# Custom stuff
-#export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/sbin:/usr/sbin:/sbin/:/opt/terraform:/home/alourie/local/bin/:/home/alourie/Projects/scripts:/opt/terraform/:/opt/packer/:/home/alourie/.local/bin:/usr/local/go/bin:/home/alourie/Projects/gospace/bin:/home/alourie/GoogleAndroidTools/ndk-bundle:/home/alourie/GoogleAndroidTools/platform-tools:/opt/GoLand/bin:/home/alourie/bin:/var/lib/snapd/snap/bin
-#
 #
 if (( ${KITTY_WINDOW_ID} )); then
     export TERM="xterm-kitty"
@@ -80,4 +87,4 @@ export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 eval "$(starship init zsh)"
 
 # Personal customisations
-source ~/.zshrc_local
+source ~/.zshrc_personal

@@ -53,7 +53,7 @@ format=" [$branch]($style) "
 style="bold yellow"
 
 [git_status]
-conflicted = "✘ "
+conflicted = "✘"
 untracked = "[∙](bold white)"
 stashed = "[∙](bold cyan)"
 staged = "[∙](bold green)"
@@ -62,4 +62,4 @@ modified = "[∙](bold red)"
 deleted = "[∙](bold red)"
 renamed = "[∙](bold red)"
 #format = "[ $all_status$ahead_behind ]"
-format='([$all_status$ahead_behind]($style))'
+format='([$conflicted$staged$modified$untracked$ahead_behind]($style))'
