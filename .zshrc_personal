@@ -118,3 +118,7 @@ export PATH=${PATH}:$HOME/.cabal/bin
 
 # Interactive comments
 setopt interactivecomments
+
+# Test alt+k as arrow up in the terminal
+bindkey "^[k" history-beginning-search-backward
+bindkey "^[j" history-beginning-search-forward
