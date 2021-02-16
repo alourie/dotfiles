@@ -4,9 +4,27 @@ if [ ! -d "${DOTS}" ]; then
 	git clone --bare http://gitlab.com/alourie/dotfiles "${DOTS}"
 fi
 
-if [ ! -e "${HOME}/.zshrc_personal" ]; then
-	echo "Don't forget getting the personal file"
+ZSHRC_PERSONAL="${HOME}/.zshrc_personal"
+if [ ! -e "${ZSHRC_PERSONAL}" ]; then
+	wget https://gitlab.com/alourie/dotfiles/-/raw/master/.zshrc_personal "${ZSHRC_PERSONAL}"
 fi
+
+# Applications list, it's for arch; will need some update for debians/fedoras
+# APPS="dunst polybar redshift feh network-manager-applet pasystray kitty neovim"
+# for app in "${(@s/ /)APPS}"; do
+# 	type $app 2&>1 > /dev/null
+# 	if [ ! $? -eq 0 ]; then
+# 		# Not installed, just do all
+# 		echo "Installing minimal programs set"
+# 		sudo pacman -S --needed ${(@s/ /)APPS}
+# 	fi
+# done
+
+# Check fonts; currently I'm using JetBrains Mono, so expect it to be installed
+# pacman -Q nerd-fonts-jetbrains-mono 2&>1 > /dev/null
+# if [ ! $? -eq 0 ]; then
+#    yay -y nerd-fonts-jetbrains-mono
+# fi
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
@@ -48,11 +66,10 @@ zinit wait lucid for \
 
 
 # Keys/completions/history + compinit
-zinit wait'!' lucid atload"zicompinit; zicdreplay" for \
+zinit wait'!' lucid for \
     OMZL::history.zsh \
     OMZL::spectrum.zsh \
     OMZL::completion.zsh \
-    OMZL::key-bindings.zsh \
 	as"completion" OMZP::docker/_docker
 
 # All of the above using the for-syntax and also z-a-bin-gem-node annex
@@ -79,12 +96,21 @@ fi
 
 
 alias edz="vim ~/.zshrc && source ~/.zshrc"
+alias edzp="vim ${ZSHRC_PERSONAL} && source ~/.zshrc"
 alias rl="source ~/.zshrc"
 alias ls="ls --color=auto"
 
 # Awesome prompt (starship)
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
+type starship > /dev/null
+if [ ! $? -eq 0 ]; then
+	echo "Install Starship"
+	curl -fsSL https://starship.rs/install.sh | bash
+fi
 eval "$(starship init zsh)"
 
 # Personal customisations
-source ~/.zshrc_personal
+source "${ZSHRC_PERSONAL}"
+
+zinit wait'!' lucid atload"zicompinit; zicdreplay" for \
+    OMZL::key-bindings.zsh \
