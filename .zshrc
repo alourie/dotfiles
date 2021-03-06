@@ -1,13 +1,29 @@
+## DEFS
+ZSHRC="${HOME}/.zshrc"
+ZSHRC_PERSONAL="${HOME}/.zshrc_personal"
+
 ## Make sure config is setup
 export DOTS="$HOME/.dots"
 if [ ! -d "${DOTS}" ]; then
 	git clone --bare http://gitlab.com/alourie/dotfiles "${DOTS}"
 fi
 
-ZSHRC_PERSONAL="${HOME}/.zshrc_personal"
 if [ ! -e "${ZSHRC_PERSONAL}" ]; then
 	wget https://gitlab.com/alourie/dotfiles/-/raw/master/.zshrc_personal "${ZSHRC_PERSONAL}"
 fi
+
+# Awesome prompt (starship)
+type starship > /dev/null
+if [ ! $? -eq 0 ]; then
+	echo "Install Starship"
+	curl -fsSL https://starship.rs/install.sh | bash
+fi
+export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
+eval "$(starship init zsh)"
+
+
+# Make PATH unique; i.e not repeat paths that are already defined.
+typeset -U path
 
 # Applications list, it's for arch; will need some update for debians/fedoras
 # APPS="dunst polybar redshift feh network-manager-applet pasystray kitty neovim"
@@ -55,25 +71,25 @@ zinit for \
     light-mode  agkozak/zsh-z \
     light-mode  marzocchi/zsh-notify \
 
-zinit wait lucid for \
-	OMZP::colorize \
-	OMZP::command-not-found \
-    OMZP::colored-man-pages \
-	OMZP::mvn \
+zinit wait'0a' lucid atload'bindkey "\el" forward-word' for \
+    OMZL::key-bindings.zsh \
 
 zinit wait lucid for \
-    PZT::modules/utility/init.zsh
-
+    light-mode OMZL::history.zsh \
+    light-mode OMZL::spectrum.zsh \
+    light-mode OMZL::completion.zsh \
+	light-mode OMZP::colorize \
+	light-mode OMZP::command-not-found \
+    light-mode OMZP::colored-man-pages \
+	light-mode OMZP::mvn \
+    light-mode PZT::modules/utility/init.zsh
 
 # Keys/completions/history + compinit
-zinit wait'!' lucid for \
-    OMZL::history.zsh \
-    OMZL::spectrum.zsh \
-    OMZL::completion.zsh \
-	as"completion" OMZP::docker/_docker
+zinit wait lucid atload"zicompinit; zicdreplay" for \
+ 	as"completion" OMZP::docker/_docker
 
 # All of the above using the for-syntax and also z-a-bin-gem-node annex
-zinit wait"1" lucid from"gh-r" as"null" for \
+zinit wait lucid from"gh-r" as"null" for \
      sbin"fzf"          junegunn/fzf-bin \
      sbin"**/fd"        @sharkdp/fd \
      sbin"**/bat"       @sharkdp/bat \
@@ -84,10 +100,7 @@ zinit wait lucid for \
 	light-mode davidde/git
 
 
-# Themes
-setopt promptsubst
-
-#
+# KITTY TERM
 if (( ${KITTY_WINDOW_ID} )); then
     export TERM="xterm-kitty"
 else
@@ -95,22 +108,17 @@ else
 fi
 
 
-alias edz="vim ~/.zshrc && source ~/.zshrc"
-alias edzp="vim ${ZSHRC_PERSONAL} && source ~/.zshrc"
-alias rl="source ~/.zshrc"
+alias rl="source ${ZSHRC}"
+alias rlc="source ${ZSHRC_PERSONAL}"
+alias edz="vim ${ZSHRC} && rl"
+alias edzp="vim ${ZSHRC_PERSONAL} && rlc"
 alias ls="ls --color=auto"
 
-# Awesome prompt (starship)
-export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
-type starship > /dev/null
-if [ ! $? -eq 0 ]; then
-	echo "Install Starship"
-	curl -fsSL https://starship.rs/install.sh | bash
-fi
-eval "$(starship init zsh)"
+# Test alt+k as arrow up in the terminal
+bindkey "\ek" up-line-or-beginning-search
+bindkey "\ej" down-line-or-beginning-search
+bindkey "\eh" backward-word
+bindkey "\el" forward-word # this one is also redefined on key-bindings loading
 
 # Personal customisations
-source "${ZSHRC_PERSONAL}"
-
-zinit wait'!' lucid atload"zicompinit; zicdreplay" for \
-    OMZL::key-bindings.zsh \
+source ${ZSHRC_PERSONAL}
