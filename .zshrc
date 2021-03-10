@@ -1,3 +1,6 @@
+# PROFILING
+# zmodload zsh/zprof
+
 ## DEFS
 ZSHRC="${HOME}/.zshrc"
 ZSHRC_PERSONAL="${HOME}/.zshrc_personal"
@@ -11,6 +14,18 @@ fi
 if [ ! -e "${ZSHRC_PERSONAL}" ]; then
 	wget https://gitlab.com/alourie/dotfiles/-/raw/master/.zshrc_personal "${ZSHRC_PERSONAL}"
 fi
+
+alias rl="source ${ZSHRC}"
+alias rlc="source ${ZSHRC_PERSONAL}"
+alias edz="vim ${ZSHRC} && rl"
+alias edzp="vim ${ZSHRC_PERSONAL} && rlc"
+alias ls="ls --color=auto"
+
+# Test alt+k as arrow up in the terminal
+bindkey "\ek" up-line-or-beginning-search
+bindkey "\ej" down-line-or-beginning-search
+bindkey "\eh" backward-word
+bindkey "\el" forward-word # this one is also redefined on key-bindings loading
 
 # Awesome prompt (starship)
 type starship > /dev/null
@@ -70,13 +85,12 @@ zinit for \
 	zdharma/history-search-multi-word \
     light-mode  agkozak/zsh-z \
     light-mode  marzocchi/zsh-notify \
-
-zinit wait'0a' lucid atload'bindkey "\el" forward-word' for \
-    OMZL::key-bindings.zsh \
-
-zinit wait lucid for \
     light-mode OMZL::history.zsh \
-    light-mode OMZL::spectrum.zsh \
+
+zinit wait lucid atload'bindkey "\el" forward-word' for \
+    light-mode OMZL::key-bindings.zsh \
+
+zinit wait lucid atload"zicompinit; zicdreplay" for \
     light-mode OMZL::completion.zsh \
 	light-mode OMZP::colorize \
 	light-mode OMZP::command-not-found \
@@ -84,9 +98,9 @@ zinit wait lucid for \
 	light-mode OMZP::mvn \
     light-mode PZT::modules/utility/init.zsh
 
-# Keys/completions/history + compinit
-zinit wait lucid atload"zicompinit; zicdreplay" for \
- 	as"completion" OMZP::docker/_docker
+# Docker, currently unused
+# zinit wait lucid atload"zicompinit; zicdreplay" for \
+#  	as"completion" OMZP::docker/_docker
 
 # All of the above using the for-syntax and also z-a-bin-gem-node annex
 zinit wait lucid from"gh-r" as"null" for \
@@ -99,7 +113,6 @@ zinit wait lucid from"gh-r" as"null" for \
 zinit wait lucid for \
 	light-mode davidde/git
 
-
 # KITTY TERM
 if (( ${KITTY_WINDOW_ID} )); then
     export TERM="xterm-kitty"
@@ -107,18 +120,14 @@ else
     export TERM="screen-256color"
 fi
 
-
-alias rl="source ${ZSHRC}"
-alias rlc="source ${ZSHRC_PERSONAL}"
-alias edz="vim ${ZSHRC} && rl"
-alias edzp="vim ${ZSHRC_PERSONAL} && rlc"
-alias ls="ls --color=auto"
-
-# Test alt+k as arrow up in the terminal
-bindkey "\ek" up-line-or-beginning-search
-bindkey "\ej" down-line-or-beginning-search
-bindkey "\eh" backward-word
-bindkey "\el" forward-word # this one is also redefined on key-bindings loading
-
 # Personal customisations
 source ${ZSHRC_PERSONAL}
+
+# VIM mode
+# zinit ice depth=1
+# zinit light jeffreytse/zsh-vi-mode
+# ZVM_KEYTIMEOUT=1
+
+
+# PROFILING
+#zprof
