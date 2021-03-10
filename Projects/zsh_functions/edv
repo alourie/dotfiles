@@ -1,25 +1,22 @@
 # vim: filetype=zsh
-edv() {
-    if [ ! -z "$1" ]; then
-
-        case $1 in
+if [ ! -z "$1" ]; then
+    case $1 in
         plugins)
-            vim ~/.config/nvim/conf/plugins.vim
+            nvim ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/conf/plugins.vim
         ;;
         line)
-            vim ~/.config/nvim/plug-config/airline.vim
+            nvim ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plug-config/airline.vim
         ;;
         coc)
-            vim ~/.config/nvim/plug-config/coc.vim
+            nvim ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plug-config/coc.vim
         ;;
         base)
-            vim ~/.config/nvim/conf/base.vim
+            nvim ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/conf/base.vim
         ;;
         keys)
-            vim ~/.config/nvim/conf/keys.vim
+            nvim ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/conf/keys.vim
         ;;
         esac
-    else
-        vim ~/.config/nvim/init.vim
-    fi
-}
+else
+    nvim ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/init.vim
+fi

@@ -19,7 +19,6 @@ alias rl="source ${ZSHRC}"
 alias rlc="source ${ZSHRC_PERSONAL}"
 alias edz="vim ${ZSHRC} && rl"
 alias edzp="vim ${ZSHRC_PERSONAL} && rlc"
-alias ls="ls --color=auto"
 
 # Test alt+k as arrow up in the terminal
 bindkey "\ek" up-line-or-beginning-search

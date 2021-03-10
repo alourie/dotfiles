@@ -1,0 +1,44 @@
+# vim: filetype=zsh
+# Shamelessly stolen from:
+#!/bin/bash
+#  ____ _____
+# |  _ \_   _|  Derek Taylor (DistroTube)
+# | | | || |    http://www.youtube.com/c/DistroTube
+# | |_| || |    http://www.gitlab.com/dwt1/
+# |____/ |_|
+#
+# Dmenu script for editing some of my more frequently edited config files.
+
+case "$1" in
+    a|alacritty)
+        choice="${XDG_CONFIG_HOME:-$HOME/.config}/alacritty/alacritty.yml"
+    ;;
+    d|dunst)
+        choice="${XDG_CONFIG_HOME:-$HOME/.config}/dunst/dunstrc"
+    ;;
+    i3)
+        choice="${XDG_CONFIG_HOME:-$HOME/.config}/i3/config"
+    ;;
+    i3b)
+        choice="${XDG_CONFIG_HOME:-$HOME/.config}/i3/i3status-rust-config.toml"
+    ;;
+    nvim)
+        choice="${XDG_CONFIG_HOME:-$HOME/.config}/nvim/init.vim"
+    ;;
+    p|polybar)
+        choice="${XDG_CONFIG_HOME:-$HOME/.config}/polybar/config"
+    ;;
+    k|kitty)
+        choice="${XDG_CONFIG_HOME:-$HOME/.config}/kitty/kitty.conf"
+    ;;
+    r|rofi)
+        choice="${XDG_CONFIG_HOME:-$HOME/.config}/rofi/config.rasi"
+    ;;
+    s|ssh)
+        choice="$HOME/.ssh/config"
+    ;;
+    *)
+        choice="$HOME/Projects/zsh_functions/c"
+    ;;
+esac
+nvim "$choice"
