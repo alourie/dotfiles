@@ -1,19 +1,22 @@
-# Customize to your needs...
-path=(/usr/local/go/bin /opt/terraform $HOME/Projects/scripts /opt/packer $HOME/.local/bin $HOME/Projects/gospace/bin $HOME/GoogleAndroidTools/ndk-bundle $HOME/GoogleAndroidTools/platform-tools $path)
+# PROJECTS
+export PROJECTS="$HOME/Projects"
+
+# PATH
+path=(/usr/local/go/bin /opt/terraform $PROJECTS/scripts /opt/packer $HOME/.local/bin $path)
 
 # Temporary aliases and functions
-alias gp="cd ~/Projects/"
-alias t=~/Projects/todo.txt-cli/todo.sh
+alias gp="cd $PROJECTS"
+alias t=$PROJECTS/todo.txt-cli/todo.sh
 alias vim='nvim'
 alias ssh="ssh -A "
-alias picsort="~/Projects/merge_pics/merge_go/picsort"
+alias picsort="$PROJECTS/merge_pics/merge_go/picsort"
 alias showbig="du -sh * | grep -e '\dG'"
 alias cls="clear"
 alias nn="notify-send \"all done\" -t 3000"
 alias config='/usr/bin/git --git-dir=$HOME/.dots/ --work-tree=$HOME'
 
 # Custom functions
-fpath+=($HOME/Projects/zsh_functions)
+fpath+=($PROJECTS/zsh_functions)
 autoload -Uz c
 autoload -Uz edv
 autoload -Uz set-tokens
@@ -58,7 +61,7 @@ fi
 export GO111MODULE=on
 export GOROOT=""
 export GOROOT=`go env GOROOT`
-export GOPATH=$HOME/Projects/gospace
+export GOPATH=$PROJECTS/gospace
 export GOSRC="${GOPATH}/src"
 path+=${GOPATH}/bin
 alias gtest="$GOPATH/bin/gotest"
