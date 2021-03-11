@@ -86,23 +86,25 @@ zinit for \
     light-mode  marzocchi/zsh-notify \
     light-mode OMZL::history.zsh \
 
-zinit wait lucid atload'bindkey "\el" forward-word' for \
-    light-mode OMZL::key-bindings.zsh \
-
-zinit wait lucid atload"zicompinit; zicdreplay" for \
-    light-mode OMZL::completion.zsh \
+zinit wait'!' lucid for \
+	light-mode PZT::modules/utility/init.zsh \
 	light-mode OMZP::colorize \
 	light-mode OMZP::command-not-found \
     light-mode OMZP::colored-man-pages \
 	light-mode OMZP::mvn \
-    light-mode PZT::modules/utility/init.zsh
+
+zinit wait'!' lucid atload'bindkey "\el" forward-word' for \
+    light-mode OMZL::key-bindings.zsh \
+
+zinit wait'!' lucid atload"zicompinit; zicdreplay" for \
+    light-mode OMZL::completion.zsh \
 
 # Docker, currently unused
 # zinit wait lucid atload"zicompinit; zicdreplay" for \
 #  	as"completion" OMZP::docker/_docker
 
 # All of the above using the for-syntax and also z-a-bin-gem-node annex
-zinit wait lucid from"gh-r" as"null" for \
+zinit wait'!' lucid from"gh-r" as"null" for \
      sbin"fzf"          junegunn/fzf-bin \
      sbin"**/fd"        @sharkdp/fd \
      sbin"**/bat"       @sharkdp/bat \
@@ -125,7 +127,8 @@ source ${ZSHRC_PERSONAL}
 # VIM mode
 # zinit ice depth=1
 # zinit light jeffreytse/zsh-vi-mode
-# ZVM_KEYTIMEOUT=1
+# export ZVM_VI_ESCAPE_BINDKEY="jj"
+# export ZVM_KEYTIMEOUT=1
 
 
 # PROFILING

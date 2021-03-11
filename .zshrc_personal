@@ -44,10 +44,10 @@ export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))
 #else
 #    start_agent;
 #fi
-# Just load all keys
 
+# Just load all paired keys
 if [ -d $HOME/.ssh ]; then
-    for f in `ls -1 ~/.ssh`; do
+    for f in `ls -1 $HOME/.ssh`; do
         if [[ -f $f\.pub ]]; then
             eval $(keychain -q --agents ssh --eval $f)
         fi;
@@ -66,21 +66,12 @@ alias gtest="$GOPATH/bin/gotest"
 # For now
 unset SSH_ASKPASS
 
-# AWS CLI completions
-# source /opt/boxen/homebrew/share/zsh/site-functions/_aws
-
-# Ruby
-# if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-#
-#
 # Google tools
 export GOOGLE_TOOLS=/home/alourie/GoogleAndroidTools
 path+=(${GOOGLE_TOOLS}/ndk-bundle ${GOOGLE_TOOLS}/platform-tools)
 
 # IntelliJ
 path+=(/opt/IntelliJ/bin /opt/GoLand/bin /opt/PyCharm/bin)
-
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Rust/Cargo
 #source $HOME/.cargo/env
