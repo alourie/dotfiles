@@ -11,6 +11,7 @@ alias vim='nvim'
 alias ssh="ssh -A "
 alias picsort="$PROJECTS/merge_pics/merge_go/picsort"
 alias showbig="du -sh * | grep -e '\dG'"
+alias showst="lsblk | ack -v \"loop|ram|rom\""
 alias cls="clear"
 alias nn="notify-send \"all done\" -t 3000"
 alias config='/usr/bin/git --git-dir=$HOME/.dots/ --work-tree=$HOME'

@@ -20,11 +20,6 @@ alias rlc="source ${ZSHRC_PERSONAL}"
 alias edz="vim ${ZSHRC} && rl"
 alias edzp="vim ${ZSHRC_PERSONAL} && rlc"
 
-# Test alt+k as arrow up in the terminal
-bindkey "\ek" up-line-or-beginning-search
-bindkey "\ej" down-line-or-beginning-search
-bindkey "\eh" backward-word
-bindkey "\el" forward-word # this one is also redefined on key-bindings loading
 
 # Awesome prompt (starship)
 type starship > /dev/null
@@ -88,31 +83,35 @@ zinit for \
 
 zinit wait'!' lucid for \
 	light-mode PZT::modules/utility/init.zsh \
+
+zinit wait'!' lucid for \
 	light-mode OMZP::colorize \
 	light-mode OMZP::command-not-found \
     light-mode OMZP::colored-man-pages \
 	light-mode OMZP::mvn \
 
-zinit wait'!' lucid atload'bindkey "\el" forward-word' for \
-    light-mode OMZL::key-bindings.zsh \
-
 zinit wait'!' lucid atload"zicompinit; zicdreplay" for \
     light-mode OMZL::completion.zsh \
+
+zinit lucid for \
+    light-mode OMZL::key-bindings.zsh \
+
 
 # Docker, currently unused
 # zinit wait lucid atload"zicompinit; zicdreplay" for \
 #  	as"completion" OMZP::docker/_docker
 
-# All of the above using the for-syntax and also z-a-bin-gem-node annex
 zinit wait'!' lucid from"gh-r" as"null" for \
      sbin"fzf"          junegunn/fzf-bin \
      sbin"**/fd"        @sharkdp/fd \
      sbin"**/bat"       @sharkdp/bat \
+     sbin"**/hyperfine" @sharkdp/hyperfine \
      sbin"exa* -> exa"  ogham/exa
 
 # GIT
 zinit wait lucid for \
 	light-mode davidde/git
+
 
 # KITTY TERM
 if (( ${KITTY_WINDOW_ID} )); then
@@ -125,10 +124,21 @@ fi
 source ${ZSHRC_PERSONAL}
 
 # VIM mode
-# zinit ice depth=1
-# zinit light jeffreytse/zsh-vi-mode
-# export ZVM_VI_ESCAPE_BINDKEY="jj"
-# export ZVM_KEYTIMEOUT=1
+zinit ice lucid depth=1
+zinit light jeffreytse/zsh-vi-mode
+export ZVM_KEYTIMEOUT=0.2
+# The plugin will auto execute this zvm_after_lazy_keybindings function
+function zvm_after_lazy_keybindings() {
+  # Here we define the custom widget
+  zvm_define_widget up-line-or-beginning-search
+  zvm_define_widget down-line-or-beginning-search
+
+  # In normal mode, press Ctrl-E to invoke this widget
+  zvm_bindkey vicmd 'k' up-line-or-beginning-search
+  zvm_bindkey viins "\ek" up-line-or-beginning-search
+  zvm_bindkey vicmd 'j' down-line-or-beginning-search
+  zvm_bindkey viins "\ej" down-line-or-beginning-search
+}
 
 
 # PROFILING
