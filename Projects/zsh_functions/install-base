@@ -2,14 +2,17 @@
 
 function install_arch() {
     # Deps list, it's for arch; will need some update for debians/fedoras
-    APPS="dunst polybar redshift feh network-manager-applet pasystray kitty neovim curl unzip tar starship"
-    for app in "${(@s/ /)APPS}"; do
+    APPS="dunst polybar redshift feh network-manager-applet pasystray kitty neovim curl unzip tar starship rustup"
+    for app in ${(@s/ /)APPS}; do
         if ! command -v $app > /dev/null; then
             # Not installed, just do all
-            echo "Installing minimal programs set"
             $sudo pacman -S --needed ${(@s/ /)APPS}
         fi
     done
+
+	rustup self upgrade-data
+	rustup install stable
+	rustup default stable
 
     # Install Paru
     cd $HOME/Projects
