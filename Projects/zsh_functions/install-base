@@ -11,10 +11,17 @@ function install_arch() {
         fi
     done
 
+    # Install Paru
+    cd $HOME/Projects
+    sudo pacman -S --needed base-devel
+    git clone https://aur.archlinux.org/paru.git
+    cd paru
+    makepkg -si
+
     #  Check fonts; currently I'm using JetBrains Mono, so expect it to be installed
     pacman -Q nerd-fonts-jetbrains-mono 2&>1 > /dev/null
     if [ ! $? -eq 0 ]; then
-        yay -y nerd-fonts-jetbrains-mono
+        paru -y nerd-fonts-jetbrains-mono
     fi
 
 }
