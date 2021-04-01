@@ -8,5 +8,5 @@ VM=$(echo $(${VIRSH} list --all --name) | sed -e "s/ /\n/g" | rofi -dmenu -p "Se
 
 if [ "x" != "x${VM}" ]
 then
-    ${VIRTM} --show-domain-console "${VM}"
+    GDK_SCALE=2 ${VIRTM} --show-domain-console "${VM}"
 fi

@@ -12,7 +12,7 @@ configuration {
 	line-padding: 10;
 	separator-style: "none";
 	hide-scrollbar: true;
-	theme: "/home/alourie/.local/share/rofi/themes/nord.rasi";
+	theme: ".local/share/rofi/themes/nord.rasi";
 	display-window: "";
 	display-run: "";
 	display-ssh: "";

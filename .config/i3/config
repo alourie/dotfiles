@@ -59,24 +59,25 @@ bindsym $mod+F12 exec ~/Projects/scripts/i3exit suspend
 # Apps
 bindsym $mod+F1 exec "slack --force-device-scale-factor=2"
 bindsym $mod+F2 exec $terminal
-bindsym $mod+F3 exec firefox
+bindsym $mod+F3 exec "GDK_SCALE=2 firefox"
 bindsym $mod+F4 exec "brave-browser --force-device-scale-factor=1.6"
-bindsym $mod+F6 exec /opt/IntelliJ/bin/idea.sh
-bindsym $mod+Shift+F6 exec /home/alourie/Projects/scrips/start_code.sh
+bindsym $mod+F6 exec /home/alourie/Projects/scripts/start_code.sh
 bindsym $mod+F10 exec virt-manager
 bindsym $mod+p exec ~/.config/polybar/launch.sh
-bindsym $mod+Shift+p exec "killall picom; picom -CGb --config /home/alourie/.config/picom/picom.conf"
+bindsym $mod+b exec "$HOME/Projects/scripts/barrier.sh toggle"
+#bindsym $mod+Shift+p exec "killall picom; picom -CGb --config /home/alourie/.config/picom/picom.conf"
+bindsym $mod+Shift+p exec "pass -c basic"
 bindsym $mod+Shift+f exec "GDK_SCALE=2 nautilus"
-
 bindsym $mod+a exec /home/alourie/Projects/scripts/start_vm.sh
-bindsym $mod+c exec /home/alourie/Projects/scripts/start_code.sh
 
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
+bindsym $mod+j focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
+bindsym $mod+k focus right
 
 # move focused window
 #bindsym $mod+Shift+j move left
@@ -145,6 +146,7 @@ assign [class="Brave"] $ws4
 assign [class="Telegram"] $ws7
 assign [class="Mailspring"] $ws9
 assign [class="Station"] $ws5
+assign [class="Zoom"] $ws0
 
 
 # switch to workspace
@@ -222,12 +224,10 @@ bindsym $mod+r mode "resize"
 # exec --no-startup-id picom -CGb --config /home/alourie/.config/picom/picom.conf
 exec --no-startup-id /home/alourie/.config/polybar/launch.sh
 exec --no-startup-id nm-applet
-exec --no-startup-id pasystray
 exec --no-startup-id /home/alourie/.local/bin/update-monitors
 exec --no-startup-id /home/alourie/.local/bin/update-keys
 exec --no-startup-id /home/alourie/.local/bin/dunst
-exec --no-startup-id /usr/libexec/geoclue-2.0/demos/agent
-exec --no-startup-id redshift-gtk
+exec --no-startup-id redshift
 exec --no-startup-id feh --bg-scale ~/.config/i3/background-frost.png
 exec --no-startup-id xss-lock -- i3lock -n -i ~/.config/i3/background-frost.png
 
@@ -258,7 +258,7 @@ client.unfocused #333333 #5f676a #ffffff #484e50 #2e3440
 #      status_command i3blocks
 #}
 #bar {
-#      font pango:JetBrains Mono, FontAwesome 12
+#      font pango:JetBrainsMono Nerd Font Mono, FontAwesome 18
 #      tray_output HDMI-0
 #      status_command ~/Projects/i3status-rust/target/release/i3status-rs ~/.config/i3/i3status-rust-config.toml
 #      #status_command py3status -c ~/.config/i3/i3status.conf

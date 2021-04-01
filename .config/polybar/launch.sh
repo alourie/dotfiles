@@ -2,6 +2,9 @@
 
 ## Add this to your wm startup file.
 
+# Fix keyboard
+update-keys
+
 # Terminate already running bar instances
 killall -q polybar
 

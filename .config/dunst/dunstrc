@@ -397,6 +397,7 @@
 
 [notify-send]
     appname = "notify-send"
+    msg_urgency = "normal"
     background = "#5E81AC"
     foreground = "#ffffff"
     format = "From: <b>terminal says</b>\n\n%s\n%b"

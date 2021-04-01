@@ -2,24 +2,21 @@
 -- install xmobar with these flags: --flags="with_alsa" --flags="with_mpd" --flags="with_xft"  OR --flags="all_extensions"
 -- you can find weather location codes here: http://weather.noaa.gov/index.html
 
-<<<<<<< Updated upstream
-Config { font    = "xft:JetBrains Mono:pixelsize=16:antialias=true:hinting=true"
-       , additionalFonts = ["xft:Inter Nerd Font:pixelsize=22:antialias=true:hinting=true"
-                           , "xft:FontAwesome:pixelsize=16"
-                           ]
-       , bgColor = "#2e3440"
-       , fgColor = "#e5e9f0"
-       , position = Static { xpos = 0 , ypos = 0, width = 1920, height = 34 }
-=======
-Config { font    = "xft:JetBrains Mono:pixelsize=24:antialias=true:hinting=true"
+Config { font    = "xft:NotoSans Nerd Font:pixelsize=26:antialias=true:hinting=true"
+      -- , textOffset = 35
        , additionalFonts = [
-                 "xft:FiraCode Nerd Font:pixelsize=32:antialias=true:hinting=true"
+                 "xft:JetBrainsMono Nerd Font Mono:pixelsize=50:antialias=true:hinting=true"
+               , "xft:FiraCode Nerd Font:pixelsize=32:antialias=true:hinting=true"
                , "xft:FontAwesome:pixelsize=22"
-                           ]
+               , "xft:JetBrainsMono Nerd Font Mono:pixelsize=40:antialias=true:hinting=true"
+               , "xft:NotoSans Nerd Font:pixelsize=24:antialias=true:hinting=true"
+               , "xft:NotoSans Nerd Font:pixelsize=50:antialias=true:hinting=true"
+               , "xft:NotoSans Nerd Font:pixelsize=26:antialias=true:hinting=true"
+        ]
        , bgColor = "#2e3440"
        , fgColor = "#e5e9f0"
-       , position = Static { xpos = 0 , ypos = 0, width = 3840, height = 44 }
->>>>>>> Stashed changes
+       , position = Static { xpos = 0 , ypos = 0, width = 3840, height = 50 }
+       --, position = TopW C 100
        , lowerOnStart = True
        , hideOnStart = False
        , allDesktops = True
@@ -27,37 +24,36 @@ Config { font    = "xft:JetBrains Mono:pixelsize=24:antialias=true:hinting=true"
        , iconRoot = "/home/alourie/.xmonad/xpm/"  -- default: "."
        , commands = [
                       -- Time and date
-                      Run Date "<fn=2>\xf073</fn> %b %d %Y - (%H:%M)" "date" 50
-                      -- Network up and down
-                    , Run Network "enp1s0" ["-t", "<fn=2>\xf0aa</fn> <rx>kb  <fn=2>\xf0ab</fn> <tx>kb"] 20
+                      Run Date "<fn=5>\xf073  %b %d %Y - (%H:%M)</fn>" "date" 50
                       -- Cpu usage in percent
-                    , Run Cpu ["-t", "<fn=2>\xf2db</fn> <total>%","-H","50","--high","red"] 20
-                      -- Ram used number and percent
-                    , Run Memory ["-t", "<fn=1>\xf233</fn> mem: <used>M (<usedratio>%)"] 20
+                    , Run Cpu ["-t", "<fn=5>\xf2db <total>%</fn>","-H","50","--high","#46d9ff"] 20
                       -- Disk space free
-                    , Run DiskU [("/", "<fn=2>\xf0a0</fn> <free>")] ["-L", "2", "-l", "red"] 60
-                      -- Runs custom script to check for pacman updates.
-                      -- This script is in my dotfiles repo in .local/bin.
-                    , Run Com "/home/alourie/.local/bin/pacupdate" [] "pacupdate" 36000
-                      -- Runs a standard shell command 'uname -r' to get kernel version
-                    , Run Com "uname" ["-r"] "" 3600
+                    , Run DiskU [("/home", "<fn=5>\xf0a0 <free></fn>")] ["-S", "on", "-L", "2", "-l", "#ff6c6b"] 60
+                    , Run Com "Projects/scripts/freespace" ["/home"] "disk" 60
                       -- Connects to XKB/X11 events for the layout selection
-                    , Run Kbd []
-                    , Run Com "/home/alourie/.config/xmobar/trayer-padding-icon.sh" [] "trayerpad" 10
-                      -- Prints out the left side items such as workspaces, layout, etc.
+                    , Run Kbd [
+                        ("us", "US"), ("ru", "RU"), ("il", "HE")
+                    ]
+                    , Run Com ".config/xmobar/trayer-padding-icon.sh" [] "trayerpad" 10
+                    , Run Com "Projects/scripts/barrier.sh" ["check", "xmobar"] "barrier" 100
+                    , Run Volume "default" "Master" [] 10
                       -- The workspaces are 'clickable' in my configs.
                     , Run UnsafeStdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-<<<<<<< Updated upstream
-       , template = "<action=`xdotool key control+alt+g`><fc=#ffbf76><fn=1>  </fn></fc></action><fc=#666666>|</fc> %UnsafeStdinReader% }<fc=#46d9ff>%date%</fc>{<fc=#ecbe7b> %cpu% </fc><fc=#666666>|</fc><fc=#51afef> %disku% </fc><fc=#666666>| </fc><fc=#f5a70a><fn=2></fn> %kbd%</fc>%trayerpad%"
-=======
-       , template = "<action=`xdotool key control+alt+g`><fc=#ffbf76><fn=1>  </fn></fc></action><fc=#666666>|</fc> %UnsafeStdinReader% }<fc=#46d9ff>%date%</fc>{ <fc=#ffffff><fn=2></fn> %kbd% </fc><fc=#666666><fn=1>|</fn></fc><fc=#ecbe7b> %cpu% </fc><fc=#666666><fn=1>|</fn></fc><fc=#51afef> %disku% </fc><fc=#666666><fn=1>|</fn></fc><fc=#c678dd> <fn=2></fn> %pacupdate% </fc><fc=#666666><fn=1>|</fn></fc>%trayerpad%"
->>>>>>> Stashed changes
+       , template = "<fc=#ffbf76><fn=2> </fn><fn=1></fn> </fc><fn=5> %UnsafeStdinReader% </fn> }<fc=#46d9ff>%date%</fc>{ %barrier%   <fc=#ecbe7b>  %cpu%  </fc><fc=#51afef>  <fn=7>%disk%</fn>    </fc><fc=#f5a70a><fn=5>  %kbd% </fn>  </fc><fc=#46d9ff>%default:Master%</fc>"
 
 -- unused modules
 -- Kernel <fn=1>|</fn><fc=#b3afc2><fn=2></fn>  %uname% </fc>
 -- Memory <fc=#666666> <fn=1>|</fn></fc> <fc=#ff6c6b> %memory% </fc>
+    -- Ram used number and percent
+    -- , Run Memory ["-t", "<fn=4>\xf233</fn> mem: <used>M (<usedratio>%)"] 20
 -- Network <fc=#98be65> %enp1s0% </fc><fc=#666666> <fn=1>|</fn></fc>
+    -- Network up and down
+    --, Run Network "enp1s0" ["-t", "<fn=2>\xf0aa</fn> <rx>kb  <fn=2>\xf0ab</fn> <tx>kb"] 20
 -- Updates <fc=#c678dd> <fn=2></fn> %pacupdate% </fc>
+-- This script is in my dotfiles repo in .local/bin.
+--, Run Com "/home/alourie/.local/bin/pacupdate" [] "pacupdate" 36000
+-- Runs a standard shell command 'uname -r' to get kernel version
+--, Run Com "uname" ["-r"] "" 3600

@@ -1,40 +1,28 @@
 # PROFILING
 # zmodload zsh/zprof
 
+# OPTIONS:
+# Uncomment; these work on being set/notset; *NOT* on true/false
+USE_GO=bla
+USE_JAVA=bla
+
 ## DEFS
 ZSHRC="${HOME}/.zshrc"
-ZSHRC_PERSONAL="${HOME}/.zshrc_personal"
 
-## Make sure config is setup
+# PROJECTS
+export PROJECTS="$HOME/Projects"
+
+## Make sure the config is setup
 export DOTS="$HOME/.dots"
 if [ ! -d "${DOTS}" ]; then
 	git clone --bare http://gitlab.com/alourie/dotfiles "${DOTS}"
 fi
 
-if [ ! -e "${ZSHRC_PERSONAL}" ]; then
-	wget https://gitlab.com/alourie/dotfiles/-/raw/master/.zshrc_personal "${ZSHRC_PERSONAL}"
-fi
-
-alias rl="source ${ZSHRC}"
-alias rlc="source ${ZSHRC_PERSONAL}"
-alias edz="vim ${ZSHRC} && rl"
-alias edzp="vim ${ZSHRC_PERSONAL} && rlc"
-
-
-# Awesome prompt (starship)
-type starship > /dev/null
-if [ ! $? -eq 0 ]; then
-	echo "Install Starship"
-	curl -fsSL https://starship.rs/install.sh | bash
-fi
-export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
-eval "$(starship init zsh)"
-
 
 # Make PATH unique; i.e not repeat paths that are already defined.
 typeset -U path
 
-# Applications list, it's for arch; will need some update for debians/fedoras
+# Deps list, it's for arch; will need some update for debians/fedoras
 # APPS="dunst polybar redshift feh network-manager-applet pasystray kitty neovim"
 # for app in "${(@s/ /)APPS}"; do
 # 	type $app 2&>1 > /dev/null
@@ -106,7 +94,6 @@ zinit wait'!' lucid from"gh-r" as"null" for \
      sbin"**/fd"        @sharkdp/fd \
      sbin"**/bat"       @sharkdp/bat \
      sbin"**/hyperfine" @sharkdp/hyperfine \
-     sbin"exa* -> exa"  ogham/exa
 
 # GIT
 zinit wait lucid for \
@@ -120,10 +107,93 @@ else
     export TERM="screen-256color"
 fi
 
-# Personal customisations
-source ${ZSHRC_PERSONAL}
+# PATH
+path=($PROJECTS/scripts /opt/packer $HOME/.local/bin $path)
 
-# VIM mode
+alias rl="source ${ZSHRC}"
+alias edz="vim ${ZSHRC} && rl"
+alias gp="cd $PROJECTS"
+alias t=$PROJECTS/todo.txt-cli/todo.sh
+alias vim='nvim'
+alias ssh="ssh -A "
+alias picsort="$PROJECTS/merge_pics/merge_go/picsort"
+alias showbig="du -sh * | grep -e '\dG'"
+alias showst="lsblk | ack -v \"loop|ram|rom\""
+alias cls="clear"
+alias nn="notify-send \"all done\" -t 3000"
+alias config='/usr/bin/git --git-dir=$HOME/.dots/ --work-tree=$HOME'
+
+# Custom functions
+fpath+=($PROJECTS/zsh_functions)
+autoload -Uz c
+autoload -Uz edv
+autoload -Uz set-tokens
+autoload -Uz set-go
+
+# PDFWork functions (ex-aliases)
+# autoload -Uz pdfwork
+
+# Locales!
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+# Perl
+# if (( ${USE_PERL} )); then
+# 	export PERL_MB_OPT="--install_base \"/Users/alexlourie/perl5\""; export PERL_MB_OPT;
+# 	export PERL_MM_OPT="INSTALL_BASE=/Users/alexlourie/perl5"; export PERL_MM_OPT;
+# 	export PERL5LIB="/Users/alexlourie/perl5/lib/perl5"
+# fi
+
+
+# JAVA_HOME
+if (( ${USE_JAVA} )); then
+	JAVA=$(which java)
+	if [[ $? == 0 ]]; then
+		export JAVA_HOME=$(dirname $(dirname $(readlink -f $JAVA)))
+	fi
+fi
+
+# Golang
+if (( ${USE_GO} )); then
+	set-go
+fi
+
+# For now
+unset SSH_ASKPASS
+
+# Google tools
+export GOOGLE_TOOLS=/home/alourie/GoogleAndroidTools
+path+=(${GOOGLE_TOOLS}/ndk-bundle ${GOOGLE_TOOLS}/platform-tools)
+
+# IntelliJ
+path+=(/opt/IntelliJ/bin /opt/GoLand/bin /opt/PyCharm/bin)
+
+# Rust/Cargo
+#source $HOME/.cargo/env
+path+=$HOME/.cargo/bin
+
+# Haskel
+path+=$HOME/.cabal/bin
+
+# Terraform
+if [ -d /opt/terraform ]; then
+	path+=/opt/terraform
+fi
+
+# Interactive comments
+setopt interactivecomments
+
+keychain -l | grep "no identities" 2> /dev/null
+if [[ $? = 0 && -d $HOME/.ssh ]]; then
+	# Just load all paired keys
+	for f in $HOME/.ssh/*; do
+        if [[ -f $f\.pub ]]; then
+            eval $(keychain -q --agents ssh --eval $f)
+        fi
+    done
+fi
+
+# VIM mode ....probably needs to be last here
 zinit ice lucid depth=1
 zinit light jeffreytse/zsh-vi-mode
 export ZVM_KEYTIMEOUT=0.2
@@ -140,6 +210,14 @@ function zvm_after_lazy_keybindings() {
   zvm_bindkey viins "\ej" down-line-or-beginning-search
 }
 
+# Awesome prompt (starship)
+type starship > /dev/null
+if [ ! $? -eq 0 ]; then
+	echo "Install Starship"
+	curl -fsSL https://starship.rs/install.sh | bash
+fi
+export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
+eval "$(starship init zsh)"
 
 # PROFILING
 #zprof

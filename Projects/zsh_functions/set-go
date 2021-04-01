@@ -1,0 +1,18 @@
+if [ -d /usr/local/go/bin ]; then
+	path+=(/usr/local/go/bin ${GOPATH}/bin)
+	type go > /dev/null
+	if [ $? = 0 ]; then
+		export GO111MODULE=on
+		export GOROOT=""
+		export GOROOT=`go env GOROOT`
+		export GOPATH="${PROJECTS}/gospace"
+		export GOSRC="${GOPATH}/src"
+
+		# Update path
+		path+=${GOPATH}/bin
+		# Set for convenience
+		alias gtest="${GOPATH}/bin/gotest"
+	fi
+else
+	echo "Didn't find go in /usr/local/go/bin. If it's installed, check where it is."
+fi
