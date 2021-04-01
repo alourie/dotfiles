@@ -22,22 +22,6 @@ fi
 # Make PATH unique; i.e not repeat paths that are already defined.
 typeset -U path
 
-# Deps list, it's for arch; will need some update for debians/fedoras
-# APPS="dunst polybar redshift feh network-manager-applet pasystray kitty neovim"
-# for app in "${(@s/ /)APPS}"; do
-# 	type $app 2&>1 > /dev/null
-# 	if [ ! $? -eq 0 ]; then
-# 		# Not installed, just do all
-# 		echo "Installing minimal programs set"
-# 		sudo pacman -S --needed ${(@s/ /)APPS}
-# 	fi
-# done
-
-# Check fonts; currently I'm using JetBrains Mono, so expect it to be installed
-# pacman -Q nerd-fonts-jetbrains-mono 2&>1 > /dev/null
-# if [ ! $? -eq 0 ]; then
-#    yay -y nerd-fonts-jetbrains-mono
-# fi
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
@@ -130,6 +114,7 @@ autoload -Uz edv
 autoload -Uz set-tokens
 autoload -Uz set-go
 autoload -Uz add-path
+autoload -Uz install-base
 
 # PDFWork functions (ex-aliases)
 # autoload -Uz pdfwork
@@ -180,16 +165,23 @@ setopt interactivecomments
 # For now
 unset SSH_ASKPASS
 
-
-keychain -l | grep "no identities" 2> /dev/null
-if [[ $? = 0 && -d $HOME/.ssh ]]; then
-	# Just load all paired keys
-	for f in $HOME/.ssh/*; do
-        if [[ -f $f\.pub ]]; then
-            eval $(keychain -q --agents ssh --eval $f)
-        fi
-    done
+# If keychain is installed and .ssh exists
+if command keychain > /dev/null; then
+	keychain -l | grep "no identities" 2> /dev/null
+	if [[ $? = 0 && -d $HOME/.ssh ]]; then
+		# Just load all paired keys
+		for f in $HOME/.ssh/*; do
+			if [[ -f $f\.pub ]]; then
+				eval $(keychain -q --agents ssh --eval $f)
+			fi
+		done
+	fi
 fi
+
+# Install a bunch of base utils
+config restore --staged Projects/zsh_functions ~/.config/starship
+config restore Projects/zsh_functions ~/.config/starship
+install-base
 
 # VIM mode ....probably needs to be last here
 zinit ice lucid depth=1
