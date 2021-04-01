@@ -4,7 +4,6 @@
 # OPTIONS:
 # Uncomment; these work on being set/notset; *NOT* on true/false
 USE_GO=bla
-USE_JAVA=bla
 
 ## DEFS
 ZSHRC="${HOME}/.zshrc"
@@ -15,6 +14,7 @@ export PROJECTS="$HOME/Projects"
 ## Make sure the config is setup
 export DOTS="$HOME/.dots"
 if [ ! -d "${DOTS}" ]; then
+	# Check prereqs!
 	git clone --bare http://gitlab.com/alourie/dotfiles "${DOTS}"
 fi
 
@@ -107,8 +107,8 @@ else
     export TERM="screen-256color"
 fi
 
-# PATH
-path=($PROJECTS/scripts /opt/packer $HOME/.local/bin $path)
+# PATH LOCAL stuff
+path=($PROJECTS/scripts $HOME/.local/bin $path)
 
 alias rl="source ${ZSHRC}"
 alias edz="vim ${ZSHRC} && rl"
@@ -129,6 +129,7 @@ autoload -Uz c
 autoload -Uz edv
 autoload -Uz set-tokens
 autoload -Uz set-go
+autoload -Uz add-path
 
 # PDFWork functions (ex-aliases)
 # autoload -Uz pdfwork
@@ -146,11 +147,9 @@ export LANG=en_US.UTF-8
 
 
 # JAVA_HOME
-if (( ${USE_JAVA} )); then
-	JAVA=$(which java)
-	if [[ $? == 0 ]]; then
-		export JAVA_HOME=$(dirname $(dirname $(readlink -f $JAVA)))
-	fi
+JAVA=$(which java)
+if [[ $? == 0 ]]; then
+	export JAVA_HOME=$(dirname $(dirname $(readlink -f $JAVA)))
 fi
 
 # Golang
@@ -158,30 +157,29 @@ if (( ${USE_GO} )); then
 	set-go
 fi
 
-# For now
-unset SSH_ASKPASS
-
 # Google tools
 export GOOGLE_TOOLS=/home/alourie/GoogleAndroidTools
-path+=(${GOOGLE_TOOLS}/ndk-bundle ${GOOGLE_TOOLS}/platform-tools)
-
-# IntelliJ
-path+=(/opt/IntelliJ/bin /opt/GoLand/bin /opt/PyCharm/bin)
+if [ -d ${GOOGLE_TOOLS} ]; then
+	path+=(${GOOGLE_TOOLS}/ndk-bundle ${GOOGLE_TOOLS}/platform-tools)
+fi
 
 # Rust/Cargo
 #source $HOME/.cargo/env
-path+=$HOME/.cargo/bin
+add-path $HOME/.cargo/bin
 
 # Haskel
-path+=$HOME/.cabal/bin
+add-path $HOME/.cabal/bin
 
-# Terraform
-if [ -d /opt/terraform ]; then
-	path+=/opt/terraform
-fi
+# Common paths in /opt
+for p in /opt/IntelliJ/bin /opt/GoLand/bin /opt/PyCharm/bin /opt/terraform /opt/packer; do
+	add-path $p
+done
 
-# Interactive comments
+# This allows putting # to comment out the command
 setopt interactivecomments
+# For now
+unset SSH_ASKPASS
+
 
 keychain -l | grep "no identities" 2> /dev/null
 if [[ $? = 0 && -d $HOME/.ssh ]]; then
