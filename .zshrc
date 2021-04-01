@@ -20,6 +20,18 @@ if [ ! -d "${DOTS}" ]; then
 	git --git-dir=$HOME/.dots/ --work-tree=$HOME restore Projects/zsh_functions ~/.config/starship
 fi
 
+# Custom functions
+fpath+=($PROJECTS/zsh_functions)
+autoload -Uz c
+autoload -Uz edv
+autoload -Uz set-tokens
+autoload -Uz set-go
+autoload -Uz add-path
+autoload -Uz install-base
+
+# Install the base
+install-base
+
 
 # Make PATH unique; i.e not repeat paths that are already defined.
 typeset -U path
@@ -108,15 +120,6 @@ alias showst="lsblk | ack -v \"loop|ram|rom\""
 alias cls="clear"
 alias nn="notify-send \"all done\" -t 3000"
 alias config='/usr/bin/git --git-dir=$HOME/.dots/ --work-tree=$HOME'
-
-# Custom functions
-fpath+=($PROJECTS/zsh_functions)
-autoload -Uz c
-autoload -Uz edv
-autoload -Uz set-tokens
-autoload -Uz set-go
-autoload -Uz add-path
-autoload -Uz install-base
 
 # PDFWork functions (ex-aliases)
 # autoload -Uz pdfwork
