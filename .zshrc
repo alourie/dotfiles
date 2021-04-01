@@ -16,6 +16,8 @@ export DOTS="$HOME/.dots"
 if [ ! -d "${DOTS}" ]; then
 	# Check prereqs!
 	git clone --bare http://gitlab.com/alourie/dotfiles "${DOTS}"
+	git --git-dir=$HOME/.dots/ --work-tree=$HOME restore --staged Projects/zsh_functions ~/.config/starship
+	git --git-dir=$HOME/.dots/ --work-tree=$HOME restore Projects/zsh_functions ~/.config/starship
 fi
 
 
@@ -179,8 +181,6 @@ if command keychain > /dev/null; then
 fi
 
 # Install a bunch of base utils
-config restore --staged Projects/zsh_functions ~/.config/starship
-config restore Projects/zsh_functions ~/.config/starship
 install-base
 
 # VIM mode ....probably needs to be last here

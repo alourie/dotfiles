@@ -1,23 +1,19 @@
 # What OS are we running?
-if command apt > /dev/null; then
+if command -v apt > /dev/null; then
     install_debian
-
-if command apk > /dev/null; then
+else if command -v apk > /dev/null; then
     install_alpine
-
-if command dnf > /dev/null; then
+else if command -v dnf > /dev/null; then
     install_fedora
-
-if command pacman > /dev/null; then
+else if command -v pacman > /dev/null; then
     install_arch
-
+fi
 
 function install_arch() {
     # Deps list, it's for arch; will need some update for debians/fedoras
     APPS="dunst polybar redshift feh network-manager-applet pasystray kitty neovim curl unzip tar starship"
     for app in "${(@s/ /)APPS}"; do
-        command $app 2&>1 > /dev/null
-        if [ ! $? -eq 0 ]; then
+        if ! command -v $app > /dev/null; then
             # Not installed, just do all
             echo "Installing minimal programs set"
             sudo pacman -S --needed ${(@s/ /)APPS}
@@ -41,10 +37,9 @@ function install_fedora() {
 }
 
 function install_alpine() {
-    APPS="zsh bash neovim curl unzip tar starship"
+    APPS="zsh bash neovim curl unzip tar starship file"
     for app in "${(@s/ /)APPS}"; do
-        command $app 2&>1 > /dev/null
-        if [ ! $? -eq 0 ]; then
+        if ! command -v $app > /dev/null; then
             # Not installed, just do all
             sudo apk add $app
         fi
