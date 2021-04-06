@@ -1,9 +1,6 @@
+# vim: filetype=zsh
 # PROFILING
 # zmodload zsh/zprof
-
-# OPTIONS:
-# Uncomment; these work on being set/notset; *NOT* on true/false
-USE_GO=bla
 
 ## DEFS
 ZSHRC="${HOME}/.zshrc"
@@ -25,7 +22,6 @@ fpath+=($PROJECTS/zsh_functions)
 autoload -Uz c
 autoload -Uz edv
 autoload -Uz set-tokens
-autoload -Uz set-go
 autoload -Uz add-path
 autoload -Uz install-base
 
@@ -35,7 +31,6 @@ install-base
 
 # Make PATH unique; i.e not repeat paths that are already defined.
 typeset -U path
-
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
@@ -88,10 +83,7 @@ zinit lucid for \
 #  	as"completion" OMZP::docker/_docker
 
 zinit wait'!' lucid from"gh-r" as"null" for \
-     sbin"fzf"          junegunn/fzf-bin \
-     sbin"**/fd"        @sharkdp/fd \
-     sbin"**/bat"       @sharkdp/bat \
-     sbin"**/hyperfine" @sharkdp/hyperfine \
+     sbin"fzf"          junegunn/fzf-bin  \
 
 # GIT
 zinit wait lucid for \
@@ -143,8 +135,24 @@ if [[ $? == 0 ]]; then
 fi
 
 # Golang
-if (( ${USE_GO} )); then
-	set-go
+# If golang is found on  the system, set it up
+if [ -d /usr/local/go/bin ]; then
+	path+=(/usr/local/go/bin ${GOPATH}/bin)
+	type go > /dev/null
+	if [ $? = 0 ]; then
+		export GO111MODULE=on
+		export GOROOT=""
+		export GOROOT=`go env GOROOT`
+		export GOPATH="${PROJECTS}/gospace"
+		export GOSRC="${GOPATH}/src"
+
+		# Update path
+		path+=${GOPATH}/bin
+		# Set for convenience
+		alias gtest="${GOPATH}/bin/gotest"
+	fi
+else
+	echo "Didn't find go in /usr/local/go/bin. If it's installed, check where it is."
 fi
 
 # Google tools
@@ -160,19 +168,20 @@ add-path $HOME/.cargo/bin
 # Haskel
 add-path $HOME/.cabal/bin
 
-# Common paths in /opt
-for p in /opt/IntelliJ/bin /opt/GoLand/bin /opt/PyCharm/bin /opt/terraform /opt/packer; do
-	add-path $p
-done
+# Conditionally add common paths in /opt
+add-path /opt/IntelliJ/bin /opt/GoLand/bin /opt/PyCharm/bin /opt/terraform /opt/packer
+
+# Neovim 0.5; NVcode
+add-path $HOME/.config/nvcode/utils/bin
 
 # This allows putting # to comment out the command
 setopt interactivecomments
 # For now
 unset SSH_ASKPASS
 
-# If keychain is installed and .ssh exists
-if command keychain > /dev/null; then
-	keychain -l | grep "no identities" 2> /dev/null
+# If keychain is installed and .ssh exists, load the keys
+if command -v keychain > /dev/null; then
+	keychain -l | grep "no identities" 2>&1 > /dev/null
 	if [[ $? = 0 && -d $HOME/.ssh ]]; then
 		# Just load all paired keys
 		for f in $HOME/.ssh/*; do
@@ -182,9 +191,6 @@ if command keychain > /dev/null; then
 		done
 	fi
 fi
-
-# Install a bunch of base utils
-install-base
 
 # VIM mode ....probably needs to be last here
 zinit ice lucid depth=1
@@ -204,13 +210,14 @@ function zvm_after_lazy_keybindings() {
 }
 
 # Awesome prompt (starship)
-type starship > /dev/null
-if [ ! $? -eq 0 ]; then
+if ! command -v starship > /dev/null ; then
 	echo "Install Starship"
 	curl -fsSL https://starship.rs/install.sh | bash
 fi
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 eval "$(starship init zsh)"
+
+export EDITOR=vim
 
 # PROFILING
 #zprof
