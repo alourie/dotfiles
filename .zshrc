@@ -8,6 +8,10 @@ ZSHRC="${HOME}/.zshrc"
 # PROJECTS
 export PROJECTS="$HOME/Projects"
 
+# Make PATH unique; i.e not repeat paths that are already defined.
+typeset -U path
+typeset -U fpath
+
 ## Make sure the config is setup
 export DOTS="$HOME/.dots"
 if [ ! -d "${DOTS}" ]; then
@@ -15,6 +19,11 @@ if [ ! -d "${DOTS}" ]; then
 	git clone --bare http://gitlab.com/alourie/dotfiles "${DOTS}"
 	git --git-dir=$HOME/.dots/ --work-tree=$HOME restore --staged Projects/zsh_functions ~/.config/starship
 	git --git-dir=$HOME/.dots/ --work-tree=$HOME restore Projects/zsh_functions ~/.config/starship
+
+    # Install the base
+    fpath+=($PROJECTS/zsh_functions)
+    autoload -Uz install-base
+    install-base
 fi
 
 # Custom functions
@@ -23,14 +32,6 @@ autoload -Uz c
 autoload -Uz edv
 autoload -Uz set-tokens
 autoload -Uz add-path
-autoload -Uz install-base
-
-# Install the base
-install-base
-
-
-# Make PATH unique; i.e not repeat paths that are already defined.
-typeset -U path
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
@@ -101,7 +102,7 @@ fi
 path=($PROJECTS/scripts $HOME/.local/bin $path)
 
 alias rl="source ${ZSHRC}"
-alias edz="vim ${ZSHRC} && rl"
+alias edz="vim ${ZSHRC}"
 alias gp="cd $PROJECTS"
 alias t=$PROJECTS/todo.txt-cli/todo.sh
 alias vim='nvim'
@@ -172,7 +173,7 @@ add-path $HOME/.cabal/bin
 add-path /opt/IntelliJ/bin /opt/GoLand/bin /opt/PyCharm/bin /opt/terraform /opt/packer
 
 # Neovim 0.5; NVcode
-add-path $HOME/.config/nvcode/utils/bin
+add-path $HOME/.config/nvim/utils/bin
 
 # This allows putting # to comment out the command
 setopt interactivecomments
@@ -195,6 +196,7 @@ fi
 # VIM mode ....probably needs to be last here
 zinit ice lucid depth=1
 zinit light jeffreytse/zsh-vi-mode
+ZVM_VI_INSERT_ESCAPE_BINDKEY=jj
 export ZVM_KEYTIMEOUT=0.2
 # The plugin will auto execute this zvm_after_lazy_keybindings function
 function zvm_after_lazy_keybindings() {

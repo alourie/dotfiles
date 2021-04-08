@@ -7,25 +7,26 @@ function install_arch() {
         if ! command -v $app > /dev/null; then
             # Not installed, just do all
             $sudo pacman -S --needed ${(@s/ /)APPS}
+            break
         fi
     done
 
-	rustup self upgrade-data
-	rustup install stable
-	rustup default stable
-
     # Install Paru
-    cd $HOME/Projects
-    sudo pacman -S --needed base-devel
-    git clone https://aur.archlinux.org/paru.git
-    cd paru
-    makepkg -si
+    if ! command -v paru > /dev/null; then
+        cd $HOME/Projects
 
-    #  Check fonts; currently I'm using JetBrains Mono, so expect it to be installed
-    pacman -Q nerd-fonts-jetbrains-mono 2&>1 > /dev/null
-    if [ ! $? -eq 0 ]; then
-        paru -y nerd-fonts-jetbrains-mono
+        rustup self upgrade-data
+        rustup install stable
+        rustup default stable
+
+        sudo pacman -S --needed base-devel
+        git clone https://aur.archlinux.org/paru.git
+        cd paru
+        makepkg -si
     fi
+
+    #  currently I'm using JetBrains Mono, so expect it to be installed
+    paru -y nerd-fonts-jetbrains-mono
 
 }
 
@@ -43,6 +44,7 @@ function install_alpine() {
         if ! command -v $app > /dev/null; then
             # Not installed, just do all
             $sudo apk add $app
+            break
         fi
     done
 }
