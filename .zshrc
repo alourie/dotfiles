@@ -8,6 +8,20 @@ ZSHRC="${HOME}/.zshrc"
 # PROJECTS
 export PROJECTS="$HOME/Projects"
 
+# Basic aliases
+alias rl="source ${ZSHRC}"
+alias edz="vim ${ZSHRC}"
+alias gp="cd $PROJECTS"
+alias t=$PROJECTS/todo.txt-cli/todo.sh
+alias vim='nvim'
+alias ssh="ssh -A "
+alias picsort="$PROJECTS/merge_pics/merge_go/picsort"
+alias showbig="du -sh * | grep -e '\dG'"
+alias showst="lsblk | ack -v \"loop|ram|rom\""
+alias cls="clear"
+alias nn="notify-send \"all done\" -t 3000"
+alias config='/usr/bin/git --git-dir=$HOME/.dots/ --work-tree=$HOME'
+
 # Make PATH unique; i.e not repeat paths that are already defined.
 typeset -U path
 typeset -U fpath
@@ -17,13 +31,11 @@ export DOTS="$HOME/.dots"
 if [ ! -d "${DOTS}" ]; then
 	# Check prereqs!
 	git clone --bare http://gitlab.com/alourie/dotfiles "${DOTS}"
-	git --git-dir=$HOME/.dots/ --work-tree=$HOME restore --staged Projects/zsh_functions ~/.config/starship
-	git --git-dir=$HOME/.dots/ --work-tree=$HOME restore Projects/zsh_functions ~/.config/starship
+	config restore --staged Projects/zsh_functions ~/.config/starship
+	config restore Projects/zsh_functions ~/.config/starship
 
-    # Install the base
-    fpath+=($PROJECTS/zsh_functions)
-    autoload -Uz install-base
-    install-base
+    # Flag the first install
+    FIRST_INSTALL=1
 fi
 
 # Custom functions
@@ -32,6 +44,12 @@ autoload -Uz c
 autoload -Uz edv
 autoload -Uz set-tokens
 autoload -Uz add-path
+
+# Install the base
+if [ "${FIRST_INSTALL}" = 1 ]; then
+    autoload -Uz install-base
+    install-base
+fi
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
@@ -100,19 +118,6 @@ fi
 
 # PATH LOCAL stuff
 path=($PROJECTS/scripts $HOME/.local/bin $path)
-
-alias rl="source ${ZSHRC}"
-alias edz="vim ${ZSHRC}"
-alias gp="cd $PROJECTS"
-alias t=$PROJECTS/todo.txt-cli/todo.sh
-alias vim='nvim'
-alias ssh="ssh -A "
-alias picsort="$PROJECTS/merge_pics/merge_go/picsort"
-alias showbig="du -sh * | grep -e '\dG'"
-alias showst="lsblk | ack -v \"loop|ram|rom\""
-alias cls="clear"
-alias nn="notify-send \"all done\" -t 3000"
-alias config='/usr/bin/git --git-dir=$HOME/.dots/ --work-tree=$HOME'
 
 # PDFWork functions (ex-aliases)
 # autoload -Uz pdfwork
@@ -220,6 +225,8 @@ export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 eval "$(starship init zsh)"
 
 export EDITOR=vim
+
+echo "First install is ${FIRST_INSTALL}"
 
 # PROFILING
 #zprof
