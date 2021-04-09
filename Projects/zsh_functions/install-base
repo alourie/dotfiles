@@ -43,7 +43,7 @@ function install_alpine() {
     for app in "${(@s/ /)APPS}"; do
         if ! command -v $app > /dev/null; then
             # Not installed, just do all
-            $sudo apk add $app
+            $sudo apk add ${(@s/ /)APPS}
             break
         fi
     done
