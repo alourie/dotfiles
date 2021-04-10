@@ -58,3 +58,5 @@ protocol = https
 	cmd = meld $LOCAL $REMOTE
 [credential]
 	helper = cache
+[init]
+	defaultBranch = master
