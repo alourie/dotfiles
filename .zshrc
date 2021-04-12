@@ -205,18 +205,16 @@ ZVM_VI_INSERT_ESCAPE_BINDKEY=jj
 export ZVM_KEYTIMEOUT=0.2
 # The plugin will auto execute this zvm_after_lazy_keybindings function
 function zvm_after_lazy_keybindings() {
-  # Here we define the custom widget
   zvm_define_widget up-line-or-beginning-search
   zvm_define_widget down-line-or-beginning-search
 
-  # In normal mode, press Ctrl-E to invoke this widget
   zvm_bindkey vicmd 'k' up-line-or-beginning-search
-  zvm_bindkey viins "\ek" up-line-or-beginning-search
+  zvm_bindkey viins "^[k" up-line-or-beginning-search
   zvm_bindkey vicmd 'j' down-line-or-beginning-search
-  zvm_bindkey viins "\ej" down-line-or-beginning-search
+  zvm_bindkey viins "^[j" down-line-or-beginning-search
 }
 
-# Awesome prompt (starship)
+# Awesome prompt (starship); only do this if not installed via the system packaging.
 if ! command -v starship > /dev/null ; then
 	echo "Install Starship"
 	curl -fsSL https://starship.rs/install.sh | bash
@@ -225,8 +223,6 @@ export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 eval "$(starship init zsh)"
 
 export EDITOR=vim
-
-echo "First install is ${FIRST_INSTALL}"
 
 # PROFILING
 #zprof
