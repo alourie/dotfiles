@@ -1,7 +1,7 @@
-# vim: filetype=zsh
+# vim: filetype=bash
 # PROFILING
 # zmodload zsh/zprof
-
+#
 ## DEFS
 ZSHRC="${HOME}/.zshrc"
 
@@ -21,6 +21,13 @@ alias showst="lsblk | ack -v \"loop|ram|rom\""
 alias cls="clear"
 alias nn="notify-send \"all done\" -t 3000"
 alias config='/usr/bin/git --git-dir=$HOME/.dots/ --work-tree=$HOME'
+alias gcl="git restore .idea *.iml"
+alias gst="git stu"
+
+function restore() {
+  config restore --staged $@ 
+  config restore $@
+}
 
 # Make PATH unique; i.e not repeat paths that are already defined.
 typeset -U path
@@ -31,8 +38,9 @@ export DOTS="$HOME/.dots"
 if [ ! -d "${DOTS}" ]; then
 	# Check prereqs!
 	git clone --bare http://gitlab.com/alourie/dotfiles "${DOTS}"
-	config restore --staged Projects/zsh_functions ~/.config/starship
-	config restore Projects/zsh_functions ~/.config/starship
+
+  # Restore function path from config
+	config restore Projects/zsh_functions
 
     # Flag the first install
     FIRST_INSTALL=1
@@ -49,6 +57,9 @@ autoload -Uz add-path
 if [ "${FIRST_INSTALL}" = 1 ]; then
     autoload -Uz install-base
     install-base
+
+    # "Restore" basic configs
+    restore $HOME/.gitconfig $HOME/.config/kitty $HOME/.config/alacritty $HOME/.config/starship $HOME/.config/dunst $HOME/.config/nvim
 fi
 
 ### Added by Zinit's installer
@@ -142,12 +153,8 @@ fi
 
 # Golang
 # If golang is found on  the system, set it up
-if [ -d /usr/local/go/bin ]; then
-	path+=(/usr/local/go/bin ${GOPATH}/bin)
-	type go > /dev/null
-	if [ $? = 0 ]; then
+if command -v go; then
 		export GO111MODULE=on
-		export GOROOT=""
 		export GOROOT=`go env GOROOT`
 		export GOPATH="${PROJECTS}/gospace"
 		export GOSRC="${GOPATH}/src"
@@ -156,9 +163,6 @@ if [ -d /usr/local/go/bin ]; then
 		path+=${GOPATH}/bin
 		# Set for convenience
 		alias gtest="${GOPATH}/bin/gotest"
-	fi
-else
-	echo "Didn't find go in /usr/local/go/bin. If it's installed, check where it is."
 fi
 
 # Google tools
@@ -176,6 +180,9 @@ add-path $HOME/.cabal/bin
 
 # Conditionally add common paths in /opt
 add-path /opt/IntelliJ/bin /opt/GoLand/bin /opt/PyCharm/bin /opt/terraform /opt/packer
+
+# LUA server (sumneko)
+add-path $PROJECTS/lua-language-server/bin/Linux
 
 # Neovim 0.5; NVcode
 add-path $HOME/.config/nvim/utils/bin
@@ -226,3 +233,4 @@ export EDITOR=vim
 
 # PROFILING
 #zprof
+#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
