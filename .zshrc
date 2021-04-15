@@ -21,7 +21,7 @@ alias showst="lsblk | ack -v \"loop|ram|rom\""
 alias cls="clear"
 alias nn="notify-send \"all done\" -t 3000"
 alias config='/usr/bin/git --git-dir=$HOME/.dots/ --work-tree=$HOME'
-alias gcl="git restore .idea *.iml"
+alias gcl="git restore .idea"
 alias gst="git stu"
 
 function restore() {
@@ -36,14 +36,14 @@ typeset -U fpath
 ## Make sure the config is setup
 export DOTS="$HOME/.dots"
 if [ ! -d "${DOTS}" ]; then
-	# Check prereqs!
-	git clone --bare http://gitlab.com/alourie/dotfiles "${DOTS}"
+  # Check prereqs!
+  git clone --bare http://gitlab.com/alourie/dotfiles "${DOTS}"
 
   # Restore function path from config
-	config restore Projects/zsh_functions
+  restore Projects/zsh_functions
 
-    # Flag the first install
-    FIRST_INSTALL=1
+  # Flag the first install
+  FIRST_INSTALL=1
 fi
 
 # Custom functions
