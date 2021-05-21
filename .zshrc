@@ -20,16 +20,21 @@ alias showbig="du -sh * | grep -e '\dG'"
 alias showst="lsblk | ack -v \"loop|ram|rom\""
 alias cls="clear"
 alias nn="notify-send \"all done\" -t 3000"
-alias config='/usr/bin/git --git-dir=$HOME/.dots/ --work-tree=$HOME'
+alias config='git --git-dir=$HOME/.dots/ --work-tree=$HOME'
 alias gcl="git restore .idea"
 alias gst="git stu"
 
 function restore() {
+  git restore --staged $@ 
+  git restore $@
+}
+
+function restore_config() {
   config restore --staged $@ 
   config restore $@
 }
 
-# Make PATH unique; i.e not repeat paths that are already defined.
+# Make PATH/FPATH unique; i.e not repeat paths that are already defined.
 typeset -U path
 typeset -U fpath
 
@@ -40,7 +45,7 @@ if [ ! -d "${DOTS}" ]; then
   git clone --bare http://gitlab.com/alourie/dotfiles "${DOTS}"
 
   # Restore function path from config
-  restore Projects/zsh_functions
+  restore_config Projects/zsh_functions
 
   # Flag the first install
   FIRST_INSTALL=1
@@ -146,14 +151,14 @@ export LANG=en_US.UTF-8
 
 
 # JAVA_HOME
-JAVA=$(which java)
-if [[ $? == 0 ]]; then
+if command -v java > /dev/null; then
+    JAVA=$(which java)
 	export JAVA_HOME=$(dirname $(dirname $(readlink -f $JAVA)))
 fi
 
 # Golang
 # If golang is found on  the system, set it up
-if command -v go; then
+if command -v go > /dev/null; then
 		export GO111MODULE=on
 		export GOROOT=`go env GOROOT`
 		export GOPATH="${PROJECTS}/gospace"
@@ -182,10 +187,7 @@ add-path $HOME/.cabal/bin
 add-path /opt/IntelliJ/bin /opt/GoLand/bin /opt/PyCharm/bin /opt/terraform /opt/packer
 
 # LUA server (sumneko)
-add-path $PROJECTS/lua-language-server/bin/Linux
-
-# Neovim 0.5; NVcode
-add-path $HOME/.config/nvim/utils/bin
+# add-path $PROJECTS/lua-language-server/bin/Linux
 
 # This allows putting # to comment out the command
 setopt interactivecomments
