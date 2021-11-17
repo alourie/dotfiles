@@ -1,6 +1,6 @@
 #!/bin/env bash
 
-LIST="code ij pycharm goland"
+LIST="code ij ij-hidef pycharm goland"
 x=$(echo ${LIST} | sed -e "s/ /\n/g" | rofi -dmenu -p "Select IDE: ")
 
 if [ "x" != "x${x}" ]
@@ -10,7 +10,10 @@ then
             ide="code"
         ;;
         ij)
-            ide="/opt/IntelliJ/bin/idea.sh"
+            ide="idea"
+            ;;
+        ij-hidef)
+            ide="GDK_SCALE=2 idea"
             ;;
         pycharm)
             ide="/opt/PyCharm/bin/pycharm.sh"

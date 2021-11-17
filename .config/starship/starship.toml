@@ -1,7 +1,7 @@
 # Use custom format
 format = """
-${username}[@](bold green)$hostname$git_branch$git_status : $directory
-$status$character
+${username}[@](bold green)$hostname${custom.git_project}$git_branch$git_status : $directory
+${conda}$status$character
 """
 
 
@@ -10,8 +10,15 @@ scan_timeout = 10
 
 # Replace the "❯" symbol in the prompt with "➜"
 [character]
-success_symbol = "[%%](bold white)"
-error_symbol = "[%%](bold white)"
+success_symbol = "[➜](bold white)"
+error_symbol = "[#](bold red)"
+
+[python]
+style="bold cyan"
+format='[(\($virtualenv\) )]($style)'
+
+[conda]
+format = '[(\($environment\) )](yellow) '
 
 [hostname]
 ssh_only = false
@@ -42,11 +49,11 @@ format = "[$user]($style)"
 disabled = false
 show_always = true
 
-[git_project]
-cmd="basename $(git rev-parse --show-toplevel)"
+[custom.git_project]
+command="basename $(git rev-parse --show-toplevel)"
 when="git rev-parse --is-inside-work-tree"
 style="bold blue"
-format="[$output]($style)"
+format=' [\[$output\]]($style)'
 
 [git_branch]
 format=" [$branch]($style) "
@@ -57,7 +64,6 @@ conflicted = "✘"
 untracked = "[∙](bold white)"
 stashed = "[∙](bold cyan)"
 staged = "[∙](bold green)"
-unstaged = "[∙](bold red)"
 modified = "[∙](bold red)"
 deleted = "[∙](bold red)"
 renamed = "[∙](bold red)"

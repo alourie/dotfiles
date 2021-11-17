@@ -23,7 +23,7 @@ case "$1" in
         choice="${XDG_CONFIG_HOME:-$HOME/.config}/i3/i3status-rust-config.toml"
     ;;
     nvim)
-        choice="${XDG_CONFIG_HOME:-$HOME/.config}/nvim/init.vim"
+        choice="${XDG_CONFIG_HOME:-$HOME/.config}/lvim/config.lua"
     ;;
     p|polybar)
         choice="${XDG_CONFIG_HOME:-$HOME/.config}/polybar/config"
@@ -34,6 +34,9 @@ case "$1" in
     r|rofi)
         choice="${XDG_CONFIG_HOME:-$HOME/.config}/rofi/config.rasi"
     ;;
+    sw|sway)
+        choice="${XDG_CONFIG_HOME:-$HOME/.config}/sway/config"
+    ;;
     s|ssh)
         choice="$HOME/.ssh/config"
     ;;
@@ -41,4 +44,4 @@ case "$1" in
         choice="$HOME/Projects/zsh_functions/c"
     ;;
 esac
-nvim "$choice"
+lvim "$choice"

@@ -15,6 +15,6 @@ while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 sleep 1;
 for m in $(polybar --list-monitors | cut -d":" -f1); do
     echo "Launch for $m"
-    MONITOR=$m polybar --reload main -r&
+    MONITOR=$m polybar --reload $m -r 2>&1 &
     sleep 1
 done
