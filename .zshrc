@@ -3,6 +3,7 @@
 # zmodload zsh/zprof
 #
 ## DEFS
+TERM=xterm
 ZSHRC="${HOME}/.zshrc"
 ZINIT_HOME="${HOME}/.zinit"
 
@@ -11,7 +12,7 @@ export PROJECTS="$HOME/Projects"
 
 # Basic aliases
 alias rl="source ${ZSHRC}"
-alias edz="lvim ${ZSHRC}"
+alias ee="lvim ${ZSHRC}"
 alias gp="cd $PROJECTS"
 alias t=$PROJECTS/todo.txt-cli/todo.sh
 alias vim='lvim'
@@ -97,6 +98,9 @@ alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'
 
 #search content with ripgrep
 alias rg="rg --sort path"
+
+# xdg-open
+alias xo=xdg-open
 
 
 function restore() {
@@ -291,6 +295,9 @@ add-path $HOME/.miniconda/bin
 # LUA server (sumneko)
 # add-path $PROJECTS/lua-language-server/bin/Linux
 
+# LUA Formatter
+add-path $HOME/.luarocks/bin
+
 # This allows putting # to comment out the command
 setopt interactivecomments
 # For now
@@ -310,26 +317,27 @@ if command -v keychain > /dev/null; then
 	fi
 fi
 
-# VIM mode ....probably needs to be last here
-if [ -z $LUNARVIM_RUNTIME_DIR ]; then
-  zinit ice lucid depth=1
-  zinit light jeffreytse/zsh-vi-mode
-  ZVM_VI_INSERT_ESCAPE_BINDKEY=jj
-  export ZVM_KEYTIMEOUT=0.2
+# # VIM mode ....probably needs to be last here
+# # Don't run when term is nvim
+# if [ -z $LUNARVIM_RUNTIME_DIR ]; then
+#   zinit ice lucid depth=1
+#   zinit light jeffreytse/zsh-vi-mode
+#   ZVM_VI_INSERT_ESCAPE_BINDKEY=jj
+#   export ZVM_KEYTIMEOUT=0.2
 
-  # The plugin will auto execute this zvm_after_lazy_keybindings function
-  function zvm_after_lazy_keybindings() {
-    zvm_define_widget up-line-or-beginning-search
-    zvm_define_widget down-line-or-beginning-search
+#   # The plugin will auto execute this zvm_after_lazy_keybindings function
+#   function zvm_after_lazy_keybindings() {
+#     zvm_define_widget up-line-or-beginning-search
+#     zvm_define_widget down-line-or-beginning-search
 
-    zvm_bindkey vicmd 'k' up-line-or-beginning-search
-    zvm_bindkey viins "^[k" up-line-or-beginning-search
-    zvm_bindkey viins "^[[A" up-line-or-beginning-search
-    zvm_bindkey vicmd 'j' down-line-or-beginning-search
-    zvm_bindkey viins "^[j" down-line-or-beginning-search
-    zvm_bindkey viins "^[[B" down-line-or-beginning-search
-  }
-fi
+#     zvm_bindkey vicmd 'k' up-line-or-beginning-search
+#     zvm_bindkey viins "^[k" up-line-or-beginning-search
+#     zvm_bindkey viins "^[[A" up-line-or-beginning-search
+#     zvm_bindkey vicmd 'j' down-line-or-beginning-search
+#     zvm_bindkey viins "^[j" down-line-or-beginning-search
+#     zvm_bindkey viins "^[[B" down-line-or-beginning-search
+#   }
+# fi
 
 # Awesome prompt (starship); only do this if not installed via the system packaging.
 if ! command -v starship > /dev/null ; then

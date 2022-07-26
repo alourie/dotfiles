@@ -10,26 +10,26 @@ scan_timeout = 10
 
 # Replace the "❯" symbol in the prompt with "➜"
 [character]
-success_symbol = "[➜](bold white)"
+success_symbol = "[➜](bold white) "
 error_symbol = "[#](bold red)"
 
 [python]
-style="bold cyan"
-format='[(\($virtualenv\) )]($style)'
+style = "bold cyan"
+format = '[(\($virtualenv\) )]($style)'
 
 [conda]
-format = '[(\($environment\) )](yellow) '
+format = '[(\($environment\) )](yellow)'
 
 [hostname]
 ssh_only = false
-style="bold green"
-format =  "[$hostname]($style)"
+style = "bold green"
+format = "[$hostname]($style)"
 disabled = false
 
 [directory]
-truncation_length=8
-truncate_to_repo=false
-disabled=false
+truncation_length = 8
+truncate_to_repo = false
+disabled = false
 
 [status]
 style = 'bold red'
@@ -50,14 +50,14 @@ disabled = false
 show_always = true
 
 [custom.git_project]
-command="basename $(git rev-parse --show-toplevel)"
-when="git rev-parse --is-inside-work-tree"
-style="bold blue"
-format=' [\[$output\]]($style)'
+command = "basename $(git rev-parse --show-toplevel)"
+when = "git rev-parse --is-inside-work-tree"
+style = "bold blue"
+format = ' [\[$output\]]($style)'
 
 [git_branch]
-format=" [$branch]($style) "
-style="bold yellow"
+format = " [$branch]($style) "
+style = "bold yellow"
 
 [git_status]
 conflicted = "✘"
@@ -68,4 +68,4 @@ modified = "[∙](bold red)"
 deleted = "[∙](bold red)"
 renamed = "[∙](bold red)"
 #format = "[ $all_status$ahead_behind ]"
-format='([$conflicted$staged$modified$untracked$ahead_behind]($style))'
+format = '([$conflicted$staged$modified$untracked$ahead_behind]($style))'

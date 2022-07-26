@@ -1,5 +1,6 @@
 #!/bin/env bash
 
+killall rofi
 CONNECT="--connect qemu:///system"
 VIRTM="virt-manager ${CONNECT}"
 VIRSH="virsh ${CONNECT}"

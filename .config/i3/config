@@ -109,6 +109,7 @@ workspace 7 output $secondMonitor
 workspace 8 output $secondMonitor
 workspace 9 output $secondMonitor
 workspace 10 output $secondMonitor
+workspace 11 output $secondMonitor
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -303,9 +304,6 @@ bindsym $mod+e layout toggle split
 
 # focus the child container
 #bindsym $mod+d focus child
-
-
-
 
 
 #####################################################################################################################
@@ -554,16 +552,18 @@ bindsym --release $mod+Escape exec xkill
 
 # misc
 bindsym $mod+p exec ~/.config/polybar/launch.sh
+bindsym $mod+shift+F exec /usr/bin/nautilus
 
 # rofi helpers
 bindsym $mod+a exec /home/alourie/Projects/scripts/start_vm.sh
+bindsym $mod+i exec /home/alourie/Projects/scripts/switch_ws.sh
 
 #workspace related
 
 #workspace 1 related
 bindsym $mod+F1 exec --no-startup-id exo-open --launch webbrowser;focus
 #qwerty/azerty conflict with w
-bindsym $mod+w exec --no-startup-id exo-open --launch webbrowser;focus
+#bindsym $mod+w exec --no-startup-id exo-open --launch webbrowser;focus
 bindsym control+mod1+f exec --no-startup-id firefox;focus
 bindsym control+mod1+v exec --no-startup-id vivaldi-stable;focus
 bindsym control+mod1+g exec --no-startup-id chromium;focus
@@ -606,6 +606,11 @@ bindsym control+mod1+s exec --no-startup-id spotify;focus
 
 # stuff
 bindsym $mod+shift+p exec "pass -c basic"
+
+# dunst control
+bindsym Control+space exec "dunstctl close"
+bindsym Control+shift+space exec "dunstctl close-all"
+bindsym Control+shift+` exec "dunstctl history-pop"
 
 
 
@@ -816,7 +821,7 @@ popup_during_fullscreen smart
 # want it
 
 
-for_window [class="^.*"] border pixel 2
+for_window [class="^.*"] border pixel 4
 gaps inner 5
 gaps outer 5
 #smart_gaps on
@@ -973,7 +978,7 @@ mode "$mode_gaps_outer" {
 
 # Window color settings
 # class                 border  backgr. text    indicator
-client.focused          #D08770 #6790EB #e5e5e5 #D08770
+client.focused          #D08770 #D08770 #e5e5e5 #D08770
 client.unfocused        #222222 #222222 #aaaaaa #222222
 client.focused_inactive #D08770 #222222 #a9a9a9 #222222
 client.placeholder      #222222 #222222 #aaaaaa #222222

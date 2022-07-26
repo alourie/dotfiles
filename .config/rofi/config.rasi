@@ -3,7 +3,7 @@ configuration {
 	width: 33;
 	lines: 10;
 	columns: 1;
-	font: "JetBrains Mono 24";
+	font: "JetBrains Mono 20";
 	bw: 0;
 	padding: 0;
 	show-icons: true;
@@ -12,10 +12,10 @@ configuration {
 	line-padding: 10;
 	separator-style: "none";
 	hide-scrollbar: true;
-	theme: ".local/share/rofi/themes/nord.rasi";
 	display-window: "";
 	display-run: "";
 	display-ssh: "";
 	display-drun: "";
 	display-combi: "";
 }
+@theme "nord.rasi"
