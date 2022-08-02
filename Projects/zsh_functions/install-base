@@ -48,21 +48,22 @@ function install_neovim() {
 }
 
 function install_lunarvim() {
-  curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh
-  bash install.sh -y
+  wget https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh -O install_lvim.sh
+  chmod +x install_lvim.sh
+  ./install_lvim.sh -y
 }
 
 function install_debian() {
     echo "Set up debian system"
 
     sudo apt update
-    sudo apt install \
+    sudo apt -y install \
       git curl wget \
       ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip curl doxygen npm pip \
       fzf
 
     if ! command -v rustup > /dev/null; then
-      curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+      sh -c "$(curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs)" "" -y 
     fi
 
 
