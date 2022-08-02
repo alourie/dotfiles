@@ -1,11 +1,78 @@
-# vim: filetype=bash
-# PROFILING
-# zmodload zsh/zprof
-#
-## DEFS
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# Path to your oh-my-zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
+
+if [ ! -d $ZSH ]; then
+  sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi
+
+
+
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="robbyrussell"
+
+# Uncomment the following line to use case-sensitive completion.
+CASE_SENSITIVE="true"
+
+# Uncomment one of the following lines to change the auto-update behavior
+# zstyle ':omz:update' mode disabled  # disable automatic updates
+# zstyle ':omz:update' mode auto      # update automatically without asking
+# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
+
+# Uncomment the following line to change how often to auto-update (in days).
+# zstyle ':omz:update' frequency 13
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS="true"
+
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
+
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
+
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+# You can also set it to another string to have that shown instead of the default red dots.
+# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
+# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
+COMPLETION_WAITING_DOTS="true"
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
+# HIST_STAMPS="mm/dd/yyyy"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load?
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git fzf z)
+
+source $ZSH/oh-my-zsh.sh
+
+# DEFS
 TERM=xterm
 ZSHRC="${HOME}/.zshrc"
-ZINIT_HOME="${HOME}/.zinit"
 
 # PROJECTS
 export PROJECTS="$HOME/Projects"
@@ -14,7 +81,7 @@ export PROJECTS="$HOME/Projects"
 alias rl="source ${ZSHRC}"
 alias ee="lvim ${ZSHRC}"
 alias gp="cd $PROJECTS"
-alias t=$PROJECTS/todo.txt-cli/todo.sh
+alias t=todo.sh
 alias vim='lvim'
 alias ssh="ssh -A "
 alias picsort="$PROJECTS/merge_pics/merge_go/picsort"
@@ -102,7 +169,6 @@ alias rg="rg --sort path"
 # xdg-open
 alias xo=xdg-open
 
-
 function restore() {
   git restore --staged $@ 
   git restore $@
@@ -160,73 +226,17 @@ autoload -Uz c
 autoload -Uz edv
 autoload -Uz set-tokens
 autoload -Uz add-path
+autoload -Uz ginit
 
 # Install the base
 if [ "${FIRST_INSTALL}" = 1 ]; then
+    echo "First install, setting up the basic stuff"
     autoload -Uz install-base
     install-base
 
     # "Restore" basic configs
     restore_config .gitconfig .config/starship 
 fi
-
-### Added by Zinit's installer
-if [[ ! -f $ZINIT_HOME/zinit.zsh ]]; then
-    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
-    command mkdir -p "$ZINIT_HOME" && command chmod g-rwX "$ZINIT_HOME"
-    command git clone https://github.com/zdharma-continuum/zinit "$ZINIT_HOME" && \
-        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
-        print -P "%F{160}▓▒░ The clone has failed.%f%b"
-fi
-
-source "$ZINIT_HOME/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
-
-# Load a few important annexes, without Turbo
-# (this is currently required for annexes)
-zinit light-mode for \
-    zdharma-continuum/z-a-rust \
-    zdharma-continuum/z-a-as-monitor \
-    zdharma-continuum/z-a-patch-dl \
-    zdharma-continuum/z-a-bin-gem-node
-
-### End of Zinit's installer chunk
-
-# Autosuggestions & fast-syntax-highlighting
-    #light-mode  marzocchi/zsh-notify \
-zinit for \
-	zdharma-continuum/history-search-multi-word \
-    light-mode  agkozak/zsh-z \
-    light-mode OMZL::history.zsh \
-
-zinit wait'!' lucid for \
-	light-mode PZT::modules/utility/init.zsh \
-
-zinit wait'!' lucid for \
-	light-mode OMZP::colorize \
-	light-mode OMZP::command-not-found \
-    light-mode OMZP::colored-man-pages \
-	light-mode OMZP::mvn \
-
-zinit wait'!' lucid atload"zicompinit; zicdreplay" for \
-    light-mode OMZL::completion.zsh \
-
-zinit lucid for \
-    light-mode OMZL::key-bindings.zsh \
-
-
-# Docker, currently unused
-# zinit wait lucid atload"zicompinit; zicdreplay" for \
-#  	as"completion" OMZP::docker/_docker
-
-zinit wait'!' lucid from"gh-r" as"null" for \
-     sbin"fzf"          junegunn/fzf-bin  \
-
-# GIT
-zinit wait lucid for \
-	light-mode davidde/git
-
 
 # KITTY TERM
 if (( ${KITTY_WINDOW_ID} )); then
@@ -317,28 +327,6 @@ if command -v keychain > /dev/null; then
 	fi
 fi
 
-# # VIM mode ....probably needs to be last here
-# # Don't run when term is nvim
-# if [ -z $LUNARVIM_RUNTIME_DIR ]; then
-#   zinit ice lucid depth=1
-#   zinit light jeffreytse/zsh-vi-mode
-#   ZVM_VI_INSERT_ESCAPE_BINDKEY=jj
-#   export ZVM_KEYTIMEOUT=0.2
-
-#   # The plugin will auto execute this zvm_after_lazy_keybindings function
-#   function zvm_after_lazy_keybindings() {
-#     zvm_define_widget up-line-or-beginning-search
-#     zvm_define_widget down-line-or-beginning-search
-
-#     zvm_bindkey vicmd 'k' up-line-or-beginning-search
-#     zvm_bindkey viins "^[k" up-line-or-beginning-search
-#     zvm_bindkey viins "^[[A" up-line-or-beginning-search
-#     zvm_bindkey vicmd 'j' down-line-or-beginning-search
-#     zvm_bindkey viins "^[j" down-line-or-beginning-search
-#     zvm_bindkey viins "^[[B" down-line-or-beginning-search
-#   }
-# fi
-
 # Awesome prompt (starship); only do this if not installed via the system packaging.
 if ! command -v starship > /dev/null ; then
 	echo "Install Starship"
@@ -347,9 +335,6 @@ fi
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 eval "$(starship init zsh)"
 
-export EDITOR=lvim
-
-# >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/alourie/.miniconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
@@ -362,8 +347,5 @@ else
     fi
 fi
 unset __conda_setup
-# <<< conda initialize <<<
 
-# PROFILING
-#zprof
-#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export EDITOR=lvim

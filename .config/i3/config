@@ -110,6 +110,7 @@ workspace 8 output $secondMonitor
 workspace 9 output $secondMonitor
 workspace 10 output $secondMonitor
 workspace 11 output $secondMonitor
+workspace 12 output $secondMonitor
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -402,6 +403,11 @@ font pango:Noto Mono Regular 13
 #assign [class="Spotify|spotify"]                                                    → 10
 #fix for spotify not moving to workspace 10
 #for_window [class="Spotify"] move to workspace 10
+
+# Hidden WS for Zoom
+assign [class="Zoom|zoom"]                                                           → 11
+#fix for spotify not moving to workspace 10
+for_window [class="zoom|Zoom"] move to workspace 11
 
 
 
