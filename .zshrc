@@ -93,6 +93,7 @@ alias config='git --git-dir=$HOME/.dots/ --work-tree=$HOME'
 alias gcl="git restore .idea"
 alias gst="git stu"
 alias vact="source venv/bin/activate"
+alias pbcopy="xclip -sel clip"
 
 #fix obvious typo's
 alias cd..='cd ..'
@@ -237,6 +238,7 @@ if [ "${FIRST_INSTALL}" = 1 ]; then
     install-base
 
     # "Restore" basic configs
+    cd $HOME
     restore_config .gitconfig .config/starship 
 fi
 
