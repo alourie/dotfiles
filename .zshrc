@@ -34,7 +34,7 @@ CASE_SENSITIVE="true"
 # DISABLE_LS_COLORS="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
@@ -168,6 +168,8 @@ alias rg="rg --sort path"
 
 # xdg-open
 alias xo=xdg-open
+
+alias pp="ping 1.1.1.1"
 
 function restore() {
   git restore --staged $@ 
