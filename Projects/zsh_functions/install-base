@@ -34,7 +34,7 @@ function setup_npm() {
   if [ ! -d $HOME/.npm-global ]; then
     mkdir $HOME/.npm-global
   fi
-  npm config set prefix '$HOME/.npm-global'
+  npm config set prefix "$HOME/.npm-global"
 }
 
 function install_neovim() {
