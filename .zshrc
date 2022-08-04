@@ -335,7 +335,7 @@ fi
 # Awesome prompt (starship); only do this if not installed via the system packaging.
 if ! command -v starship > /dev/null ; then
 	echo "Install Starship"
-	curl -fsSL https://starship.rs/install.sh | bash
+	curl -fsSL https://starship.rs/install.sh | sudo sh
 fi
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 eval "$(starship init zsh)"
