@@ -212,6 +212,7 @@ typeset -U fpath
 
 ## Make sure the config is setup
 export DOTS="$HOME/.dots"
+FIRST_INSTALL=0
 if [ ! -d "${DOTS}" ]; then
   # Check prereqs!
   git clone --bare http://gitlab.com/alourie/dotfiles "${DOTS}"
