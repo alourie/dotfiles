@@ -43,7 +43,7 @@ function install_neovim() {
   pushd $HOME/Projects
   git clone https://github.com/neovim/neovim 
   cd neovim
-  echo "CMAKE_EXTRA_FLAGS := -DCMAKE_INSTALL_PREFIX=$HOME/.local/" > local.mk
+  echo "CMAKE_EXTRA_FLAGS := -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$HOME/.local/" > local.mk
   make CMAKE_BUILD_TYPE=Release
   make install
   popd
