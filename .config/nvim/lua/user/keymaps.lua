@@ -39,8 +39,11 @@ keymap("n", "<leader>h", "<cmd>nohlsearch<CR>", opts)
 keymap("n", "<S-q>", "<cmd>Bdelete!<CR>", opts)
 
 
--- Open terminal
+-- Terminal stuff
 keymap("n", "<leader>t", "<cmd>vsp +term<CR>", opts)
+keymap("t", "<esc>", "<C-\\><C-n>", opts)
+keymap("t", "<C-h>", "<C-\\><C-n><C-w>h", opts)
+keymap("t", "<C-l>", "<C-\\><C-n><C-w>l", opts)
 
 -- Better paste
 keymap("v", "p", '"_dP', opts)

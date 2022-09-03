@@ -44,3 +44,19 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
     vim.highlight.on_yank { higroup = "Visual", timeout = 80 }
   end,
 })
+-- Make ansible playbooks actually use ansible stuff/highlighting
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = { "*/playbooks/*.yml" },
+  callback = function()
+    vim.filetype = "yaml.ansible"
+  end,
+})
+
+-- No line numbers in terminal
+vim.api.nvim_create_autocmd({ "TermOpen" }, {
+  callback = function()
+    vim.opt_local.number = false
+    vim.opt_local.relativenumber = false
+    vim.opt_local.signcolumn = "no"
+  end,
+})

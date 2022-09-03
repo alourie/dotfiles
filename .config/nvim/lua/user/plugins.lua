@@ -87,6 +87,9 @@ return packer.startup(function(use)
   -- Go
   use {'fatih/vim-go'}
 
+  -- Ansible
+  use {'pearofducks/ansible-vim'}
+
   -- Telescope
   use { "nvim-telescope/telescope.nvim", commit = "d96eaa914aab6cfc4adccb34af421bdd496468b0" }
 

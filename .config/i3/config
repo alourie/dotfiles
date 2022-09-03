@@ -557,7 +557,7 @@ bindsym control+mod1+p exec --no-startup-id pamac-manager
 bindsym --release $mod+Escape exec xkill
 
 # misc
-bindsym $mod+p exec ~/.config/polybar/launch.sh
+bindsym $mod+shift+P exec ~/.config/polybar/launch.sh
 bindsym $mod+shift+F exec /usr/bin/nautilus
 
 # rofi helpers
@@ -611,7 +611,7 @@ bindsym $mod+F10 exec --no-startup-id spotify;focus
 bindsym control+mod1+s exec --no-startup-id spotify;focus
 
 # stuff
-bindsym $mod+shift+p exec "pass -c basic"
+bindsym $mod+p exec /home/alourie/Projects/scripts/p.sh 
 
 # dunst control
 bindsym Control+space exec "dunstctl close"
@@ -793,7 +793,7 @@ bindsym $mod+shift+b exec --no-startup-id i3-msg border toggle
 #super+t in arcolinux is starting terminal
 bindsym $mod+t border normal
 bindsym $mod+y border 1pixel
-bindsym $mod+u border none
+# bindsym $mod+u border none
 
 
 #new_window pixel 1
