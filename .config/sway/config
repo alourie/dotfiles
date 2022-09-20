@@ -1,0 +1,340 @@
+# Variables
+
+# Use Hyper as a modifier key
+set $hyper Mod4
+
+# Home row direction keys, like vim
+set $left  h
+set $down  j
+set $up    k
+set $right l
+
+### Output configuration
+#
+# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+set $wallpaper /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_2048x1536.png
+#
+# Example configuration:
+#
+#   output HDMI-A-1 resolution 1920x1080 position 1920,0
+#
+# You can get the names of your outputs by running: swaymsg -t get_outputs
+
+# Outputs
+set $laptop         eDP-1
+set $dellDP2        DP-2
+set $dellDP3        DP-3
+
+# Self
+output $laptop      resolution 1920x1080 position 0 0
+# Dell 3840x2160
+output $dellDP2        resolution 3840x2160@30Hz position 1920 0 scale 2
+output $dellDP3        resolution 3840x2160@30Hz position 1920 0 scale 1
+
+# Your preferred terminal emulator
+set $term kitty --single-instance
+
+# Set font
+font pango: Noto Mono Regular 15
+
+input type:keyboard {
+    xkb_layout us,il,ru
+    xkb_options grp:alt_shift_toggle,compose:ralt,caps:hyper,numpad:mac
+    xkb_numlock enable
+}
+
+input type:touchpad {
+    natural_scroll enabled
+    tap enabled
+}
+
+seat * hide_cursor 10000
+
+bindsym $hyper+F12 exec swaylock -i $lock_bg
+exec swayidle -w \
+    timeout 600  'swaylock -i $wallpaper' \
+    timeout 600  'swaymsg "output * dpms off"' \
+    resume       'swaymsg "output * dpms on"' \
+    before-sleep 'swaylock -i $wallpaper' \
+    lock         'swaylock -i $wallpaper'
+
+
+output * {
+    bg "#5e81ac" solid_color
+}
+
+# Gaps
+gaps inner 5
+#smart_gaps on
+
+# Borders
+default_border pixel 4
+default_floating_border none
+hide_edge_borders --i3 smart
+
+# Disable cursor jumping
+mouse_warping none
+focus_follows_mouse no
+
+# Workspaces
+#workspace_layout tabbed
+set $workspace1 workspace number 1
+set $workspace2 workspace number 2
+set $workspace3 workspace number 3
+set $workspace4 workspace number 4
+set $workspace5 workspace number 5
+set $workspace6 workspace number 6
+set $workspace7 workspace number 7
+set $workspace8 workspace number 8
+set $workspace9 workspace number 9
+set $workspace0 workspace number 10
+
+# Specific window configuration
+for_window    [app_id=".*"]                              sticky enable
+for_window    [window_role="pop-up"]                     floating enable
+for_window    [app_id="udiskie"]                         floating enable
+for_window    [app_id="org.qutebrowser.qutebrowser"]     move container to $workspace2
+for_window    [app_id="Signal"]                          move container to $workspace3
+for_window    [app_id="neomutt"]                         move container to $workspace4, title_format "NeoMutt"
+for_window    [app_id="dmenu.*"]                         floating enable, resize set width 60ppt height 80ppt
+for_window    [app_id="dmenu-browser"]                   resize set height 20ppt
+for_window    [app_id="dmenu-emoji"]                     resize set height 20ppt
+for_window    [app_id="qalculate-gtk"]                   floating enable
+for_window    [app_id="mpv"]                             floating enable, resize set width 531 height 300, move position 1345 125
+for_window    [app_id="iriunwebcam"]                     floating disable
+
+# Window color settings
+# class                 border  backgr. text    indicator    self
+client.focused          #d08770 #6790EB #e5e5e5 #6790EB    #d08770
+client.unfocused        #222222 #222222 #aaaaaa #222222    #5e81ac
+client.focused_inactive #222222 #222222 #a9a9a9 #222222    #5e81ac
+client.placeholder      #222222 #222222 #aaaaaa #222222    #5e81ac
+client.urgent           #d08770 #d42121 #f7f7f7 #d42121
+
+
+# Use Mouse+$hyper to drag floating windows to their wanted position
+floating_modifier $hyper
+
+set $mode_audio "Audio"
+mode $mode_audio {
+    bindsym --to-code {
+        h exec sway-audio bt-connect-headphones, mode "default"
+        s exec sway-audio bt-connect-speakers, mode "default"
+        t exec sway-audio bt-toggle-profile, mode "default"
+        d exec sway-audio bt-disconnect, mode "default"
+
+        # back to normal: Enter or Escape
+        Return mode default
+        Escape mode default
+    }
+}
+
+set $mode_resize "Resize window"
+mode $mode_resize {
+    bindsym --to-code {
+        h            exec swaymsg resize grow   left 10 || swaymsg resize shrink right 10
+        Ctrl+h       exec swaymsg resize grow   left 1  || swaymsg resize shrink right 1
+        j            exec swaymsg resize shrink up   10 || swaymsg resize grow   down  10
+        Ctrl+j       exec swaymsg resize shrink up   1  || swaymsg resize grow   down  1
+        k            exec swaymsg resize grow   up   10 || swaymsg resize shrink down  10
+        Ctrl+k       exec swaymsg resize grow   up   1  || swaymsg resize shrink down  1
+        l            exec swaymsg resize shrink left 10 || swaymsg resize grow   right 10
+        Ctrl+l       exec swaymsg resize shrink left 1  || swaymsg resize grow   right 1
+
+        # back to normal: Enter or Escape
+        Return mode default
+        Escape mode default
+    }
+}
+
+set $mode_workspaces_monitors "Move workspace between monitors"
+mode $mode_workspaces_monitors {
+    bindsym --to-code {
+        h exec swaymsg move workspace to output left, mode "default"
+        l exec swaymsg move workspace to output right, mode "default"
+
+        # back to normal: Enter or Escape
+        Return mode default
+        Escape mode default
+    }
+}
+
+bindsym --to-code {
+    # Terminal
+    $hyper+Return exec $term
+    $hyper+Shift+Return exec $term --config NONE /bin/bash
+
+    # Launcher
+    $hyper+d          fullscreen disable, exec wofi --show run
+    $hyper+space          fullscreen disable, exec wofi --allow-images --show drun
+    # $hyper+p          fullscreen disable, exec "wl-clipboard-manager lock; passmenu -p pass; wl-clipboard-manager unlock"
+    # $hyper+m          fullscreen disable, exec udiskie-dmenu
+    # $hyper+grave        fullscreen disable, exec wl-clipboard-manager dmenu
+    # $hyper+Backspace  fullscreen disable, exec emoji-dmenu
+    Print             exec sway-screenshot-area
+    # $hyper+Print      exec sway-gif-area
+    $hyper+Print        exec sway-screenshare
+
+    # Kill focused window
+    $hyper+q kill
+
+    # Change focus
+    $hyper+$left focus left
+    $hyper+$down focus down
+    $hyper+$up focus up
+    $hyper+$right focus right
+
+    # Move focused window
+    # $hyper+h move left
+    # $hyper+j move down
+    # $hyper+k move up
+    # $hyper+l move right
+
+    # Enter fullscreen mode
+    $hyper+f fullscreen
+
+    # Container layout: split
+    $hyper+e layout toggle split
+
+    # Container layout: tabbed
+    $hyper+w layout tabbed
+
+    # Split
+    $hyper+s split toggle
+
+    # Focus the parent container
+    # $hyper+u focus parent
+
+    # Focus the child container
+    # $hyper+i focus child
+
+    # Toggle tiling / floating
+    # $hyper+space floating toggle
+
+    # Make the currently focused window a scratchpad
+    # $hyper+minus move scratchpad
+
+    # Show the first scratchpad window
+    # $hyper+minus scratchpad show
+
+    # Change focus between tiling / floating windows
+    # $hyper+space focus mode_toggle
+
+    # Notification actions
+    ctrl+space exec makoctl dismiss
+    $hyper+o exec makoctl menu dmenu
+
+    # Brightness control
+    XF86MonBrightnessUp         exec light -A 1%
+    XF86MonBrightnessDown       exec light -U 1%
+    Shift+XF86MonBrightnessUp   exec light -A 5%
+    Shift+XF86MonBrightnessDown exec light -U 5%
+
+    # Media control
+    # XF86AudioPlay exec playerctl --player playerctld play-pause
+    # XF86AudioNext exec playerctl --player playerctld next
+    # XF86AudioPrev exec playerctl --player playerctld previous
+    # $hyper+Up     exec playerctl --player playerctld play-pause
+    # $hyper+Down   exec playerctl --player playerctld play-pause
+    # $hyper+Left   exec playerctl --player playerctld previous
+    # $hyper+Right  exec playerctl --player playerctld next
+
+    XF86AudioMute        exec amixer -D pulse sset Master toggl
+    XF86AudioRaiseVolume exec sway-audio output-volume-up
+    XF86AudioLowerVolume exec sway-audio output-volume-down
+    # $hyper+Up              exec sway-audio output-mute
+    # $hyper+Down            exec sway-audio output-mute
+    # $hyper+Right           exec sway-audio output-volume-up
+    # $hyper+Left            exec sway-audio output-volume-down
+    # $hyper+Shift+Up        exec sway-audio input-mute
+    # $hyper+Shift+Down      exec sway-audio input-mute
+    # $hyper+Shift+Right     exec sway-audio input-volume-up
+    # $hyper+Shift+Left      exec sway-audio input-volume-down
+
+    # Reload the configuration file
+    $hyper+Shift+r reload
+
+    # Switch to workspace using number row
+    $hyper+1 $workspace1
+    $hyper+2 $workspace2
+    $hyper+3 $workspace3
+    $hyper+4 $workspace4
+    $hyper+5 $workspace5
+    $hyper+6 $workspace6
+    $hyper+7 $workspace7
+    $hyper+8 $workspace8
+    $hyper+9 $workspace9
+    $hyper+0 $workspace0
+
+    # Switch to workspace using keypad
+    $hyper+KP_1 $workspace1
+    $hyper+KP_2 $workspace2
+    $hyper+KP_3 $workspace3
+    $hyper+KP_4 $workspace4
+    $hyper+KP_5 $workspace5
+    $hyper+KP_6 $workspace6
+    $hyper+KP_7 $workspace7
+    $hyper+KP_8 $workspace8
+    $hyper+KP_9 $workspace9
+    $hyper+KP_0 $workspace0
+
+    # Move window to workspace using number row
+    $hyper+Shift+1 move container to $workspace1
+    $hyper+Shift+2 move container to $workspace2
+    $hyper+Shift+3 move container to $workspace3
+    $hyper+Shift+4 move container to $workspace4
+    $hyper+Shift+5 move container to $workspace5
+    $hyper+Shift+6 move container to $workspace6
+    $hyper+Shift+7 move container to $workspace7
+    $hyper+Shift+8 move container to $workspace8
+    $hyper+Shift+9 move container to $workspace9
+    $hyper+Shift+0 move container to $workspace0
+
+    # Move window to workspace using keypad
+    $hyper+Shift+KP_1 move container to $workspace1
+    $hyper+Shift+KP_2 move container to $workspace2
+    $hyper+Shift+KP_3 move container to $workspace3
+    $hyper+Shift+KP_4 move container to $workspace4
+    $hyper+Shift+KP_5 move container to $workspace5
+    $hyper+Shift+KP_6 move container to $workspace6
+    $hyper+Shift+KP_7 move container to $workspace7
+    $hyper+Shift+KP_8 move container to $workspace8
+    $hyper+Shift+KP_9 move container to $workspace9
+    $hyper+Shift+KP_0 move container to $workspace0
+
+    # Modes
+    $hyper+a mode $mode_audio
+    $hyper+r mode $mode_resize
+    # $hyper+e mode $mode_system
+    $hyper+m mode $mode_workspaces_monitors
+
+    # Arcoexit
+    $hyper+Shift+e exec arcolinux-logout
+    $hyper+x exec arcolinux-logout 
+}
+
+# Load host-specific configs
+include "~/.config/sway/autostart.conf"
+
+# Load systemd integration
+include /etc/sway/config.d/*
+exec systemctl --user start sway-session.target
+
+bar {
+    # position top
+
+    # font pango:DejaVu Sans Mono, FontAwesome 5 Free 10
+
+    swaybar_command waybar
+
+    # When the status_command prints a new line to stdout, swaybar updates.
+    # The default just shows the current date and time.
+    # status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1; done
+    # status_command i3blocks
+
+    # colors {
+    #     statusline #ffffff
+    #     background #323232
+    #     inactive_workspace #32323200 #32323200 #5c5c5c
+    # }
+}
