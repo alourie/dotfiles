@@ -38,13 +38,37 @@ function setup_npm() {
   npm config set prefix "$HOME/.npm-global"
 }
 
+function setup_neovim_config() {
+  if [ ! -d $HOME/.config ]; then
+    mkdir $HOME/.config
+  fi
+  git clone https://github.com/LunarVim/nvim-basic-ide.git ~/.config/nvim
+  nvim
+}
+
+function setup_neovim() {
+  if [ -d $HOME/.config/nvim ]; then
+    echo ".nvim already exists, backup and rerun"
+    exit 0
+  fi
+  setup_npm
+  install_neovim
+  setup_neovim_config
+}
+
 function install_neovim() {
-  echo "Installing Neovim"
-  pushd $HOME/Projects
-  git clone https://github.com/neovim/neovim 
+  if [ ! -d $HOME/Projects/neovim ]; then
+    echo "Installing Neovim"
+    pushd $HOME/Projects
+    git clone https://github.com/neovim/neovim 
+    echo "CMAKE_EXTRA_FLAGS := -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$HOME/.local/" > neovim/local.mk
+  fi
   cd neovim
-  echo "CMAKE_EXTRA_FLAGS := -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$HOME/.local/" > local.mk
-  make CMAKE_BUILD_TYPE=Release
+  if [ "$1" = "update" ]; then
+    echo "Updating neovim"
+    git fetch -v
+    git rebase
+  fi
   make install
   popd
 }
@@ -62,21 +86,21 @@ function install_debian() {
     sudo apt -y install \
       git curl wget \
       ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip curl doxygen npm pip \
-      fzf
+      golang jq
 
-    if ! command -v rustup > /dev/null; then
-      sh -c "$(curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs)" "" -y 
-    fi
+    install_rust
+}
 
-    export PATH="$PATH:$HOME/.cargo/bin"
+function install_rust() {
+  if ! command -v rustup > /dev/null; then
+    sh -c "$(curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs)" "" -y 
+  fi
 
-    rustup self upgrade-data
-    rustup install stable
-    rustup default stable
+  export PATH="$PATH:$HOME/.cargo/bin"
 
-    install_neovim
-    setup_npm
-    install_lunarvim
+  rustup self upgrade-data
+  rustup install stable
+  rustup default stable
 }
 
 function install_fedora() {
@@ -102,10 +126,6 @@ function install_alpine() {
     rustup self upgrade-data
     rustup install stable
     rustup default stable
-
-    install_neovim
-    setup_npm
-    install_lunarvim
 }
 
 # What OS are we running?
