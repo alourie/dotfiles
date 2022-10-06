@@ -47,6 +47,7 @@ keymap("t", "<C-l>", "<C-\\><C-n><C-w>l", opts)
 
 -- Better paste
 keymap("v", "p", '"_dP', opts)
+keymap("x", "p", '"_dP', opts)
 
 -- Insert --
 -- Press jk fast to enter

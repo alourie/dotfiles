@@ -116,10 +116,14 @@ return packer.startup(function(use)
   use {'dstein64/vim-startuptime'}
   use {'godlygeek/tabular'}
   use {'doums/suit.nvim'}
+
   -- {'nvim-treesitter/nvim-treesitter-context'},
   -- {'kunzaatko/nord.nvim'},
   -- {'andersevenrud/nordic.nvim'},
+  use {'gruvbox-community/gruvbox'}
 
+  -- harpoon
+  use {'ThePrimeagen/harpoon'}
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

@@ -16,6 +16,10 @@ local diagnostics = {
   always_visible = false,
 }
 
+local filename = function()
+  return vim.api.nvim_buf_get_name(0)
+end
+
 local filetype = {
   "filetype",
   icons_enabled = true,
@@ -45,8 +49,9 @@ lualine.setup {
   },
   sections = {
     lualine_a = { "mode" },
-    lualine_b = {"branch"},
-    lualine_c = { diagnostics },
+    lualine_b = { "branch" },
+    lualine_c = { filename },
+    lualine_d = { diagnostics },
     lualine_x = { spaces, "encoding", filetype },
     lualine_y = { location },
     lualine_z = {},
