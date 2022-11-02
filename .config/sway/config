@@ -12,7 +12,9 @@ set $right l
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-set $wallpaper /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_2048x1536.png
+# set $wallpaper /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_2048x1536.png
+# only on arco or wherever archlinux-betterlockscreen is installed
+set $wallpaper /usr/share/archlinux-betterlockscreen/wallpapers/rocket-7680x4320.png
 #
 # Example configuration:
 #
@@ -50,9 +52,9 @@ input type:touchpad {
 
 seat * hide_cursor 10000
 
-bindsym $hyper+F12 exec swaylock -i $lock_bg
+bindsym $hyper+y exec swaylock -i $wallpaper
 exec swayidle -w \
-    timeout 600  'swaylock -i $wallpaper' \
+    timeout 598  'swaylock -i $wallpaper' \
     timeout 600  'swaymsg "output * dpms off"' \
     resume       'swaymsg "output * dpms on"' \
     before-sleep 'swaylock -i $wallpaper' \
@@ -74,7 +76,7 @@ hide_edge_borders --i3 smart
 
 # Disable cursor jumping
 mouse_warping none
-focus_follows_mouse no
+focus_follows_mouse yes
 
 # Workspaces
 #workspace_layout tabbed
@@ -220,6 +222,12 @@ bindsym --to-code {
     # Change focus between tiling / floating windows
     # $hyper+space focus mode_toggle
 
+    # P
+    $hyper+p exec /home/alourie/Projects/scripts/p.sh 
+    # Screenshot
+    $hyper+alt+0 exec grim -g "$(slurp)" -t png - | wl-copy -t image/png
+
+
     # Notification actions
     ctrl+space exec makoctl dismiss
     $hyper+o exec makoctl menu dmenu
@@ -265,6 +273,8 @@ bindsym --to-code {
     $hyper+8 $workspace8
     $hyper+9 $workspace9
     $hyper+0 $workspace0
+    $hyper+i exec /home/alourie/Projects/scripts/switch_ws.sh
+
 
     # Switch to workspace using keypad
     $hyper+KP_1 $workspace1
@@ -289,6 +299,7 @@ bindsym --to-code {
     $hyper+Shift+8 move container to $workspace8
     $hyper+Shift+9 move container to $workspace9
     $hyper+Shift+0 move container to $workspace0
+    $hyper+Shift+i exec /home/alourie/Projects/scripts/move_ws.sh
 
     # Move window to workspace using keypad
     $hyper+Shift+KP_1 move container to $workspace1
@@ -309,8 +320,8 @@ bindsym --to-code {
     $hyper+m mode $mode_workspaces_monitors
 
     # Arcoexit
-    $hyper+Shift+e exec arcolinux-logout
-    $hyper+x exec arcolinux-logout 
+    $hyper+Shift+e exec archlinux-logout
+    $hyper+x exec archlinux-logout 
 }
 
 # Load host-specific configs

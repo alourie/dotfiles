@@ -16,6 +16,15 @@ local diagnostics = {
   always_visible = false,
 }
 
+local pbranch = function ()
+  local p = io.popen("$HOME/Projects/scripts/project_branch.sh")
+  if p then
+    local project = p:read()
+    p:close()
+    return project 
+  end
+end
+
 local filename = function()
   return vim.api.nvim_buf_get_name(0)
 end
@@ -49,7 +58,7 @@ lualine.setup {
   },
   sections = {
     lualine_a = { "mode" },
-    lualine_b = { "branch" },
+    lualine_b = { pbranch },
     lualine_c = { filename },
     lualine_d = { diagnostics },
     lualine_x = { spaces, "encoding", filetype },
