@@ -11,7 +11,7 @@ ZINIT_HOME="${HOME}/.zinit"
 export PROJECTS="$HOME/Projects"
 
 # EDITOR
-export EDITOR=nvim
+export EDITOR=$HOME/Projects/zsh_functions/mvim
 
 
 # Basic aliases
@@ -168,6 +168,7 @@ autoload -Uz c
 autoload -Uz edv
 autoload -Uz set-tokens
 autoload -Uz add-path
+autoload -Uz ginit
 
 # Install the base
 if [ "${FIRST_INSTALL}" = 1 ]; then
@@ -278,6 +279,13 @@ export GOOGLE_TOOLS=/home/alourie/GoogleAndroidTools
 if [ -d ${GOOGLE_TOOLS} ]; then
 	path+=(${GOOGLE_TOOLS}/ndk-bundle ${GOOGLE_TOOLS}/platform-tools)
 fi
+
+# Pascal
+export FPCDIR='/usr/lib/fpc/src'      # FPC source directory (This is the only required option for the server to work).
+export PP='/usr/lib/fpc/3.2.2/ppcx64' # Path to the Free Pascal compiler executable.
+export LAZARUSDIR='/usr/lib/lazarus'  # Path to the Lazarus sources.
+export FPCTARGET=''                   # Target operating system for cross compiling.
+export FPCTARGETCPU='x86_64'          # Target CPU for cross compiling.
 
 # Rust/Cargo
 #source $HOME/.cargo/env

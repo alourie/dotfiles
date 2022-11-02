@@ -1,0 +1,16 @@
+# vim: filetype=zsh
+git rev-parse --is-inside-work-tree 2&>1 > /dev/null
+if [ $? != 0 ]; then
+  echo "Not a git repo"
+fi
+
+if [ -z $1 ]; then
+  echo "Give param 'z' for zb or 'p' for personal"
+elif [ "z" = "$1" ]; then
+  email="alex.lourie@zepben.com"
+elif [ "p" = "$1" ]; then
+  email="djay.il@gmail.com"
+fi
+
+git config --local user.email $email
+git config --local user.name "Alex Lourie"

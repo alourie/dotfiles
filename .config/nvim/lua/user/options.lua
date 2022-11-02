@@ -28,6 +28,7 @@ vim.opt.tabstop = 4                             -- insert 2 spaces for a tab
 vim.opt.softtabstop = 4                             -- insert 2 spaces for a tab
 vim.opt.cursorline = true                       -- highlight the current line
 vim.opt.number = true                           -- set numbered lines
+vim.opt.relativenumber = true                   -- user relativenumber
 vim.opt.laststatus = 3
 vim.opt.showcmd = false
 vim.opt.ruler = false

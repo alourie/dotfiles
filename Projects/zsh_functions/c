@@ -26,7 +26,7 @@ case "$1" in
         choice="${XDG_CONFIG_HOME:-$HOME/.config}/lvim/config.lua"
     ;;
     p|polybar)
-        choice="${XDG_CONFIG_HOME:-$HOME/.config}/polybar/config"
+        choice="${XDG_CONFIG_HOME:-$HOME/.config}/polybar/config.ini"
     ;;
     k|kitty)
         choice="${XDG_CONFIG_HOME:-$HOME/.config}/kitty/kitty.conf"
@@ -44,4 +44,5 @@ case "$1" in
         choice="$HOME/Projects/zsh_functions/c"
     ;;
 esac
-lvim "$choice"
+echo "Opening $choice"
+nvim "$choice"
