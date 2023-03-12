@@ -23,6 +23,9 @@ case "$1" in
         choice="${XDG_CONFIG_HOME:-$HOME/.config}/i3/i3status-rust-config.toml"
     ;;
     nvim)
+        choice="${XDG_CONFIG_HOME:-$HOME/.config}/nvim/init.lua"
+    ;;
+    lvim)
         choice="${XDG_CONFIG_HOME:-$HOME/.config}/lvim/config.lua"
     ;;
     p|polybar)

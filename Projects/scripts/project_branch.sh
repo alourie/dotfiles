@@ -5,4 +5,6 @@ if [ "$g" = "true" ]; then
     proj=$(basename $(git rev-parse --show-toplevel))
     branch=$(git branch --show-current)
     echo "[$proj]  $branch"
+else
+    echo "not git"
 fi

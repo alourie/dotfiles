@@ -432,7 +432,7 @@ exec env GDK_SCALE=2 signal-desktop
 for_window [class="signal|signal-desktop|Signal|Signal-desktop"] move to workspace 20
 
 # Mailspring, otherwise I forget 
-exec env GDK_SCALE=2 signal-desktop
+#exec env GDK_SCALE=2 signal-desktop
 for_window [class="mailspring|Mailspring"] move to workspace 11 
 
 #browser

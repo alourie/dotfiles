@@ -110,6 +110,9 @@ alias xo=xdg-open
 # fetch date
 alias ddd="echo -n $(date +'%B %d, %Y') | pbcopy"
 
+# Zepben Address
+alias zzz="echo -n Suite 2, Level 2, 11 London Circuit, Canberra, Australian Capital Territory 2601 | pbcopy"
+
 
 function restore() {
   git restore --staged $@ 
