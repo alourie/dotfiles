@@ -24,7 +24,7 @@ vim.api.nvim_create_autocmd({ "User" }, {
 
 -- Set wrap and spell in markdown and gitcommit
 vim.api.nvim_create_autocmd({ "FileType" }, {
-    pattern = { "gitcommit", "markdown" },
+    pattern = { "gitcommit", "markdown", "*.md" },
     callback = function()
         vim.opt_local.wrap = true
         vim.opt_local.spell = true
@@ -37,8 +37,6 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
         vim.lsp.buf.format()
     end,
 })
-
-vim.cmd("autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif")
 
 -- Fixes Autocomment
 vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
