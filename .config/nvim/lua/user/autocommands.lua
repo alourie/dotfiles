@@ -5,22 +5,22 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     pattern = { "qf", "help", "man", "lspinfo", "spectre_panel", "lir" },
     callback = function()
         vim.cmd([[
-      nnoremap <silent> <buffer> q :close<CR>
-      set nobuflisted
-    ]])
+          nnoremap <silent> <buffer> q :close<CR>
+          set nobuflisted
+        ]])
     end,
 })
 
 -- Remove statusline and tabline when in Alpha
-vim.api.nvim_create_autocmd({ "User" }, {
-    pattern = { "AlphaReady" },
-    callback = function()
-        vim.cmd([[
-      set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2
-      set laststatus=0 | autocmd BufUnload <buffer> set laststatus=3
-    ]])
-    end,
-})
+-- vim.api.nvim_create_autocmd({ "User" }, {
+--     pattern = { "AlphaReady" },
+--     callback = function()
+--         vim.cmd([[
+--           set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2
+--           set laststatus=0 | autocmd BufUnload <buffer> set laststatus=3
+--         ]])
+--     end,
+-- })
 
 -- Set wrap and spell in markdown and gitcommit
 vim.api.nvim_create_autocmd({ "FileType" }, {
@@ -28,6 +28,17 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     callback = function()
         vim.opt_local.wrap = true
         vim.opt_local.spell = true
+    end,
+})
+
+vim.api.nvim_create_autocmd({ "FileType" }, {
+    pattern = { "*.c", "*.cpp", "*.h", "*.hpp" },
+    callback = function()
+        vim.opt_local.wrap = true
+        vim.opt_local.spell = true
+        vim.opt.shiftwidth = 2  -- the number of spaces inserted for each indentation
+        vim.opt.tabstop = 2     -- insert 2 spaces for a tab
+        vim.opt.softtabstop = 2 -- insert 2 spaces for a tab
     end,
 })
 

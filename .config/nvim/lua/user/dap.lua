@@ -35,7 +35,6 @@ dap.configurations.cpp = {
         cwd = '${workspaceFolder}',
         stopOnEntry = false,
         args = {},
-
         -- 💀
         -- if you change `runInTerminal` to true, you might need to change the yama/ptrace_scope setting:
         --
@@ -58,7 +57,7 @@ dapui.setup {
     layout = {
         {
             elements = {
-                { id = "scopes", size = 0.25, },
+                { id = "scopes",      size = 0.25, },
                 { id = "breakpoints", size = 0.25, },
                 size = 40,
                 position = "right", -- Can be "left", "right", "top", "bottom"
