@@ -6,15 +6,33 @@ local color = {
     --         require('github-theme').setup()
     --     end
     -- }
+    -- {
+    --     "tjdevries/gruvbuddy.nvim",
+    --     priority = 1000,
+    --     lazy = false,
+    --     dependencies = {
+    --         { "tjdevries/colorbuddy.nvim" }, -- Required
+    --     },
+    --     config = function()
+    --         require('colorbuddy').colorscheme('gruvbuddy')
+    --     end
+    -- }
+    -- {
+    --     "rose-pine/neovim",
+    --     name = "rose-pine",
+    --     config = function()
+    --         require('rose-pine').setup({
+    --             variant = 'auto',
+    --             --- @usage 'main'|'moon'|'dawn'
+    --             dark_variant = 'moon',
+    --         })
+    --         vim.cmd('colorscheme rose-pine')
+    --     end
+    -- },
     {
-        "tjdevries/gruvbuddy.nvim",
-        priority = 1000,
-        lazy = false,
-        dependencies = {
-            { "tjdevries/colorbuddy.nvim" }, -- Required
-        },
+        "folke/tokyonight.nvim",
         config = function()
-            require('colorbuddy').colorscheme('gruvbuddy')
+            vim.cmd('colorscheme tokyonight-moon')
         end
     }
 }
@@ -22,11 +40,6 @@ return {
     color,
     -- Colorschemes
     "gruvbox-community/gruvbox",
-    "folke/tokyonight.nvim",
-    {
-        "rose-pine/neovim",
-        name = "rose-pine"
-    },
 
     -- this is for the lualine colour
     "alourie/dim-colours.nvim",

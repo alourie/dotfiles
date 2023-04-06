@@ -54,7 +54,19 @@ return {
                 diagnostics_color = require "dim-colors.colors.lualine_diagnostics"
             },
             sections = {
-                lualine_a = { "mode" },
+                lualine_a = {
+                    "mode",
+                    -- {
+                    --     "macro-recording",
+                    --     fmt = show_macro_recording,
+                    --     color = { bg = "red" },
+                    -- },
+                    {
+                        require("noice").api.statusline.mode.get,
+                        cond = require("noice").api.statusline.mode.has,
+                        color = { bg = "red" },
+                    }
+                },
                 lualine_b = { pbranch },
                 lualine_c = { diagnostics, filename },
                 lualine_d = {},

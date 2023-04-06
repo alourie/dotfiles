@@ -15,12 +15,13 @@ export EDITOR=$HOME/Projects/zsh_functions/mvim
 
 
 # Basic aliases
+alias ls="ls --color"
 alias rl="source ${ZSHRC}"
 alias ee="$EDITOR ${ZSHRC}"
 alias gp="cd $PROJECTS"
 alias t=todo.sh
 alias vim=$EDITOR
-alias ssh="ssh -A "
+alias ssh="kitty +kitten ssh --kitten env=NVIM=vim -A "
 alias picsort="$PROJECTS/merge_pics/merge_go/picsort"
 alias showbig="du -sh * | grep -e '\dG'"
 alias showst="lsblk | ack -v \"loop|ram|rom\""
@@ -31,6 +32,7 @@ alias gcl="git restore .idea"
 alias gst="git stu"
 alias gf="git fetch -v"
 alias vact="source venv/bin/activate"
+alias pp="termpdf.py"
 
 #fix obvious typo's
 alias cd..='cd ..'
@@ -172,6 +174,7 @@ autoload -Uz edv
 autoload -Uz set-tokens
 autoload -Uz add-path
 autoload -Uz ginit
+autoload -Uz lock
 
 # Install the base
 if [ "${FIRST_INSTALL}" = 1 ]; then
@@ -284,9 +287,9 @@ if [ -d ${GOOGLE_TOOLS} ]; then
 fi
 
 # Pascal
-export FPCDIR='/usr/lib/fpc/src'      # FPC source directory (This is the only required option for the server to work).
+# export FPCDIR='/usr/lib/fpc/src'      # FPC source directory (This is the only required option for the server to work).
 export PP='/usr/lib/fpc/3.2.2/ppcx64' # Path to the Free Pascal compiler executable.
-export LAZARUSDIR='/usr/lib/lazarus'  # Path to the Lazarus sources.
+# export LAZARUSDIR='/usr/lib/lazarus'  # Path to the Lazarus sources.
 export FPCTARGET=''                   # Target operating system for cross compiling.
 export FPCTARGETCPU='x86_64'          # Target CPU for cross compiling.
 

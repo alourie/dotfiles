@@ -68,13 +68,14 @@ keymap("v", ">", ">gv", opts)
 -- Plugins --
 
 -- NvimTree
-keymap("n", "<leader>e", ":NeoTreeShowToggle<CR>", opts)
+-- keymap("n", "<leader>e", ":NeoTreeShowToggle<CR>", opts)
 
 -- LSP
 keymap("n", "<leader>lf", ":lua vim.lsp.buf.format()<CR>", opts)
 
 -- Git
 -- keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)
+keymap("n", "<leader>gg", "<cmd>Gitsigns toggle_current_line_blame<CR>", opts)
 
 -- Comment
 keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle.linewise()<CR>", opts)

@@ -12,29 +12,18 @@ return { -- My plugins here
     "ravenxrz/DAPInstall.nvim",
 
     -- Misc
+    "folke/zen-mode.nvim",
     "vladdoster/remember.nvim",
     "tpope/vim-surround",
     "tpope/vim-repeat",
     "dstein64/vim-startuptime",
     "godlygeek/tabular",
     "moll/vim-bbye",
-    --[[ "doums/suit.nvim", ]]
 
-
-    -- Noice
     {
-        "folke/noice.nvim",
-        event = "VimEnter",
+        "j-hui/fidget.nvim",
         config = function()
-            require("noice").setup()
-        end,
-        dependencies = {
-            -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-            "MunifTanjim/nui.nvim",
-            -- OPTIONAL:
-            --   `nvim-notify` is only needed, if you want to use the notification view.
-            --   If not available, we use `mini` as the fallback
-            "rcarriga/nvim-notify",
-        },
+            require('fidget').setup()
+        end
     },
 }

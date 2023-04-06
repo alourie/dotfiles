@@ -68,4 +68,4 @@ modified = "[∙](bold red)"
 deleted = "[∙](bold red)"
 renamed = "[∙](bold red)"
 #format = "[ $all_status$ahead_behind ]"
-format = '([$conflicted$staged$modified$untracked$ahead_behind]($style))'
+format = '([$conflicted$staged$modified$deleted$renamed$untracked$ahead_behind]($style))'
