@@ -3,7 +3,7 @@
 # zmodload zsh/zprof
 #
 ## DEFS
-TERM=xterm
+# TERM=xterm
 ZSHRC="${HOME}/.zshrc"
 ZINIT_HOME="${HOME}/.zinit"
 
@@ -158,7 +158,7 @@ typeset -U fpath
 export DOTS="$HOME/.dots"
 if [ ! -d "${DOTS}" ]; then
   # Check prereqs!
-  git clone --bare http://gitlab.com/alourie/dotfiles "${DOTS}"
+  git clone --bare http://github.com/alourie/dotfiles "${DOTS}"
 
   # Restore function path from config
   restore_config Projects/zsh_functions
@@ -175,6 +175,7 @@ autoload -Uz set-tokens
 autoload -Uz add-path
 autoload -Uz ginit
 autoload -Uz lock
+autoload -Uz install-neovim-req
 
 # Install the base
 if [ "${FIRST_INSTALL}" = 1 ]; then
