@@ -43,7 +43,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 })
 
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-    pattern = { "*.rs", "*.lua", "*.c", "*.cpp", "*.h", "*.c++", "*.hpp" },
+    pattern = { "*.rs", "*.lua" },
     callback = function()
         vim.lsp.buf.format()
     end,
@@ -67,6 +67,7 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
         })
     end,
 })
+
 -- Make ansible playbooks actually use ansible stuff/highlighting
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     pattern = { "*/playbooks/*.yml" },
@@ -79,14 +80,14 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 -- vim.api.nvim_create_user_command('PeekOpen', require('peek').open, {})
 -- vim.api.nvim_create_user_command('PeekClose', require('peek').close, {})
 
--- No line numbers in terminal
-vim.api.nvim_create_autocmd({ "TermOpen" }, {
-    callback = function()
-        vim.opt_local.number = false
-        vim.opt_local.relativenumber = false
-        vim.opt_local.signcolumn = "no"
-    end,
-})
+-- -- No line numbers in terminal
+-- vim.api.nvim_create_autocmd({ "TermOpen" }, {
+--     callback = function()
+--         vim.opt_local.number = false
+--         vim.opt_local.relativenumber = false
+--         vim.opt_local.signcolumn = "no"
+--     end,
+-- })
 
 -- Save files
 vim.api.nvim_create_user_command('W', function()

@@ -1,12 +1,9 @@
 # vim: set syntax=bash:
 #!/usr/bin/env bash
 
-vim=nvim
-# vim=lvim
-
 if [ -z $NVIM ]; then
     # basic nvim
-    $vim $*
+    nvim $*
 else
-    $vim --server $NVIM --remote $(realpath $1)
+    nvim --server $NVIM --remote $(realpath $1)
 fi

@@ -3,7 +3,7 @@ configuration {
 	width: 33;
 	lines: 10;
 	columns: 1;
-	font: "JetBrains Mono 20";
+	font: "Inter Medium 22";
 	bw: 0;
 	padding: 0;
 	show-icons: true;

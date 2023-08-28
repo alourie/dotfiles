@@ -42,12 +42,13 @@ keymap("n", "<S-q>", "<cmd>Bdelete!<CR>", opts)
 keymap("n", ":W<CR>", ":w<CR>", opts)
 
 -- Terminal stuff
-keymap("n", "<leader>t", "<cmd>vsp +term<CR>", opts)
+keymap("n", "<leader>t", "<cmd>vsp +term<CR><cmd>set filetype=term<CR>", opts)
+keymap("n", "<leader>T", "<cmd>sp +term<CR><cmd>set filetype=term<CR>", opts)
 keymap("t", "<esc>", "<C-\\><C-n>", opts)
 keymap("t", "<C-h>", "<C-\\><C-n><C-w>h", opts)
 keymap("t", "<C-l>", "<C-\\><C-n><C-w>l", opts)
-keymap("t", "<C-j>", "<C-\\><C-n><C-w>j", opts)
-keymap("t", "<C-k>", "<C-\\><C-n><C-w>k", opts)
+-- keymap("t", "<C-j>", "<C-\\><C-n><C-w>j", opts)
+-- keymap("t", "<C-k>", "<C-\\><C-n><C-w>k", opts)
 
 -- Better paste
 keymap("v", "p", '"_dP', opts)

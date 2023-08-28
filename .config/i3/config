@@ -1,4 +1,4 @@
-#####################################################################################################################
+####################################################################################################################
 #####################################################################################################################
 #################                          Start of all the settings                                #################
 #####################################################################################################################
@@ -94,6 +94,7 @@ set $scripts $HOME/Projects/scripts
 #set $firstMonitor HDMI-1
 #set $secondMonitor HDMI-2
 
+bindsym $mod+Shift+n exec --no-startup-id $HOME/Projects/zsh_functions/lock
 bindsym $mod+Shift+u exec --no-startup-id $scripts/update-monitors
 
 set $firstMonitor eDP1
@@ -531,7 +532,7 @@ bindsym F12 exec --no-startup-id xfce4-terminal --drop-down; focus
 bindsym control+Shift+Escape exec --no-startup-id xfce4-taskmanager;focus
 
 #settings
-bindsym control+mod1+m exec --no-startup-id xfce4-settings-manager
+bindsym control+Mod1+m exec --no-startup-id xfce4-settings-manager
 
 #catfish
 bindsym control+mod1+c exec --no-startup-id catfish;focus
@@ -1057,11 +1058,8 @@ client.background       #242424
 #################                          keyboard control                                         #################
 #####################################################################################################################
 
-# NOT USED
-
 # Settings of arcolinux will be applied
-#exec --no-startup-id setxkbmap be
-exec --no-startup-id setxkbmap us
+exec --no-startup-id setxkbmap -layout us,workman,il,ru -option 'grp:alt_shift_toggle'
 
 
 

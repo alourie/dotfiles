@@ -1,7 +1,3 @@
-local hide_in_width = function()
-    return vim.fn.winwidth(0) > 80
-end
-
 local diagnostics = {
     "diagnostics",
     sources = { "nvim_lsp" },
@@ -56,19 +52,14 @@ return {
             sections = {
                 lualine_a = {
                     "mode",
-                    -- {
-                    --     "macro-recording",
-                    --     fmt = show_macro_recording,
-                    --     color = { bg = "red" },
-                    -- },
                     {
                         require("noice").api.statusline.mode.get,
                         cond = require("noice").api.statusline.mode.has,
-                        color = { bg = "red" },
+                        color = { bg = "#BF616A" },
                     }
                 },
                 lualine_b = { pbranch },
-                lualine_c = { diagnostics, filename },
+                lualine_c = { diagnostics, '%=', filename },
                 lualine_d = {},
                 lualine_x = { spaces, "encoding", filetype },
                 lualine_y = { location },

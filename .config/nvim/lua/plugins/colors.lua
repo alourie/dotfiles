@@ -6,6 +6,7 @@ local color = {
     --         require('github-theme').setup()
     --     end
     -- }
+
     -- {
     --     "tjdevries/gruvbuddy.nvim",
     --     priority = 1000,
@@ -17,6 +18,7 @@ local color = {
     --         require('colorbuddy').colorscheme('gruvbuddy')
     --     end
     -- }
+
     -- {
     --     "rose-pine/neovim",
     --     name = "rose-pine",
@@ -29,17 +31,28 @@ local color = {
     --         vim.cmd('colorscheme rose-pine')
     --     end
     -- },
+
     {
         "folke/tokyonight.nvim",
         config = function()
+            -- require("tokyonight").setup({
+            --     style = "moon",
+            --     on_highlights = function(hl, _)
+            --         hl.WinSeparator = {
+            --             foreground_color = "#fff",
+            --         }
+            --     end
+            -- })
             vim.cmd('colorscheme tokyonight-moon')
+            vim.cmd('hi! WinSeparator guibg=None guifg=#fff')
         end
     }
+
 }
 return {
     color,
     -- Colorschemes
-    "gruvbox-community/gruvbox",
+    -- "gruvbox-community/gruvbox",
 
     -- this is for the lualine colour
     "alourie/dim-colours.nvim",

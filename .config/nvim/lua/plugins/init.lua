@@ -1,15 +1,23 @@
 return { -- My plugins here
 
     -- Go
-    "fatih/vim-go",
+    {
+        "fatih/vim-go",
+        event = "BufEnter *.yaml",
+        lazy = true
+    },
 
     -- Ansible
-    "pearofducks/ansible-vim",
+    {
+        "pearofducks/ansible-vim",
+        event = "BufEnter *.yaml",
+        lazy = true
+    },
 
     -- DAP
-    "mfussenegger/nvim-dap",
-    "rcarriga/nvim-dap-ui",
-    "ravenxrz/DAPInstall.nvim",
+    -- "mfussenegger/nvim-dap",
+    -- "rcarriga/nvim-dap-ui",
+    -- "ravenxrz/DAPInstall.nvim",
 
     -- Misc
     "folke/zen-mode.nvim",
@@ -18,12 +26,5 @@ return { -- My plugins here
     "tpope/vim-repeat",
     "dstein64/vim-startuptime",
     "godlygeek/tabular",
-    "moll/vim-bbye",
-
-    {
-        "j-hui/fidget.nvim",
-        config = function()
-            require('fidget').setup()
-        end
-    },
+    "moll/vim-bbye"
 }

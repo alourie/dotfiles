@@ -11,6 +11,8 @@ ZINIT_HOME="${HOME}/.zinit"
 export PROJECTS="$HOME/Projects"
 
 # EDITOR
+# export NVIM_APPNAME=kickstart
+# export nvim=$HOME/.local/bin/nvim
 export EDITOR=$HOME/Projects/zsh_functions/mvim
 
 
@@ -21,7 +23,7 @@ alias ee="$EDITOR ${ZSHRC}"
 alias gp="cd $PROJECTS"
 alias t=todo.sh
 alias vim=$EDITOR
-alias ssh="kitty +kitten ssh --kitten env=NVIM=vim -A "
+alias ssh="ssh -A "
 alias picsort="$PROJECTS/merge_pics/merge_go/picsort"
 alias showbig="du -sh * | grep -e '\dG'"
 alias showst="lsblk | ack -v \"loop|ram|rom\""

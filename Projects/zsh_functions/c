@@ -9,6 +9,9 @@
 #
 # Dmenu script for editing some of my more frequently edited config files.
 
+setopt PUSHDSILENT
+dir=$(pwd)
+
 case "$1" in
     a|alacritty)
         choice="${XDG_CONFIG_HOME:-$HOME/.config}/alacritty/alacritty.yml"
@@ -23,6 +26,7 @@ case "$1" in
         choice="${XDG_CONFIG_HOME:-$HOME/.config}/i3/i3status-rust-config.toml"
     ;;
     nvim)
+        dir="${XDG_CONFIG_HOME:-$HOME/.config}/nvim"
         choice="${XDG_CONFIG_HOME:-$HOME/.config}/nvim/init.lua"
     ;;
     lvim)
@@ -47,5 +51,7 @@ case "$1" in
         choice="$HOME/Projects/zsh_functions/c"
     ;;
 esac
-echo "Opening $choice"
+pushd 
+cd $dir
 nvim "$choice"
+popd

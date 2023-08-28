@@ -72,7 +72,7 @@ gaps inner 5
 # Borders
 default_border pixel 4
 default_floating_border none
-hide_edge_borders --i3 smart
+# hide_edge_borders --i3 smart
 
 # Disable cursor jumping
 mouse_warping none

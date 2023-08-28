@@ -3,11 +3,8 @@ local lsp = require("lsp-zero")
 lsp.preset("recommended")
 
 lsp.ensure_installed({
-    --[[ 'tsserver', ]]
-    --[[ 'eslint', ]]
     "lua_ls",
     "rust_analyzer",
-    "pyright",
 })
 
 local kind_icons = {
@@ -138,20 +135,25 @@ lsp.setup_nvim_cmp({
     mapping = cmp_mappings,
 })
 
--- Pascal
-require('lspconfig.configs').pascal = {
-    default_config = {
-        cmd = {
-            "pasls",
-            -- Uncomment for debugging:
-            --"--save-log", "pasls-log", "--save-replay", "pasls-replay"
-        },
-        filetypes = { "pascal" },
-        root_dir = require('lspconfig.util').root_pattern(".git", "Makefile.fpc"),
-        init_options = {}
-    },
-};
-lsp.configure('pascal', { force_setup = true })
+-- pyright = require('lspconfig').pyright
+-- pyright.setup({
+--
+-- })
+
+-- -- Pascal
+-- require('lspconfig.configs').pascal = {
+--     default_config = {
+--         cmd = {
+--             "pasls",
+--             -- Uncomment for debugging:
+--             --"--save-log", "pasls-log", "--save-replay", "pasls-replay"
+--         },
+--         filetypes = { "pascal" },
+--         root_dir = require('lspconfig.util').root_pattern(".git", "Makefile.fpc"),
+--         init_options = {}
+--     },
+-- };
+-- lsp.configure('pascal', { force_setup = true })
 
 lsp.on_attach(function(client, bufnr)
     local opts = { buffer = bufnr, remap = false }
@@ -168,10 +170,10 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set("n", "<leader>vd", function()
         vim.diagnostic.open_float()
     end, opts)
-    vim.keymap.set("n", "[d", function()
+    vim.keymap.set("n", "<leader>ln", function()
         vim.diagnostic.goto_next()
     end, opts)
-    vim.keymap.set("n", "]d", function()
+    vim.keymap.set("n", "<leader>lp", function()
         vim.diagnostic.goto_prev()
     end, opts)
     vim.keymap.set("n", "<leader>vca", function()
