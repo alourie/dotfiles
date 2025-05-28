@@ -1,5 +1,8 @@
 return {
     "nvim-telescope/telescope.nvim",
+    dependencies = {
+        "nvim-lua/plenary.nvim",
+    },
     lazy = false,
     config = function()
         actions = require('telescope.actions')
@@ -25,18 +28,19 @@ return {
             }
         })
 
-        local builtin = require("telescope.builtin")
-
         -- Shorten function name
         local keymap = vim.keymap.set
+        local builtin = require("telescope.builtin")
         -- Silent keymap option
         local opts = { silent = true }
-        keymap("n", "<leader>ff", builtin.find_files, opts)
-        keymap("n", "<leader>fg", builtin.git_files, opts)
-        keymap("n", "<leader>ft", function()
+        keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts)
+        keymap("n", "<leader>fg", ":Telescope git_files<CR>", opts)
+        keymap("n", "<leader>ft", ":Telescop live_grep<CR>", opts)
+        keymap("n", "<leader>fT", function()
             local word = vim.fn.expand("<cword>")
             builtin.grep_string({ search = word })
         end, opts)
+
         keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
     end
 }

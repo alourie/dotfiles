@@ -21,6 +21,15 @@ local location = {
     padding = 1,
 }
 
+local function show_macro_recording()
+    local recording_register = vim.fn.reg_recording()
+    if recording_register == "" then
+        return ""
+    else
+        return "recording @" .. recording_register
+    end
+end
+
 local spaces = function()
     return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
 end
@@ -44,8 +53,8 @@ return {
                 lualine_a = {
                     "mode",
                     {
-                        require("noice").api.statusline.mode.get,
-                        cond = require("noice").api.statusline.mode.has,
+                        "macro-recording",
+                        fmt = show_macro_recording,
                         color = { bg = "#BF616A" },
                     }
                 },

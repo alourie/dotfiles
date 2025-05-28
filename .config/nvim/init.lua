@@ -1,4 +1,4 @@
-require("user.options")
-require("user.keymaps")
-require("user.plugins")
-require("user.autocommands")
+require("alourie.options")
+require("alourie.keymaps")
+require("alourie.plugins")
+require("alourie.autocommands")

@@ -1,5 +1,14 @@
 return { -- My plugins here
 
+    -- Highlight same word in the buffer
+    {
+        "RRethy/vim-illuminate",
+        event = { "BufReadPost", "BufNewFile" }
+    },
+
+    -- Comment easily
+    "numToStr/Comment.nvim",
+
     -- Go
     {
         "fatih/vim-go",
@@ -29,4 +38,16 @@ return { -- My plugins here
     "tpope/vim-repeat",
     "dstein64/vim-startuptime",
     "godlygeek/tabular",
+
+    -- -- Markview
+    -- {
+    --     "OXY2DEV/markview.nvim",
+    --     lazy = false, -- Recommended
+    --     -- ft = "markdown" -- If you decide to lazy-load anyway
+    --
+    --     dependencies = {
+    --         "nvim-treesitter/nvim-treesitter",
+    --         "nvim-tree/nvim-web-devicons"
+    --     }
+    -- }
 }

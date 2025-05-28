@@ -18,7 +18,6 @@ local ghtheme = {
     version = 'v0.0.7',
     config = function()
         require('github-theme').setup()
-        vim.cmd("colorscheme github_dark_default")
     end
 }
 
@@ -27,9 +26,9 @@ local rosepine = {
     name = "rose-pine",
     config = function()
         require('rose-pine').setup({
-            disable_background = true
+            variant = 'dark',
         })
-        vim.cmd('colorscheme rose-pine')
+        vim.cmd('colorscheme rose-pine-moon')
     end
 }
 
@@ -52,12 +51,6 @@ local tokyo = {
 }
 
 return {
-    -- tokyo,
-    rosepine,
-    -- ghtheme,
-    -- gruv,
-    -- Colorschemes
-
     -- this is for the lualine colour
     "alourie/dim-colours.nvim",
 
@@ -68,4 +61,9 @@ return {
             require('colorizer').setup()
         end
     },
+
+    -- Colorschemes
+    -- tokyo,
+    -- gruv,
+    rosepine,
 }

@@ -1,5 +1,6 @@
 local augroup = vim.api.nvim_create_augroup
 
+
 -- Use 'q' to quit from common plugins
 vim.api.nvim_create_autocmd({ "FileType" }, {
     pattern = { "qf", "help", "man", "lspinfo", "spectre_panel", "lir" },
@@ -58,7 +59,6 @@ vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
 
 -- Highlight Yanked Text
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
-    group = augroup("HighlightYank", {}),
     pattern = "*",
     callback = function()
         vim.highlight.on_yank({
@@ -76,17 +76,61 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     end,
 })
 
+-- LSP
+vim.api.nvim_create_autocmd({ "LspAttach" }, {
+    group = augroup("alourie", {}),
+    callback = function(ev)
+        -- debug
+        local client = vim.lsp.get_client_by_id(ev.data.client_id)
+        if client.name ~= nil then
+            print(client.name)
+        end
+
+        local opts = { buffer = ev.buf }
+        vim.keymap.set("n", 'K', function() vim.lsp.buf.hover() end, opts)
+        vim.keymap.set('n', 'gd', function() vim.lsp.buf.definition() end, opts)
+        vim.keymap.set('n', '<leader>rn', function() vim.lsp.buf.rename() end, opts)
+        vim.keymap.set('n', '<leader>ca', function() vim.lsp.buf.code_action() end, opts)
+        -- vim.keymap.set('n', 'gI', function() vim.lsp.buf.implementation() end, opts)
+        -- vim.keymap.set('n', '<leader>D', function() vim.lsp.buf.type_definition() end, opts)
+        vim.keymap.set('n', '<leader>ne', function() vim.diagnostic.go_next() end, opts)
+        vim.keymap.set('n', '<leader>pe', function() vim.diagnostic.go_prev() end, opts)
+        vim.keymap.set('n', 'gr', require('telescope.builtin').lsp_references, opts)
+        -- vim.keymap.set('n', '<leader>ds', require('telescope.builtin').lsp_document_symbols, opts)
+        -- vim.keymap.set('n', '<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, opts)
+        vim.keymap.set('i', '<C-h>', function() vim.lsp.buf.signature_help() end, opts)
+
+
+        -- See `:help K` for why this keymap
+        local config = {
+            -- Enable virtual text
+            virtual_text = true,
+            -- show signs
+            signs = {
+                active = true,
+            },
+            update_in_insert = true,
+            underline = true,
+            severity_sort = true,
+            float = {
+                focusable = false,
+                style = "minimal",
+                border = "rounded",
+                source = "always",
+                header = "",
+                prefix = "",
+            },
+        }
+
+        vim.diagnostic.config(config)
+    end
+})
+
 -- Markdown stuff
 -- vim.api.nvim_create_user_command('PeekOpen', require('peek').open, {})
 -- vim.api.nvim_create_user_command('PeekClose', require('peek').close, {})
 
--- -- No line numbers in terminal
--- vim.api.nvim_create_autocmd({ "TermOpen" }, {
---     callback = function()
---         vim.opt_local.number = false
---         vim.opt_local.relativenumber = false
---         vim.opt_local.signcolumn = "no"
---     end,
--- })
-
 -- Save files
+vim.api.nvim_create_user_command('W', function()
+    vim.cmd("write")
+end, {})
