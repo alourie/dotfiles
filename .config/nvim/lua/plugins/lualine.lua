@@ -7,15 +7,6 @@ local diagnostics = {
     always_visible = false,
 }
 
-local pbranch = function()
-    local p = io.popen("$HOME/Projects/scripts/project_branch.sh")
-    if p then
-        local project = p:read()
-        p:close()
-        return project
-    end
-end
-
 local filename = function()
     return vim.api.nvim_buf_get_name(0)
 end
@@ -58,9 +49,8 @@ return {
                         color = { bg = "#BF616A" },
                     }
                 },
-                lualine_b = { pbranch },
-                lualine_c = { diagnostics, '%=', filename },
-                lualine_d = {},
+                lualine_b = { 'branch', diagnostics },
+                lualine_c = { '%=', filename },
                 lualine_x = { spaces, "encoding", filetype },
                 lualine_y = { location },
                 lualine_z = {},

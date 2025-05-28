@@ -35,4 +35,4 @@ local noice_config = {
     },
 }
 
-return { noice_config }
+return noice_config

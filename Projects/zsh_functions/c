@@ -38,11 +38,17 @@ case "$1" in
     k|kitty)
         choice="${XDG_CONFIG_HOME:-$HOME/.config}/kitty/kitty.conf"
     ;;
+    g|ghostty)
+        choice="${XDG_CONFIG_HOME:-$HOME/.config}/ghostty/config"
+    ;;
     r|rofi)
         choice="${XDG_CONFIG_HOME:-$HOME/.config}/rofi/config.rasi"
     ;;
     sw|sway)
         choice="${XDG_CONFIG_HOME:-$HOME/.config}/sway/config"
+    ;;
+    waybar)
+        choice="${XDG_CONFIG_HOME:-$HOME/.config}/waybar/config"
     ;;
     s|ssh)
         choice="$HOME/.ssh/config"

@@ -8,7 +8,7 @@ return {
                 prompt_prefix = " ",
                 selection_caret = " ",
                 path_display = { "smart" },
-                file_ignore_patterns = { ".git/", "node_modules" },
+                file_ignore_patterns = { ".git/", "undodir" },
                 mappings = {
                     i = {
                         ["<Down>"] = actions.cycle_history_next,
@@ -18,15 +18,25 @@ return {
                     },
                 },
             },
+            pickers = {
+                find_files = {
+                    hidden = true
+                }
+            }
         })
+
+        local builtin = require("telescope.builtin")
 
         -- Shorten function name
         local keymap = vim.keymap.set
         -- Silent keymap option
         local opts = { silent = true }
-        keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts)
-        keymap("n", "<leader>fg", ":Telescope git_files<CR>", opts)
-        keymap("n", "<leader>ft", ":Telescope live_grep<CR>", opts)
+        keymap("n", "<leader>ff", builtin.find_files, opts)
+        keymap("n", "<leader>fg", builtin.git_files, opts)
+        keymap("n", "<leader>ft", function()
+            local word = vim.fn.expand("<cword>")
+            builtin.grep_string({ search = word })
+        end, opts)
         keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
     end
 }

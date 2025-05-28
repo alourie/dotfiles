@@ -1,4 +1,5 @@
 # Variables
+include "~/.config/sway/autostart.conf"
 
 # Use Hyper as a modifier key
 set $hyper Mod4
@@ -28,13 +29,15 @@ set $dellDP2        DP-2
 set $dellDP3        DP-3
 
 # Self
-output $laptop      resolution 1920x1080 position 0 0
+output $laptop      resolution 1920x1080 position 3840 0
 # Dell 3840x2160
-output $dellDP2        resolution 3840x2160@30Hz position 1920 0 scale 2
-output $dellDP3        resolution 3840x2160@30Hz position 1920 0 scale 1
+# output $dellDP2        resolution 3840x2160 position 1920 0 scale 2
+output $dellDP3        resolution 3840x2160 position 0 0 scale 1
 
 # Your preferred terminal emulator
-set $term kitty --single-instance
+#set $term kitty --single-instance
+set $term ghostty --gtk-single-instance=true --quit-after-last-window-closed=false 
+
 
 # Set font
 font pango: Noto Mono Regular 15
@@ -51,8 +54,9 @@ input type:touchpad {
 }
 
 seat * hide_cursor 10000
+seat seat0 xcursor_theme Breeze
 
-bindsym $hyper+y exec swaylock -i $wallpaper
+bindsym $hyper+y exec swaylock -i $wallpaper & sleep 1 && powerctl mem
 exec swayidle -w \
     timeout 598  'swaylock -i $wallpaper' \
     timeout 600  'swaymsg "output * dpms off"' \
@@ -97,12 +101,10 @@ for_window    [window_role="pop-up"]                     floating enable
 for_window    [app_id="udiskie"]                         floating enable
 for_window    [app_id="org.qutebrowser.qutebrowser"]     move container to $workspace2
 for_window    [app_id="Signal"]                          move container to $workspace3
-for_window    [app_id="neomutt"]                         move container to $workspace4, title_format "NeoMutt"
-for_window    [app_id="dmenu.*"]                         floating enable, resize set width 60ppt height 80ppt
-for_window    [app_id="dmenu-browser"]                   resize set height 20ppt
-for_window    [app_id="dmenu-emoji"]                     resize set height 20ppt
-for_window    [app_id="qalculate-gtk"]                   floating enable
-for_window    [app_id="mpv"]                             floating enable, resize set width 531 height 300, move position 1345 125
+# for_window    [app_id="dmenu.*"]                         floating enable, resize set width 60ppt height 80ppt
+# for_window    [app_id="dmenu-browser"]                   resize set height 20ppt
+# for_window    [app_id="dmenu-emoji"]                     resize set height 20ppt
+# for_window    [app_id="mpv"]                             floating enable, resize set width 531 height 300, move position 1345 125
 for_window    [app_id="iriunwebcam"]                     floating disable
 
 # Window color settings
@@ -204,6 +206,9 @@ bindsym --to-code {
     # Split
     $hyper+s split toggle
 
+    # Toggle the audio mute
+    $hyper+Shift+u exec pactl set-sink-mute @DEFAULT_SINK@ toggle 
+
     # Focus the parent container
     # $hyper+u focus parent
 
@@ -247,9 +252,11 @@ bindsym --to-code {
     # $hyper+Left   exec playerctl --player playerctld previous
     # $hyper+Right  exec playerctl --player playerctld next
 
-    XF86AudioMute        exec amixer -D pulse sset Master toggl
-    XF86AudioRaiseVolume exec sway-audio output-volume-up
-    XF86AudioLowerVolume exec sway-audio output-volume-down
+    XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+    XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+    XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+    XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
     # $hyper+Up              exec sway-audio output-mute
     # $hyper+Down            exec sway-audio output-mute
     # $hyper+Right           exec sway-audio output-volume-up
@@ -324,9 +331,6 @@ bindsym --to-code {
     $hyper+x exec archlinux-logout 
 }
 
-# Load host-specific configs
-include "~/.config/sway/autostart.conf"
-
 # Load systemd integration
 include /etc/sway/config.d/*
 exec systemctl --user start sway-session.target
@@ -342,10 +346,4 @@ bar {
     # The default just shows the current date and time.
     # status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1; done
     # status_command i3blocks
-
-    # colors {
-    #     statusline #ffffff
-    #     background #323232
-    #     inactive_workspace #32323200 #32323200 #5c5c5c
-    # }
 }

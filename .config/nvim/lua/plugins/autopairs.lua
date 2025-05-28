@@ -1,4 +1,4 @@
-return {
+local config = {
     "windwp/nvim-autopairs", -- Autopairs, integrates with both cmp and treesitter
     lazy = false,
     config = function()
@@ -12,3 +12,5 @@ return {
         cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done {})
     end
 }
+
+return {}

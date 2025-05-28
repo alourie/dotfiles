@@ -26,9 +26,9 @@
     "custom/vpn",
     "cpu",
     "disk",
-    "network",
     "sway/language",
     "battery",
+    "idle_inhibitor",
     "tray"
   ],
   "custom/progress": {
@@ -130,15 +130,6 @@
       ""
     ]
   },
-  "network": {
-    "interval": 2,
-    "interface": "wlp9s0",
-    "format-wifi": "<span foreground='#e5e9f0'></span> {essid}",
-    "format-ethernet": "<span foreground='#928374'></span> {ifname}",
-    "format-linked": "<span foreground='#928374'></span> {ifname}",
-    "format-disconnected": " <span foreground='#928374'></span> ",
-    "tooltip-format": "{ifname}: {ipaddr}/{cidr}\n {bandwidthDownBits}\n {bandwidthUpBits}"
-  },
   "pulseaudio": {
     "format": "<span foreground='#928374'>{icon}</span> {volume}%   {format_source}",
     "format-bluetooth": "<span foreground='#928374'>{icon}</span> {volume}%   {format_source}",
@@ -160,6 +151,14 @@
       ]
     },
     "on-click": "pavucontrol"
+  },
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+        "activated": "",
+        "deactivated": ""
+    },
+    "timeout": 30.5
   },
   "tray": {
     "spacing": 10

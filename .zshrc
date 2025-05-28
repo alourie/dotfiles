@@ -11,7 +11,7 @@ ZINIT_HOME="${HOME}/.zinit"
 export PROJECTS="$HOME/Projects"
 
 # EDITOR
-# export NVIM_APPNAME=kickstart
+export NVIM_APPNAME=nvim-new
 # export nvim=$HOME/.local/bin/nvim
 export EDITOR=$HOME/Projects/zsh_functions/mvim
 
@@ -29,12 +29,16 @@ alias showbig="du -sh * | grep -e '\dG'"
 alias showst="lsblk | ack -v \"loop|ram|rom\""
 alias cls="clear"
 alias nn="notify-send \"all done\" -t 3000"
+alias nne="notify-send -u critical -a \"shell\" \"error!\" -t 3000"
 alias config='git --git-dir=$HOME/.dots/ --work-tree=$HOME'
 alias gcl="git restore .idea"
 alias gst="git stu"
 alias gf="git fetch -v"
+alias gr="git rebase"
 alias vact="source venv/bin/activate"
 alias pp="termpdf.py"
+alias qp='qpdf --empty --pages'
+alias k=kubectl
 
 #fix obvious typo's
 alias cd..='cd ..'
@@ -178,6 +182,11 @@ autoload -Uz add-path
 autoload -Uz ginit
 autoload -Uz lock
 autoload -Uz install-neovim-req
+autoload -Uz my-slack
+autoload -Uz doccc
+autoload -Uz gg 
+autoload -Uz create-ci-task 
+autoload -Uz clearusb 
 
 # Install the base
 if [ "${FIRST_INSTALL}" = 1 ]; then
@@ -240,8 +249,8 @@ zi for \
 # KITTY TERM
 if (( ${KITTY_WINDOW_ID} )); then
     export TERM="xterm-kitty"
-else
-    export TERM="screen-256color"
+elif [ ! -z ${BYOBU_BACKEND} ]; then
+    export TERM="tmux-256color"
 fi
 
 # PATH LOCAL stuff
@@ -321,7 +330,7 @@ setopt interactivecomments
 unset SSH_ASKPASS
 
 # If keychain is installed and .ssh exists, load the keys
-eval `ssh-agent -s` > /dev/null 
+eval $(ssh-agent -s) > /dev/null 
 if command -v keychain > /dev/null; then
 	keychain -l | grep "no identities" 2>&1 > /dev/null
 	if [[ $? = 0 && -d $HOME/.ssh ]]; then
@@ -332,6 +341,8 @@ if command -v keychain > /dev/null; then
 			fi
 		done
 	fi
+else
+    echo "Something went wrong with keys"
 fi
 
 # # VIM mode ....probably needs to be last here
@@ -379,6 +390,11 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+# direnv
+eval "$(direnv hook zsh)"
+
 # PROFILING
 #zprof
 #[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+bindkey \^U backward-kill-line

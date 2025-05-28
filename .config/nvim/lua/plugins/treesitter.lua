@@ -27,7 +27,7 @@ return {
                 end,
             },
         },
-        ---@type TSConfig
+        -- @type TSConfig
         opts = {
             highlight = { enable = true },
             indent = { enable = true },
@@ -63,7 +63,7 @@ return {
                 },
             },
         },
-        ---@param opts TSConfig
+        -- @param opts TSConfig
         config = function(_, opts)
             if type(opts.ensure_installed) == "table" then
                 ---@type table<string, boolean>

@@ -90,6 +90,3 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 -- })
 
 -- Save files
-vim.api.nvim_create_user_command('W', function()
-    vim.cmd("write")
-end, {})

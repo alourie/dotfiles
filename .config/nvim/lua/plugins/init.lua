@@ -3,7 +3,7 @@ return { -- My plugins here
     -- Go
     {
         "fatih/vim-go",
-        event = "BufEnter *.yaml",
+        event = "BufEnter *.go",
         lazy = true
     },
 
@@ -19,6 +19,9 @@ return { -- My plugins here
     -- "rcarriga/nvim-dap-ui",
     -- "ravenxrz/DAPInstall.nvim",
 
+    -- keep splits/windows when closing buffers
+    "moll/vim-bbye",
+
     -- Misc
     "folke/zen-mode.nvim",
     "vladdoster/remember.nvim",
@@ -26,5 +29,4 @@ return { -- My plugins here
     "tpope/vim-repeat",
     "dstein64/vim-startuptime",
     "godlygeek/tabular",
-    "moll/vim-bbye"
 }
