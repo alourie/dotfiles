@@ -39,6 +39,14 @@ return { -- My plugins here
     "dstein64/vim-startuptime",
     "godlygeek/tabular",
 
+    -- SARIF
+    {
+        'fguisso/sfer.nvim',
+        -- config = function()
+        --     require('sfer').setup()
+        -- end
+    }
+
     -- -- Markview
     -- {
     --     "OXY2DEV/markview.nvim",

@@ -11,8 +11,9 @@ ZINIT_HOME="${HOME}/.zinit"
 export PROJECTS="$HOME/Projects"
 
 # EDITOR
-export NVIM_APPNAME=nvim-new
+# export NVIM_APPNAME=nvim-new
 # export nvim=$HOME/.local/bin/nvim
+# export NVIM_APPNAME=nvim
 export EDITOR=$HOME/Projects/zsh_functions/mvim
 
 
