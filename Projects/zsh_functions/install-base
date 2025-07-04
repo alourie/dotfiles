@@ -2,7 +2,9 @@
 
 function install_arch() {
     # Deps list, it's for arch; will need some update for debians/fedoras
-    APPS="dunst polybar redshift feh network-manager-applet pasystray kitty neovim curl unzip tar starship rustup"
+    echo "Ran install arch"
+    exit
+    APPS=""
     for app in ${(@s/ /)APPS}; do
         if ! command -v $app > /dev/null; then
             # Not installed, just do all
@@ -27,7 +29,6 @@ function install_arch() {
 
     #  currently I'm using JetBrains Mono, so expect it to be installed
     paru -y nerd-fonts-jetbrains-mono
-
 }
 
 function setup_npm() {
@@ -36,47 +37,6 @@ function setup_npm() {
     mkdir $HOME/.npm-global
   fi
   npm config set prefix "$HOME/.npm-global"
-}
-
-function setup_neovim_config() {
-  if [ ! -d $HOME/.config ]; then
-    mkdir $HOME/.config
-  fi
-  git clone https://github.com/LunarVim/nvim-basic-ide.git ~/.config/nvim
-  nvim
-}
-
-function setup_neovim() {
-  if [ -d $HOME/.config/nvim ]; then
-    echo ".nvim already exists, backup and rerun"
-    exit 0
-  fi
-  setup_npm
-  install_neovim
-  setup_neovim_config
-}
-
-function install_neovim() {
-  if [ ! -d $HOME/Projects/neovim ]; then
-    echo "Installing Neovim"
-    pushd $HOME/Projects
-    git clone https://github.com/neovim/neovim 
-    echo "CMAKE_EXTRA_FLAGS := -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$HOME/.local/" > neovim/local.mk
-  fi
-  cd neovim
-  if [ "$1" = "update" ]; then
-    echo "Updating neovim"
-    git fetch -v
-    git rebase
-  fi
-  make install
-  popd
-}
-
-function install_lunarvim() {
-  echo "Installing Lunarvim"
-  cd $HOME
-  PATH=$PATH:$HOME/.local/bin:$HOME/.cargo/bin bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh) -y
 }
 
 function install_debian() {
@@ -142,4 +102,3 @@ elif command -v dnf > /dev/null; then
 elif command -v pacman > /dev/null; then
     install_arch
 fi
-
