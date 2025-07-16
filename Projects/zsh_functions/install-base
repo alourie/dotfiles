@@ -2,9 +2,8 @@
 
 function install_arch() {
     # Deps list, it's for arch; will need some update for debians/fedoras
-    echo "Ran install arch"
-    exit
-    APPS=""
+    echo "Installing a basic arch"
+    APPS="git wget curl base-devel"
     for app in ${(@s/ /)APPS}; do
         if ! command -v $app > /dev/null; then
             # Not installed, just do all
@@ -13,22 +12,20 @@ function install_arch() {
         fi
     done
 
+    # Install rust just in case
+    install_rust
+
     # Install Paru
+    echo "Install Paru helper"
     if ! command -v paru > /dev/null; then
         cd $HOME/Projects
-
-        rustup self upgrade-data
-        rustup install stable
-        rustup default stable
-
-        sudo pacman -S --needed base-devel
         git clone https://aur.archlinux.org/paru.git
         cd paru
         makepkg -si
     fi
 
-    #  currently I'm using JetBrains Mono, so expect it to be installed
-    paru -y nerd-fonts-jetbrains-mono
+    # Install omarchy
+    wget -qO- https://raw.githubusercontent.com/alourie/omarchy/refs/heads/main/boot.sh | bash
 }
 
 function setup_npm() {

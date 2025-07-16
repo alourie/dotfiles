@@ -117,7 +117,7 @@ alias rg="rg --sort path"
 alias xo=xdg-open
 
 # fetch date
-alias ddd="echo -n $(date +'%B %d, %Y') | pbcopy"
+alias ddd="echo -n $(date +'%B %d, %Y') | wl-copy"
 
 # Zepben Address
 alias zzz="echo -n Suite 2, Level 2, 11 London Circuit, Canberra, Australian Capital Territory 2601 | pbcopy"
@@ -164,6 +164,7 @@ typeset -U fpath
 ## Make sure the config is setup
 export DOTS="$HOME/.dots"
 if [ ! -d "${DOTS}" ]; then
+
   # Check prereqs!
   git clone --bare http://github.com/alourie/dotfiles "${DOTS}"
 
@@ -182,12 +183,13 @@ autoload -Uz set-tokens
 autoload -Uz add-path
 autoload -Uz ginit
 autoload -Uz lock
-autoload -Uz install-neovim-req
 autoload -Uz my-slack
 autoload -Uz doccc
 autoload -Uz gg 
 autoload -Uz create-ci-task 
 autoload -Uz clearusb 
+autoload -Uz get-git-path
+autoload -Uz update-tmux-pane
 
 # Install the base
 if [ "${FIRST_INSTALL}" = 1 ]; then
@@ -198,7 +200,6 @@ if [ "${FIRST_INSTALL}" = 1 ]; then
     restore_config .gitconfig .config/starship 
 fi
 
-### Added by Zinit's installer
 if [[ ! -f $ZINIT_HOME/zinit.zsh ]]; then
     print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
     command mkdir -p "$ZINIT_HOME" && command chmod g-rwX "$ZINIT_HOME"
@@ -206,6 +207,7 @@ if [[ ! -f $ZINIT_HOME/zinit.zsh ]]; then
         print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
         print -P "%F{160}▓▒░ The clone has failed.%f%b"
 fi
+### End of Zinit's installer chunk
 
 source "$ZINIT_HOME/zinit.zsh"
 autoload -Uz _zinit
@@ -219,10 +221,9 @@ zinit light-mode for \
     zdharma-continuum/z-a-patch-dl \
     zdharma-continuum/z-a-bin-gem-node
 
-### End of Zinit's installer chunk
 zi for \
 	zdharma-continuum/history-search-multi-word \
-    light-mode  agkozak/zsh-z \
+    light-mode agkozak/zsh-z \
     light-mode OMZL::history.zsh \
 
 zinit wait'!' lucid for \
@@ -230,7 +231,7 @@ zinit wait'!' lucid for \
 
 zinit wait'!' lucid for \
 	light-mode OMZP::colorize \
-  light-mode OMZP::colored-man-pages \
+    light-mode OMZP::colored-man-pages \
 	light-mode OMZP::command-not-found \
 	light-mode OMZP::mvn \
 
@@ -239,13 +240,6 @@ zinit wait'!' lucid atload"zicompinit; zicdreplay" for \
 
 zinit lucid for \
     light-mode OMZL::key-bindings.zsh \
-
-zi for \
-    from'gh-r'  \
-    sbin'fzf'   \
-  junegunn/fzf
-zi for \
-    https://github.com/junegunn/fzf/raw/master/shell/{'completion','key-bindings'}.zsh
 
 # KITTY TERM
 if (( ${KITTY_WINDOW_ID} )); then
@@ -276,6 +270,8 @@ export LANG=en_US.UTF-8
 if command -v java > /dev/null; then
     JAVA=$(which java)
 	export JAVA_HOME=$(dirname $(dirname $(readlink -f $JAVA)))
+    export IDEA_JDK=/usr/lib/jvm/jre-jetbrains/
+
 fi
 
 # Golang
@@ -314,7 +310,8 @@ add-path $HOME/.cargo/bin
 add-path $HOME/.cabal/bin
 
 # Conditionally add common paths in /opt
-add-path /opt/IntelliJ/bin /opt/GoLand/bin /opt/PyCharm/bin /opt/terraform /opt/packer
+# add-path /opt/IntelliJ/bin /opt/GoLand/bin /opt/PyCharm/bin /opt/terraform /opt/packer
+echo "/opt paths are out, be mindful"
 
 # Conda (mini)
 add-path $HOME/.miniconda/bin
@@ -345,28 +342,6 @@ if command -v keychain > /dev/null; then
 else
     echo "Something went wrong with keys"
 fi
-
-# # VIM mode ....probably needs to be last here
-# # Don't run when term is nvim
-# if [ -z $LUNARVIM_RUNTIME_DIR ]; then
-#   zinit ice lucid depth=1
-#   zinit light jeffreytse/zsh-vi-mode
-#   ZVM_VI_INSERT_ESCAPE_BINDKEY=jj
-#   export ZVM_KEYTIMEOUT=0.2
-
-#   # The plugin will auto execute this zvm_after_lazy_keybindings function
-#   function zvm_after_lazy_keybindings() {
-#     zvm_define_widget up-line-or-beginning-search
-#     zvm_define_widget down-line-or-beginning-search
-
-#     zvm_bindkey vicmd 'k' up-line-or-beginning-search
-#     zvm_bindkey viins "^[k" up-line-or-beginning-search
-#     zvm_bindkey viins "^[[A" up-line-or-beginning-search
-#     zvm_bindkey vicmd 'j' down-line-or-beginning-search
-#     zvm_bindkey viins "^[j" down-line-or-beginning-search
-#     zvm_bindkey viins "^[[B" down-line-or-beginning-search
-#   }
-# fi
 
 # Awesome prompt (starship); only do this if not installed via the system packaging.
 if ! command -v starship > /dev/null ; then
@@ -399,3 +374,8 @@ eval "$(direnv hook zsh)"
 #[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 bindkey \^U backward-kill-line
+
+bindkey -s ^f "echo test"
+
+# Autorename tmux windows
+add-zsh-hook chpwd update-tmux-pane

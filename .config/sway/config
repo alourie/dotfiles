@@ -29,10 +29,10 @@ set $dellDP2        DP-2
 set $dellDP3        DP-3
 
 # Self
-output $laptop      resolution 1920x1080 position 3840 0
+output $laptop      resolution 1920x1080 position 0 0
 # Dell 3840x2160
 # output $dellDP2        resolution 3840x2160 position 1920 0 scale 2
-output $dellDP3        resolution 3840x2160 position 0 0 scale 1
+output $dellDP3        resolution 3840x2160 position 1920 0 scale 1
 
 # Your preferred terminal emulator
 #set $term kitty --single-instance
@@ -270,7 +270,7 @@ bindsym --to-code {
     $hyper+Shift+r reload
 
     # Switch to workspace using number row
-    $hyper+1 $workspace1
+    $hyper+1 $workspace1 
     $hyper+2 $workspace2
     $hyper+3 $workspace3
     $hyper+4 $workspace4
@@ -296,29 +296,29 @@ bindsym --to-code {
     $hyper+KP_0 $workspace0
 
     # Move window to workspace using number row
-    $hyper+Shift+1 move container to $workspace1
-    $hyper+Shift+2 move container to $workspace2
-    $hyper+Shift+3 move container to $workspace3
-    $hyper+Shift+4 move container to $workspace4
-    $hyper+Shift+5 move container to $workspace5
-    $hyper+Shift+6 move container to $workspace6
-    $hyper+Shift+7 move container to $workspace7
-    $hyper+Shift+8 move container to $workspace8
-    $hyper+Shift+9 move container to $workspace9
-    $hyper+Shift+0 move container to $workspace0
+    $hyper+Shift+1 move container to $workspace1, $workspace1
+    $hyper+Shift+2 move container to $workspace2, $workspace2
+    $hyper+Shift+3 move container to $workspace3, $workspace3
+    $hyper+Shift+4 move container to $workspace4, $workspace4
+    $hyper+Shift+5 move container to $workspace5, $workspace5
+    $hyper+Shift+6 move container to $workspace6, $workspace6
+    $hyper+Shift+7 move container to $workspace7, $workspace7
+    $hyper+Shift+8 move container to $workspace8, $workspace8
+    $hyper+Shift+9 move container to $workspace9, $workspace9
+    $hyper+Shift+0 move container to $workspace0, $workspace0
     $hyper+Shift+i exec /home/alourie/Projects/scripts/move_ws.sh
 
     # Move window to workspace using keypad
-    $hyper+Shift+KP_1 move container to $workspace1
-    $hyper+Shift+KP_2 move container to $workspace2
-    $hyper+Shift+KP_3 move container to $workspace3
-    $hyper+Shift+KP_4 move container to $workspace4
-    $hyper+Shift+KP_5 move container to $workspace5
-    $hyper+Shift+KP_6 move container to $workspace6
-    $hyper+Shift+KP_7 move container to $workspace7
-    $hyper+Shift+KP_8 move container to $workspace8
-    $hyper+Shift+KP_9 move container to $workspace9
-    $hyper+Shift+KP_0 move container to $workspace0
+    $hyper+Shift+KP_1 move container to $workspace1, $workspace1
+    $hyper+Shift+KP_2 move container to $workspace2, $workspace2
+    $hyper+Shift+KP_3 move container to $workspace3, $workspace3
+    $hyper+Shift+KP_4 move container to $workspace4, $workspace4
+    $hyper+Shift+KP_5 move container to $workspace5, $workspace5
+    $hyper+Shift+KP_6 move container to $workspace6, $workspace6
+    $hyper+Shift+KP_7 move container to $workspace7, $workspace7
+    $hyper+Shift+KP_8 move container to $workspace8, $workspace8
+    $hyper+Shift+KP_9 move container to $workspace9, $workspace9
+    $hyper+Shift+KP_0 move container to $workspace0, $workspace0
 
     # Modes
     $hyper+a mode $mode_audio

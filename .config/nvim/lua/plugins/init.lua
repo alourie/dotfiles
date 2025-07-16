@@ -33,6 +33,7 @@ return { -- My plugins here
 
     -- Misc
     "folke/zen-mode.nvim",
+    { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
     "vladdoster/remember.nvim",
     "tpope/vim-surround",
     "tpope/vim-repeat",
