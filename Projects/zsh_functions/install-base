@@ -15,15 +15,6 @@ function install_arch() {
     # Install rust just in case
     install_rust
 
-    # Install Paru
-    echo "Install Paru helper"
-    if ! command -v paru > /dev/null; then
-        cd $HOME/Projects
-        git clone https://aur.archlinux.org/paru.git
-        cd paru
-        makepkg -si
-    fi
-
     # Install omarchy
     wget -qO- https://raw.githubusercontent.com/alourie/omarchy/refs/heads/main/boot.sh | bash
 }
