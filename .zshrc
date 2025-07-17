@@ -166,13 +166,14 @@ export DOTS="$HOME/.dots"
 if [ ! -d "${DOTS}" ]; then
 
   # Check prereqs!
+  if ! command -v git > /dev/null; then
+      sudo pacman -Sy git
+  fi
+
   git clone --bare http://github.com/alourie/dotfiles "${DOTS}"
 
-  # Restore function path from config
-  restore_config Projects/zsh_functions
-
-  # Flag the first install
-  FIRST_INSTALL=1
+  # Restore config
+  config reset --hard HEAD 
 fi
 
 # Custom functions
