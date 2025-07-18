@@ -5,7 +5,7 @@ CONNECT="--connect qemu:///system"
 VIRTM="virt-manager ${CONNECT}"
 VIRSH="virsh ${CONNECT}"
 
-VM=$(echo $(${VIRSH} list --all --name) | sed -e "s/ /\n/g" | rofi -dmenu -p "Select VM: ")
+VM=$(echo $(${VIRSH} list --all --name) | sed -e "s/ /\n/g" | wofi -dmenu -p "Select VM: ")
 
 if [ "x" != "x${VM}" ]
 then

@@ -231,6 +231,9 @@ bindsym --to-code {
     $hyper+p exec /home/alourie/Projects/scripts/p.sh 
     # Screenshot
     $hyper+alt+0 exec grim -g "$(slurp)" -t png - | wl-copy -t image/png
+    # VMs list
+    $hyper+a exec /home/alourie/Projects/scripts/start_vm.sh
+
 
 
     # Notification actions
@@ -321,7 +324,7 @@ bindsym --to-code {
     $hyper+Shift+KP_0 move container to $workspace0, $workspace0
 
     # Modes
-    $hyper+a mode $mode_audio
+    # $hyper+a mode $mode_audio
     $hyper+r mode $mode_resize
     # $hyper+e mode $mode_system
     $hyper+m mode $mode_workspaces_monitors

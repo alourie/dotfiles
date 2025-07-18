@@ -34,7 +34,7 @@ alias nne="notify-send -u critical -a \"shell\" \"error!\" -t 3000"
 alias config='git --git-dir=$HOME/.dots/ --work-tree=$HOME'
 alias gcl="git restore .idea"
 alias gst="git stu"
-alias gf="git fetch -v"
+alias gf="gix fetch"
 alias gr="git rebase"
 alias vact="source venv/bin/activate"
 alias pp="termpdf.py"
