@@ -75,7 +75,7 @@ keymap("v", "K", ":m '<-2<CR>gv=gv")
 -- keymap("n", "<leader>e", ":NeoTreeShowToggle<CR>", opts)
 
 -- LSP
-keymap("n", "<leader>lf", ":lua vim.lsp.buf.format()<CR>", opts)
+keymap("n", "<leader>lf", ":lua require('conform').format()<CR>", opts)
 
 -- Git
 -- keymap("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", opts)

@@ -1,7 +1,7 @@
 local noice_config = {
     {
         "folke/noice.nvim",
-        event = "VeryLazy",
+        -- event = "VeryLazy",
         config = function()
             require("noice").setup({
                 lsp = {
@@ -21,7 +21,7 @@ local noice_config = {
             {
                 "rcarriga/nvim-notify",
                 opts = {
-                    timeout = 1500,
+                    timeout = 1000,
                     max_height = function()
                         return math.floor(vim.o.lines * 0.75)
                     end,
@@ -36,3 +36,4 @@ local noice_config = {
 }
 
 return { noice_config }
+-- return {}

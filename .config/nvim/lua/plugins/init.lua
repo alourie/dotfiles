@@ -3,7 +3,7 @@ return { -- My plugins here
     -- Highlight same word in the buffer
     {
         "RRethy/vim-illuminate",
-        event = { "BufReadPost", "BufNewFile" }
+        event = { "BufReadPost", "BufNewFile" },
     },
 
     -- Comment easily
@@ -13,14 +13,14 @@ return { -- My plugins here
     {
         "fatih/vim-go",
         event = "BufEnter *.go",
-        lazy = true
+        lazy = true,
     },
 
     -- Ansible
     {
         "pearofducks/ansible-vim",
         event = "BufEnter *.yaml",
-        lazy = true
+        lazy = true,
     },
 
     -- DAP
@@ -33,30 +33,49 @@ return { -- My plugins here
 
     -- Misc
     "folke/zen-mode.nvim",
-    { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
+    {
+        "folke/todo-comments.nvim",
+        event = "VimEnter",
+        dependencies = { "nvim-lua/plenary.nvim" },
+        opts = { signs = false },
+    },
     "vladdoster/remember.nvim",
     "tpope/vim-surround",
     "tpope/vim-repeat",
     "dstein64/vim-startuptime",
     "godlygeek/tabular",
 
-    -- SARIF
+    -- Notify
     {
-        'fguisso/sfer.nvim',
-        -- config = function()
-        --     require('sfer').setup()
-        -- end
-    }
+        "rcarriga/nvim-notify",
+        opts = {
+            timeout = 1500,
+            max_height = function()
+                return math.floor(vim.o.lines * 0.75)
+            end,
+            max_width = function()
+                return math.floor(vim.o.columns * 0.75)
+            end,
+        },
+    },
 
-    -- -- Markview
+    -- -- SARIF
     -- {
-    --     "OXY2DEV/markview.nvim",
-    --     lazy = false, -- Recommended
-    --     -- ft = "markdown" -- If you decide to lazy-load anyway
-    --
-    --     dependencies = {
-    --         "nvim-treesitter/nvim-treesitter",
-    --         "nvim-tree/nvim-web-devicons"
-    --     }
+    --     'fguisso/sfer.nvim',
+    --     -- config = function()
+    --     --     require('sfer').setup()
+    --     -- end
     -- }
+    --
+
+    --     -- Markview
+    --     {
+    --         "OXY2DEV/markview.nvim",
+    --         lazy = false, -- Recommended
+    --         -- ft = "markdown" -- If you decide to lazy-load anyway
+    --         dependencies = {
+    --             "nvim-tree/nvim-web-devicons",
+    --         },
+    --     },
+
 }

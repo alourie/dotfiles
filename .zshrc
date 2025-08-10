@@ -40,6 +40,7 @@ alias vact="source venv/bin/activate"
 alias pp="termpdf.py"
 alias qp='qpdf --empty --pages'
 alias k=kubectl
+alias run='podman run --rm'
 
 #fix obvious typo's
 alias cd..='cd ..'
@@ -187,7 +188,6 @@ autoload -Uz lock
 autoload -Uz my-slack
 autoload -Uz doccc
 autoload -Uz gg 
-autoload -Uz create-ci-task 
 autoload -Uz clearusb 
 autoload -Uz get-git-path
 autoload -Uz update-tmux-pane
@@ -291,7 +291,7 @@ if command -v go > /dev/null; then
 fi
 
 # Google tools
-export GOOGLE_TOOLS=/home/alourie/GoogleAndroidTools
+export GOOGLE_TOOLS=$HOME/GoogleAndroidTools
 if [ -d ${GOOGLE_TOOLS} ]; then
 	path+=(${GOOGLE_TOOLS}/ndk-bundle ${GOOGLE_TOOLS}/platform-tools)
 fi
@@ -336,7 +336,7 @@ if command -v keychain > /dev/null; then
 		# Just load all paired keys
 		for f in $HOME/.ssh/*; do
 			if [[ -f $f\.pub ]]; then
-				eval $(keychain -q --agents ssh --eval $f)
+				eval $(keychain -q --ssh-allow-gpg --eval $f)
 			fi
 		done
 	fi
@@ -354,14 +354,14 @@ eval "$(starship init zsh)"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/alourie/.miniconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('$HOME/.miniconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/alourie/.miniconda/etc/profile.d/conda.sh" ]; then
-        . "/home/alourie/.miniconda/etc/profile.d/conda.sh"
+    if [ -f "$HOME/.miniconda/etc/profile.d/conda.sh" ]; then
+        . "$HOME/.miniconda/etc/profile.d/conda.sh"
     else
-        export PATH="/home/alourie/.miniconda/bin:$PATH"
+        export PATH="$HOME/.miniconda/bin:$PATH"
     fi
 fi
 unset __conda_setup
@@ -370,13 +370,17 @@ unset __conda_setup
 # direnv
 eval "$(direnv hook zsh)"
 
+# mise
+eval "$(mise hook-env -s zsh)"
+
 # PROFILING
 #zprof
-#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# FZF stuff
+source <(fzf --zsh)
 
 bindkey \^U backward-kill-line
-
-bindkey -s ^f "echo test"
+bindkey -s ^s "tmux choose-tree -Zs\n"
 
 # Autorename tmux windows
 add-zsh-hook chpwd update-tmux-pane

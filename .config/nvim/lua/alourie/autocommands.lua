@@ -1,6 +1,3 @@
-local augroup = vim.api.nvim_create_augroup
-
-
 -- Use 'q' to quit from common plugins
 vim.api.nvim_create_autocmd({ "FileType" }, {
     pattern = { "qf", "help", "man", "lspinfo", "spectre_panel", "lir" },
@@ -78,7 +75,7 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 
 -- LSP
 vim.api.nvim_create_autocmd({ "LspAttach" }, {
-    group = augroup("alourie", {}),
+    group = vim.api.nvim_create_augroup('alourie', { clear = true }),
     callback = function(ev)
         -- debug
         local client = vim.lsp.get_client_by_id(ev.data.client_id)
