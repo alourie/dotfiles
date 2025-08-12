@@ -25,6 +25,9 @@ case "$1" in
     i3b)
         choice="${XDG_CONFIG_HOME:-$HOME/.config}/i3/i3status-rust-config.toml"
     ;;
+    hypr)
+        choice="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/hyprland.conf"
+    ;;
     nvim)
         dir="${XDG_CONFIG_HOME:-$HOME/.config}/nvim"
         choice="${XDG_CONFIG_HOME:-$HOME/.config}/nvim/init.lua"
@@ -54,6 +57,7 @@ case "$1" in
         choice="$HOME/.ssh/config"
     ;;
     *)
+        echo "I don't know what to do with '$1'" && sleep 2
         choice="$HOME/Projects/zsh_functions/c"
     ;;
 esac

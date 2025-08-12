@@ -328,8 +328,7 @@ setopt interactivecomments
 # For now
 unset SSH_ASKPASS
 
-# If keychain is installed and .ssh exists, load the keys
-eval $(ssh-agent -s) > /dev/null 
+# If keychain is installed , load the keys
 if command -v keychain > /dev/null; then
 	keychain -l | grep "no identities" 2>&1 > /dev/null
 	if [[ $? = 0 && -d $HOME/.ssh ]]; then
@@ -341,7 +340,7 @@ if command -v keychain > /dev/null; then
 		done
 	fi
 else
-    echo "Something went wrong with keys"
+    echo " ***  Keychain is not installed, so keys are probably not loaded *** "
 fi
 
 # Awesome prompt (starship); only do this if not installed via the system packaging.

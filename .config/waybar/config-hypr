@@ -8,19 +8,26 @@
   "modules-right": [
     "battery",
     "cpu",
+    "disk",
     "pulseaudio",
+    "hyprland/language",
     "tray"
   ],
   "hyprland/workspaces": {
     "format": "{name}: {icon}",
     "format-icons": {
-      "active": "",
-      "default": ""
+      "active": "",
+      "default": ""
     }
+  },
+  "hyprland/language": {
+    "format-en": "  en",
+    "format-he": "  il",
+    "format-ru": "  ru"
   },
   "tray": {
     "icon-size": 21,
-    "spacing": 16
+    "spacing": 19
   },
   "clock": {
     "timezone": "Australia/Adelaide",
@@ -35,6 +42,7 @@
       "critical": 15
     },
     "format": "<span foreground='#c7ae25'>{icon}</span>{time}",
+    "format-full": " Full",
     "format-charging": "<span foreground='#a3be8c'>⚡ </span>{capacity}%",
     "format-icons": [
       "  ",
@@ -43,6 +51,11 @@
       "  ",
       "  "
     ]
+  },
+  "disk": {
+    "path": "/",
+    "format": "  {free}",
+    "interval": 30
   },
   "cpu": {
     "format": " {usage:>2}%",
@@ -58,6 +71,7 @@
   "pulseaudio": {
     "format": "{icon} {volume}%",
     "format-muted": "",
+    "format-bluetooth": "<span foreground='#928374'>{icon} </span> {volume}%",
     "format-icons": {
       "default": ["", "", " "]
     },
