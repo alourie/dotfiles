@@ -1,16 +1,17 @@
 * {
   font-family: JetbrainsMono Nerd Font;
-  font-size: 17px;
+  font-size: 19px;
   min-height: 0;
   padding-right: 2px;
   padding-left: 2px;
   padding-bottom: 0px;
   font-weight: 700;
-}
-
-* {
   color: #cdd6f4;
   background-color: #1a1b26;
+}
+
+window.e-DP1 * {
+  font-size: 14px;
 }
 
 #waybar {
@@ -45,10 +46,11 @@
 #pulseaudio,
 #network,
 #cpu,
+#language,
 #disk,
 #custom-lock,
 #custom-power {
-  background-color: #101010;
+  /* background-color: #101010; */
   padding: 0.5rem 1rem;
   margin: 5px 0;
   border-radius: 0px 5px 5px 0px;
@@ -81,7 +83,7 @@
   color: #8caaee;
   border-radius: 5px;
   margin-right: 1rem;
-  font-size: 19px;
+  /* font-size: 19px; */
 }
 
 #battery {
@@ -126,7 +128,3 @@
   border-radius: 0px 5px 5px 0px;
   color: #e78284;
 }
-
-/* #tray { */
-/*   margin-right: 1rem; */
-/* } */

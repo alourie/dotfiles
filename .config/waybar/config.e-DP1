@@ -1,0 +1,23 @@
+{
+  "name": "eDP-1",
+  "layer": "top",
+  "position": "top",
+  "output": "eDP-1",
+  "include": [
+    "$HOME/.config/waybar/modules.json"
+  ],
+  "modules-left": [
+    "hyprland/workspaces"
+  ],
+  "modules-center": [
+    "clock"
+  ],
+  "modules-right": [
+    "battery",
+    "cpu",
+    "disk",
+    "pulseaudio",
+    "hyprland/language",
+    "tray"
+  ]
+}

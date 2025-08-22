@@ -1,0 +1,23 @@
+{
+  "name": "DP-3",
+  "layer": "top",
+  "position": "top",
+  "output": "DP-3",
+  "include": [
+    "$HOME/.config/waybar/modules.json"
+  ],
+  "modules-left": [
+    "hyprland/workspaces"
+  ],
+  "modules-center": [
+    "clock"
+  ],
+  "modules-right": [
+    "battery",
+    "cpu",
+    "disk",
+    "pulseaudio",
+    "hyprland/language",
+    "tray"
+  ]
+}
