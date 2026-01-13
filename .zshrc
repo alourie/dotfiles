@@ -312,7 +312,7 @@ add-path $HOME/.cabal/bin
 
 # Conditionally add common paths in /opt
 # add-path /opt/IntelliJ/bin /opt/GoLand/bin /opt/PyCharm/bin /opt/terraform /opt/packer
-echo "/opt paths are out, be mindful"
+# echo "/opt paths are out, be mindful"
 
 # Conda (mini)
 add-path $HOME/.miniconda/bin
@@ -327,11 +327,18 @@ add-path $HOME/.luarocks/bin
 setopt interactivecomments
 # For now
 unset SSH_ASKPASS
+unset SSH_AGENT_PID
+
+if [ -z "${SSH_AUTH_SOCK}" ]; then
+  export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+fi
 
 # If keychain is installed , load the keys
 if command -v keychain > /dev/null; then
+    keychain -q --ssh-allow-gpg
 	keychain -l | grep "no identities" 2>&1 > /dev/null
 	if [[ $? = 0 && -d $HOME/.ssh ]]; then
+        keychain -q --ssh-allow-gpg
 		# Just load all paired keys
 		for f in $HOME/.ssh/*; do
 			if [[ -f $f\.pub ]]; then
