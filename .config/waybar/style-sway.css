@@ -13,22 +13,11 @@ window.DP-3 * { font-size: 22px; }
 window#waybar {
     background-color: #2e3440;
     color: #eceff4;
-    transition-property: background-color;
-    transition-duration: .5s;
 }
 
 window#waybar.hidden {
     opacity: 0.2;
 }
-
-/*
-window#waybar.empty {
-    background-color: transparent;
-}
-window#waybar.solo {
-    background-color: #FFFFFF;
-}
-*/
 
 #workspaces button {
     font-size: 22px;
@@ -113,6 +102,10 @@ window#waybar.solo {
 
 label:focus {
     background-color: #4C566A;
+}
+
+#language {
+    text-transform: capitalize;
 }
 
 #custom-media {

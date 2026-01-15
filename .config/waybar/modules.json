@@ -63,10 +63,21 @@
     },
     "on-click": "pavucontrol"
   },
+  "sway/language":  {
+    "format": "{short}",
+  },
   "custom/lock": {
     "tooltip": false,
     "on-click": "sh -c '(sleep 0.5s; hyprlock)' & disown",
     "format": ""
+  },
+  "idle_inhibitor": {
+      "format": "{icon}",
+      "format-icons": {
+          "activated": " ",
+          "deactivated": " "
+      },
+      "timeout": 30.5
   },
   "later": {
         "format": "<span class='icon'>{icon}</span> <span class='text'>{text}</span>"
