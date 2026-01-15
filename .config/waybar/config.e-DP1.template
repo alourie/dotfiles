@@ -1,0 +1,24 @@
+{
+  "name": "eDP-1",
+  "layer": "top",
+  "position": "top",
+  "output": "eDP-1",
+  "include": [
+    "$HOME/.config/waybar/modules.json"
+  ],
+  "modules-left": [
+    "ENV/workspaces"
+  ],
+  "modules-center": [
+    "clock"
+  ],
+  "modules-right": [
+    "battery",
+    "cpu",
+    "disk",
+    "pulseaudio",
+    "ENV/language",
+    "idle_inhibitor",
+    "tray"
+  ]
+}

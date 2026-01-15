@@ -79,7 +79,7 @@ default_floating_border none
 # hide_edge_borders --i3 smart
 
 # Disable cursor jumping
-mouse_warping none
+mouse_warping output
 focus_follows_mouse yes
 
 # Workspaces
@@ -343,7 +343,8 @@ bar {
 
     # font pango:DejaVu Sans Mono, FontAwesome 5 Free 10
 
-    swaybar_command "waybar -c config-sway -s style-sway.css"
+    # swaybar_command $HOME/.config/waybar/waybar.sh
+    swaybar_command waybar
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
