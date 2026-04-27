@@ -191,6 +191,7 @@ autoload -Uz gg
 autoload -Uz clearusb 
 autoload -Uz get-git-path
 autoload -Uz update-tmux-pane
+autoload -Uz make-mp3
 
 # Install the base
 if [ "${FIRST_INSTALL}" = 1 ]; then
@@ -358,26 +359,29 @@ fi
 export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 eval "$(starship init zsh)"
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('$HOME/.miniconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "$HOME/.miniconda/etc/profile.d/conda.sh" ]; then
-        . "$HOME/.miniconda/etc/profile.d/conda.sh"
-    else
-        export PATH="$HOME/.miniconda/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
+# NVM
+source /usr/share/nvm/init-nvm.sh
+
+# # >>> conda initialize >>>
+# # !! Contents within this block are managed by 'conda init' !!
+# __conda_setup="$('$HOME/.miniconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#     eval "$__conda_setup"
+# else
+#     if [ -f "$HOME/.miniconda/etc/profile.d/conda.sh" ]; then
+#         . "$HOME/.miniconda/etc/profile.d/conda.sh"
+#     else
+#         export PATH="$HOME/.miniconda/bin:$PATH"
+#     fi
+# fi
+# unset __conda_setup
+# # <<< conda initialize <<<
 
 # direnv
 eval "$(direnv hook zsh)"
 
-# mise
-eval "$(mise hook-env -s zsh)"
+# # mise
+# eval "$(mise hook-env -s zsh)"
 
 # PROFILING
 #zprof

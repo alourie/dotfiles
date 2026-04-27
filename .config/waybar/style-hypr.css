@@ -1,22 +1,20 @@
 * {
   font-family: JetbrainsMono Nerd Font;
-  font-size: 19px;
+  font-size: 17px;
   min-height: 0;
   padding-right: 2px;
   padding-left: 2px;
   padding-bottom: 0px;
   font-weight: 700;
   color: #cdd6f4;
+}
+
+window.DP-3 * { font-size: 19px; }
+
+window#waybar {
+  transition-property: background-color;
   background-color: #1a1b26;
-}
-
-window.e-DP1 * {
-  font-size: 14px;
-}
-
-#waybar {
-  background: transparent;
-  color: #c6d0f5;
+  border: none;
   margin: 2px 2px;
 }
 
@@ -26,16 +24,16 @@ window.e-DP1 * {
 }
 
 #workspaces button {
-  color: #babbf1;
-  padding: 0.4rem;
+    /* font-size: 22px; */
+    padding: 0 6px;
+    background-color: transparent;
+    color: #eceff4;
 }
 
-#workspaces button.active {
-  color: #99d1db;
-}
-
-#workspaces button:hover {
-  color: #85c1dc;
+#workspaces button.focused {
+    font-size: 16px;
+    color: #eceff4;
+    background-color: #5e81ac;
 }
 
 #custom-music,

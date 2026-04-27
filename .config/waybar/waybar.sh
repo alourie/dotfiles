@@ -19,4 +19,4 @@ echo "Detected $desktop" | tee /tmp/waybar.log
 sed -e "s/ENV/$desktop/g" ~/.config/waybar/config.DP-3.template > ~/.config/waybar/config.DP-3
 sed -e "s/ENV/$desktop/g" ~/.config/waybar/config.e-DP1.template > ~/.config/waybar/config.e-DP1
 
-waybar -c $HOME/.config/waybar/config -s $HOME/.config/waybar/style.css
+waybar -c "$HOME/.config/waybar/config-${desktop}" -s "$HOME/.config/waybar/style-${desktop}.css"
