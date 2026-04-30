@@ -1,156 +1,130 @@
 * {
-    padding: 0 4px;
-    border: none;
-    border-radius: 0;
-    font-family: Inter Semi Bold, Helvetica, Arial, sans-serif;
-    font-size: 17px;
-    font-weight: 600;
-    min-height: 0;
+  font-family: JetbrainsMono Nerd Font;
+  font-size: 17px;
+  min-height: 0;
+  padding-right: 2px;
+  padding-left: 2px;
+  padding-bottom: 0px;
+  font-weight: 700;
+  color: #cdd6f4;
 }
 
-window.DP-3 * { font-size: 22px; }
+window.DP-3 * { font-size: 19px; }
 
 window#waybar {
-    background-color: #2e3440;
-    color: #eceff4;
+  transition-property: background-color;
+  background-color: #1a1b26;
+  border: none;
+  margin: 2px 2px;
 }
 
-window#waybar.hidden {
-    opacity: 0.2;
+#workspaces {
+  margin: 5px;
+  margin-left: 1rem;
 }
 
 #workspaces button {
-    font-size: 22px;
+    /* font-size: 22px; */
     padding: 0 6px;
     background-color: transparent;
     color: #eceff4;
 }
 
-/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
-#workspaces button:hover {
-    font-size: 16px;
-    background: #434C5E;
-    box-shadow: inherit;
-}
-
 #workspaces button.focused {
-    font-size: 16px;
     background-color: #5e81ac;
 }
 
 #workspaces button.urgent {
-    font-size: 16px;
     background-color: #d08770;
 }
 
-#mode {
-    background-color: #64727D;
-    border-bottom: 3px solid #eceff4;
+#custom-music,
+#tray,
+#backlight,
+#clock,
+#battery,
+#pulseaudio,
+#network,
+#cpu,
+#language,
+#disk,
+#custom-lock,
+#custom-power {
+  /* background-color: #101010; */
+  padding: 0.5rem 1rem;
+  margin: 5px 0;
+  border-radius: 0px 5px 5px 0px;
+}
+
+#custom-stream_status {
+  background-color: #101010;
+  padding: 0.5rem 1rem;
+  margin: 5px 0;
+  border-radius: 0px 5px 5px 0px;
+}
+
+#custom-stream_status.up {
+  color: #c3e88d;
+}
+
+#custom-stream_status.warning {
+  color: #ff9e64;
+}
+
+#custom-stream_status.down {
+  color: #ea999c;
+}
+
+#memory {
+  border-radius: 0px 5px 5px 0px;
+}
+
+#clock {
+  color: #8caaee;
+  border-radius: 5px;
+  margin-right: 1rem;
+  /* font-size: 19px; */
 }
 
 #battery {
-    font-size: 17px;
-    font-weight: 600;
-    padding: 0 8px;
-    margin: 0 2px;
-    color: #eceff4;
-}
-
-#battery.DP-3 {
-    font-size: 19px;
-    font-weight: 600;
-    padding: 0 8px;
-    margin: 0 2px;
-    color: #eceff4;
-}
-
-#clock,
-#cpu,
-#memory,
-#temperature,
-#backlight,
-#network,
-#pulseaudio,
-#custom-media,
-#tray,
-#mode,
-#idle_inhibitor,
-#mpd {
-    padding: 0 8px;
-    margin: 0 2px;
-    color: #eceff4;
+  color: #a6d189;
 }
 
 #battery.charging {
-    color: #a3be8c;
+  color: #a6d189;
 }
 
-@keyframes blink {
-    to {
-        color: #eceff4;
-    }
+#battery.warning:not(.charging) {
+  color: #e78284;
 }
 
-#battery.critical:not(.charging) {
-    color: #b5616a;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+#backlight {
+  color: #e5c890;
 }
 
-label:focus {
-    background-color: #4C566A;
+#backlight,
+#battery {
+  border-radius: 0;
 }
 
-#language {
-    text-transform: capitalize;
+#pulseaudio {
+  color: #ea999c;
+  /* border-radius: 5px 0px 0px 5%; */
+  /* margin-left: 1rem; */
 }
 
-#custom-media {
-    color: #2a5c45;
-    min-width: 100px;
+#custom-music {
+  color: #ca9ee6;
+  border-radius: 5px;
 }
 
-#custom-media.custom-spotify {
-    background-color: #66cc99;
+#custom-lock {
+  border-radius: 5px 0px 0px 5px;
+  color: #babbf1;
 }
 
-#custom-media.custom-vlc {
-    background-color: #ffa000;
-}
-
-#temperature.critical {
-    color: #BF616A;
-}
-
-#idle_inhibitor {
-    background-color: #2d3436;
-}
-
-#mpd {
-    color: #a3be8c;
-}
-
-#mpd.disconnected {
-    color: #bf616a;
-}
-
-#mpd.stopped {
-    color: #90b1b1;
-}
-
-#mpd.paused {
-    color: #51a37a;
-}
-
-#custom-menu, #custom-power {
-    padding: 0 9px;
-    background: #88c0d0;
-    color: #eceff5;
-}
-
-#custom-menu button:hover {
-    color: black;
+#custom-power {
+  margin-right: 1rem;
+  border-radius: 0px 5px 5px 0px;
+  color: #e78284;
 }
