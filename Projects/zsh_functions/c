@@ -56,6 +56,9 @@ case "$1" in
     s|ssh)
         choice="$HOME/.ssh/config"
     ;;
+    tmux)
+        choice="${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf"
+    ;;
     *)
         echo "I don't know what to do with '$1'" && sleep 2
         choice="$HOME/Projects/zsh_functions/c"

@@ -40,3 +40,5 @@ vim.opt.updatetime = 50 -- faster completion (4000ms default)
 vim.opt.whichwrap:append("<,>,[,],h,l")
 vim.opt.wrap = false -- display lines as one long line
 vim.opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
+
+vim.g.have_nerd_font = true

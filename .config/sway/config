@@ -56,7 +56,8 @@ input type:touchpad {
 seat * hide_cursor 10000
 seat seat0 xcursor_theme Breeze
 
-bindsym $hyper+y exec swaylock -i $wallpaper & sleep 1 && powerctl mem
+# bindsym $hyper+y exec swaylock -i $wallpaper & sleep 1 && powerctl mem
+bindsym $hyper+y exec noctalia msg session lock && sleep 1 && powerctl mem
 exec swayidle -w \
     timeout 598  'swaylock -i $wallpaper' \
     timeout 600  'swaymsg "output * dpms off"' \
@@ -167,10 +168,12 @@ bindsym --to-code {
     # Terminal
     $hyper+Return exec $term
     $hyper+Shift+Return exec $term --config NONE /bin/bash
+    $hyper+Shift+L exec noctalia msg session lock
 
     # Launcher
     $hyper+d          fullscreen disable, exec wofi --show run
-    $hyper+space          fullscreen disable, exec wofi --allow-images --show drun
+    $hyper+space          fullscreen disable, exec noctalia msg panel-toggle launcher
+    # $hyper+space          fullscreen disable, exec wofi --allow-images --show drun
     # $hyper+p          fullscreen disable, exec "wl-clipboard-manager lock; passmenu -p pass; wl-clipboard-manager unlock"
     # $hyper+m          fullscreen disable, exec udiskie-dmenu
     # $hyper+grave        fullscreen disable, exec wl-clipboard-manager dmenu
@@ -237,8 +240,8 @@ bindsym --to-code {
 
 
     # Notification actions
-    ctrl+space exec makoctl dismiss
-    $hyper+o exec makoctl menu dmenu
+    # ctrl+space exec makoctl dismiss
+    # $hyper+o exec makoctl menu dmenu
 
     # Brightness control
     XF86MonBrightnessUp         exec light -A 1%
@@ -344,10 +347,13 @@ bar {
     # font pango:DejaVu Sans Mono, FontAwesome 5 Free 10
 
     # swaybar_command $HOME/.config/waybar/waybar.sh
-    swaybar_command waybar
+    # swaybar_command waybar
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
     # status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1; done
     # status_command i3blocks
 }
+
+# Load shell
+exec noctalia

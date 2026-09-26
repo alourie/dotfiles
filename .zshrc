@@ -11,7 +11,7 @@ ZINIT_HOME="${HOME}/.zinit"
 export PROJECTS="$HOME/Projects"
 
 # EDITOR
-# export NVIM_APPNAME=nvim-new
+export NVIM_APPNAME=nvim-fixed
 # export nvim=$HOME/.local/bin/nvim
 # export NVIM_APPNAME=nvim
 export EDITOR=$HOME/Projects/zsh_functions/mvim
@@ -29,9 +29,10 @@ alias picsort="$PROJECTS/merge_pics/merge_go/picsort"
 alias showbig="du -sh * | grep -e '\dG'"
 alias showst="lsblk | ack -v \"loop|ram|rom\""
 alias cls="clear"
-alias nn="notify-send \"all done\" -t 3000"
+alias nn="paplay /usr/lib/slack/resources/calls_confirmation_v2.mp3 && notify-send \"all done\" -t 3000"
 alias nne="notify-send -u critical -a \"shell\" \"error!\" -t 3000"
 alias config='git --git-dir=$HOME/.dots/ --work-tree=$HOME'
+alias yget="yt-dlp --cookies-from-browser firefox "
 alias gcl="git restore .idea"
 alias gst="git stu"
 alias gf="gix fetch"
@@ -41,6 +42,7 @@ alias pp="termpdf.py"
 alias qp='qpdf --empty --pages'
 alias k=kubectl
 alias run='podman run --rm'
+alias ginit="gset git"
 
 #fix obvious typo's
 alias cd..='cd ..'
@@ -183,7 +185,7 @@ autoload -Uz c
 autoload -Uz edv
 autoload -Uz set-tokens
 autoload -Uz add-path
-autoload -Uz ginit
+autoload -Uz gset
 autoload -Uz lock
 autoload -Uz my-slack
 autoload -Uz doccc
@@ -192,6 +194,8 @@ autoload -Uz clearusb
 autoload -Uz get-git-path
 autoload -Uz update-tmux-pane
 autoload -Uz make-mp3
+autoload -Uz space
+autoload -Uz mvim
 
 # Install the base
 if [ "${FIRST_INSTALL}" = 1 ]; then
@@ -330,26 +334,28 @@ setopt interactivecomments
 unset SSH_ASKPASS
 unset SSH_AGENT_PID
 
-if [ -z "${SSH_AUTH_SOCK}" ]; then
-  export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
-fi
+# Setup ssh socket properly
+# if [ -z "${SSH_AUTH_SOCK}" ]; then
+#   export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+# fi
+export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
 
 # If keychain is installed , load the keys
-if command -v keychain > /dev/null; then
-    keychain -q --ssh-allow-gpg
-	keychain -l | grep "no identities" 2>&1 > /dev/null
-	if [[ $? = 0 && -d $HOME/.ssh ]]; then
-        keychain -q --ssh-allow-gpg
-		# Just load all paired keys
-		for f in $HOME/.ssh/*; do
-			if [[ -f $f\.pub ]]; then
-				eval $(keychain -q --ssh-allow-gpg --eval $f)
-			fi
-		done
-	fi
-else
-    echo " ***  Keychain is not installed, so keys are probably not loaded *** "
-fi
+# if command -v keychain > /dev/null; then
+#     keychain -q --ssh-allow-gpg
+# 	keychain -l | grep "no identities" 2>&1 > /dev/null
+# 	if [[ $? = 0 && -d $HOME/.ssh ]]; then
+#         keychain -q --ssh-allow-gpg
+# 		# Just load all paired keys
+# 		for f in $HOME/.ssh/*; do
+# 			if [[ -f $f\.pub ]]; then
+# 				eval $(keychain -q --ssh-allow-gpg --eval $f)
+# 			fi
+# 		done
+# 	fi
+# else
+#     echo " ***  Keychain is not installed, so keys are probably not loaded *** "
+# fi
 
 # Awesome prompt (starship); only do this if not installed via the system packaging.
 if ! command -v starship > /dev/null ; then

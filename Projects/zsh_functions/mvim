@@ -3,7 +3,7 @@
 
 if [ -z $NVIM ]; then
     # basic nvim
-    nvim $*
+    exec nvim $*
 else
-    nvim --server $NVIM --remote $(realpath $1)
+    exec nvim --server $NVIM --remote $(realpath $1)
 fi

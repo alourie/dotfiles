@@ -1,0 +1,354 @@
+# Noctalia v5 (5.0.1) bar configured to match the omarchy-shell bar
+# (omacom/omarchy, branch quattro, 4.0.0.alpha).
+#
+# Every value below is either an omarchy measurement or a documented Noctalia
+# default. Numbers in comments are the omarchy source they came from.
+#
+# Companion file: ~/.config/noctalia/palettes/OmarchyTokyoNight.json
+# Without it the bar falls back to the builtin "Noctalia" palette and the
+# background/foreground are wrong.
+
+# ── Palette ───────────────────────────────────────────────────────────────────
+# The bar background is palette role `surface` and the widget foreground is role
+# `on_surface`; neither is settable per bar, so colour parity has to come from
+# the palette file. Noctalia's builtin "Tokyo-Night" is close but paints text in
+# #c0caf5 (bright_foreground) where omarchy paints #a9b1d6 (foreground).
+
+[shell]
+font_family = "JetBrainsMono Nerd Font"
+launcher_categories = false       # category filters, Tab toggles while open
+launcher_show_icons = true
+launcher_compact = true         # smaller icons, tighter rows, no subtitles
+launcher_session_search = true  # fold session actions into plain search vs. requiring /session
+launcher_sort_by_usage = true
+
+
+[lockscreen]
+show_media = false
+show_weather = false
+
+[theme]
+mode           = "dark"
+source         = "custom"
+custom_palette = "TokyoNight"   # -> palettes/OmarchyTokyoNight.json
+
+[wallpaper]
+enabled             = true
+fill_color          = "primary" # optional fallback/fill color; image wallpapers take priority
+
+[wallpaper.default]
+# path = "/usr/share/archlinux-betterlockscreen/wallpapers/rocket-7680x4320.png"
+path = "color:#5e81ac"
+
+# ── Bar geometry and type ─────────────────────────────────────────────────────
+
+[bar.default.monitor.Dell]
+position           = "top"     # omarchy: position = "top"
+enabled            = true
+
+# omarchy [bar] size-horizontal = 26 (default/themed/shell.toml.tpl)
+thickness          = 40 
+
+# omarchy [bar] background-alpha = 1.0 over the theme background
+background_opacity = 1.0
+
+# Full-width strip flush to the top edge: no inset, no rounding, no carve.
+# Noctalia defaults are margin_ends = 100, radius = 12, concave_edge_corners = true.
+margin_ends        = 0
+margin_edge        = 0
+radius             = 0
+concave_edge_corners = false
+
+# Flat strip: omarchy draws no border, no drop shadow and no widget capsules.
+border_width       = 0.0
+shadow             = false
+capsule            = false
+hover_highlight    = false     # omarchy has no hover fill on the bar
+
+# omarchy anchors its module groups 8 px from the screen edges (Bar.qml:1130/1136)
+padding            = 8
+
+# omarchy gives sections 0 gap and packs widgets into fixed slots (27 px icon
+# slot with a 13 px glyph, 8.5 px text padding). Noctalia has one uniform gap and
+# no per-widget slot, so 10 px is the closest single value to the ~11 px of slack
+# between omarchy icon inks.
+widget_spacing     = 24
+
+# Glyphs: 16 px base * 0.85 = 13.6 px  (omarchy icon-font = 13)
+# Labels: 14 px base * 0.85 * 1.0 = 11.9 px (omarchy font.body = 12)
+scale              = 1.25
+font_scale         = 1
+font_weight        = 800                        # omarchy draws nothing bold
+
+# omarchy resolves `monospace` through fontconfig to JetBrainsMono Nerd Font
+# (default/fontconfig/conf.avail/50-omarchy.conf). Scoped to the bar on purpose:
+# [shell] font_family would repaint the launcher, panels and settings too.
+font_family        = "JetBrainsMono Nerd Font"
+
+# omarchy layout: left = menu, workspaces · center = indicators, clock (anchored),
+# keyboard-layout, weather, update · right = tray, bluetooth, network, audio,
+# monitor, power. The center order below follows omarchy's exactly; the clock
+# stays pinned to the midline by `anchor`, and everything else flanks it.
+start  = ["workspaces"]
+center = ["tray", "clock"]
+end    = ["menu-gap", "cpu", "disk", "battery", "caffeine", "nightlight", "network", "volume", "keyboard_layout", "notifications"]
+
+# Deliberately not on the bar (no purpose match in the omarchy default layout):
+#   media, notifications, clipboard, wallpaper, control-center, session,
+#   settings, active_window, taskbar, sysmon, screenshot.
+# Losing `session` means there is no logout/power affordance on the bar; add it
+# to `end` if that matters more than parity.
+
+# ── Bar geometry and type ─────────────────────────────────────────────────────
+
+[bar.default.monitor.eDP-1]
+match = "eDP-1"
+position           = "top"     # omarchy: position = "top"
+enabled            = true
+
+# omarchy [bar] size-horizontal = 26 (default/themed/shell.toml.tpl)
+thickness          = 40 
+
+# omarchy [bar] background-alpha = 1.0 over the theme background
+background_opacity = 1.0
+
+# Full-width strip flush to the top edge: no inset, no rounding, no carve.
+# Noctalia defaults are margin_ends = 100, radius = 12, concave_edge_corners = true.
+margin_ends        = 0
+margin_edge        = 0
+radius             = 0
+concave_edge_corners = false
+
+# Flat strip: omarchy draws no border, no drop shadow and no widget capsules.
+border_width       = 0.0
+shadow             = false
+capsule            = false
+hover_highlight    = false     # omarchy has no hover fill on the bar
+
+# omarchy anchors its module groups 8 px from the screen edges (Bar.qml:1130/1136)
+padding            = 8
+
+# omarchy gives sections 0 gap and packs widgets into fixed slots (27 px icon
+# slot with a 13 px glyph, 8.5 px text padding). Noctalia has one uniform gap and
+# no per-widget slot, so 10 px is the closest single value to the ~11 px of slack
+# between omarchy icon inks.
+widget_spacing     = 20
+
+# Glyphs: 16 px base * 0.85 = 13.6 px  (omarchy icon-font = 13)
+# Labels: 14 px base * 0.85 * 1.0 = 11.9 px (omarchy font.body = 12)
+scale              = 1.2
+font_scale         = 1
+font_weight        = 700                        # omarchy draws nothing bold
+
+# omarchy resolves `monospace` through fontconfig to JetBrainsMono Nerd Font
+# (default/fontconfig/conf.avail/50-omarchy.conf). Scoped to the bar on purpose:
+# [shell] font_family would repaint the launcher, panels and settings too.
+font_family        = "JetBrainsMono Nerd Font"
+
+# omarchy layout: left = menu, workspaces · center = indicators, clock (anchored),
+# keyboard-layout, weather, update · right = tray, bluetooth, network, audio,
+# monitor, power. The center order below follows omarchy's exactly; the clock
+# stays pinned to the midline by `anchor`, and everything else flanks it.
+start  = ["workspaces"]
+center = ["tray", "clock"]
+end    = ["menu-gap", "cpu", "disk", "battery", "caffeine", "nightlight", "network", "volume", "keyboard_layout", "notifications"]
+
+# Deliberately not on the bar (no purpose match in the omarchy default layout):
+#   media, notifications, clipboard, wallpaper, control-center, session,
+#   settings, active_window, taskbar, sysmon, screenshot.
+# Losing `session` means there is no logout/power affordance on the bar; add it
+# to `end` if that matters more than parity.
+
+# ── Widgets ───────────────────────────────────────────────────────────────────
+
+# omarchy.menu — logo glyph, left = menu, right = terminal.
+# Noctalia renders bar glyphs from its bundled Tabler font, so Omarchy's U+E900
+# logo cannot be used. Drop an SVG at ~/Pictures/omarchy.svg and uncomment the
+# two image lines to restore the logo (SVG is rasterized via librsvg).
+[widget.launcher]
+# custom_image            = "~/Pictures/omarchy.svg"
+# custom_image_colorize   = true
+
+# The 12 px gap omarchy's own example puts between menu and workspaces.
+# A spacer suppresses widget_spacing on both sides, so this is exactly 12 px.
+[widget.menu-gap]
+type   = "spacer"
+length = 12
+
+# omarchy.workspaces — digits, unoccupied dimmed to 50 %, focused marked.
+# "minimal" draws the labels with no pill backgrounds, which is what omarchy does.
+[widget.workspaces]
+scale                 = 1.3
+style                 = "regular"
+show_labels           = true
+label_source          = "id"
+focused_color         = "primary"     # #7aa2f7 accent
+empty_color           = "surface"
+occupied_color        = "surface"
+urgent_color          = "error"       # #f7768e
+change_color_on_hover = false
+capsule_radius        = 2
+active_pill_size      = 1.2
+inactive_pill_size    = 1.2
+pill_scale            = 1.5
+font_family           = "JetBrainsMono Nerd Font Propo"
+
+# omarchy.clock — "dddd HH:mm", pinned to the exact midline (centerAnchor).
+# omarchy's formatAlt "d MMMM 'W'ww yyyy" has no Noctalia click-to-cycle
+# equivalent, so it lives in the tooltip instead.
+[widget.clock]
+anchor         = true
+format         = "%A %d %b %H:%M"
+tooltip_format = "%e %B W%V %Y"
+color = "#8caaee"
+font_weight = 800
+
+[widget.clock.actions]
+left  = "panel-toggle control-center calendar"   # omarchy: left = calendar popup
+right = "panel-toggle control-center"
+
+# omarchy.keyboard-layout — short code only, no icon, hides itself on a
+# single-layout install.
+[widget.keyboard_layout]
+show_glyph              = false
+show_label              = true
+display                 = "short"
+hide_when_single_layout = true
+font_weight = 800
+# font_family        = "JetBrainsMono Nerd Font Propo"
+
+# omarchy.weather — condition glyph only, in a 21 px status slot.
+# Needs [weather] enabled = true and a resolved [location] below.
+# Caveat: unlike omarchy's widget, this one never hides itself. With no location
+# resolved it prints the literal label "No location" (or "Weather off" when
+# [weather] is disabled), which omarchy's bar never shows. If the geocoder is
+# unreachable, set `enabled = false` here rather than leaving a text stub on the
+# bar.
+[widget.weather]
+show_condition   = false
+show_temperature = false
+
+# omarchy.tray — chevron plus hidden icons. Noctalia's drawer opens on click,
+# not on hover; that difference is not configurable.
+[widget.tray]
+drawer                 = false
+hide_passive           = false
+match_adjacent_spacing = true
+
+# omarchy.indicators — only the capture-privacy half has a counterpart.
+# Dictation / Reminder / DND / StayAwake / NightLight have no Noctalia widget
+# with the same purpose.
+# [widget.privacy]
+# hide_inactive = true
+# active_color  = "error"        # omarchy paints active indicators in `red`
+# icon_spacing  = 4
+#
+
+# omarchy.bluetooth / omarchy.network — icon only.
+[widget.bluetooth]
+
+[widget.brightness]
+
+[widget.network]
+show_label = false
+vpn_status = "replace"         # omarchy.tailscale folds into the network icon
+
+# omarchy.audio — icon only, muted state in red.
+[widget.volume]
+show_label  = false
+mute_color  = "error"
+font_weight = 700
+
+# omarchy.microphone — ships in the catalogue, invisible until a source is live.
+[widget.mic]
+type               = "volume"
+device             = "input"
+show_label         = false
+hide_when_inactive = true
+mute_color         = "error"
+font_weight        = 700
+
+# omarchy.power (battery half) — icon only. The widget hides itself when no
+# battery is present, so a desktop keeps the omarchy look.
+[widget.battery]
+enabled = true
+show_label       = true
+hide_when_plugged = false
+warning_color    = "error"
+label_content = "time"
+font_weight = 800
+color = "#9ece6a"
+
+# Not enabled — omarchy.system-update is invisible until an update is pending,
+# and a Noctalia custom_button is always visible, so enabling it would change
+# the bar's resting state. Uncomment for a manual update launcher instead.
+# [widget.update]
+# type    = "custom_button"
+# glyph   = "refresh"
+# tooltip = "Check for updates"
+# [widget.update.actions]
+# left = "exec kitty -e paru -Syu"
+
+# Not enabled — omarchy has no power-profile bar widget.
+[widget.power_profile]
+enabled = true
+
+# Not enabled — omarchy.indicators' remaining states, as separate widgets.
+[widget.nightlight]
+enabled = true
+[widget.caffeine]
+enabled = true
+
+# Not enabled — omarchy.media exists but is not in omarchy's default layout.
+# [widget.media]
+# hide_album_art = true
+# hide_artist    = true
+
+# ── Services the bar depends on ───────────────────────────────────────────────
+
+# weather widget
+[weather]
+enabled         = true
+refresh_minutes = 30
+unit            = "celsius"
+effects         = false
+
+# feeds weather (and night light / theme auto mode)
+[location]
+auto_locate = false
+address     = "Adelaide, SA"      # geocoded; or set latitude/longitude
+
+# ── Coexistence with an existing shell ────────────────────────────────────────
+# Noctalia registers org.freedesktop.Notifications and
+# org.kde.StatusNotifierWatcher on a non-Plasma session (PACKAGING.md). On an
+# Omarchy desktop omarchy-shell already owns both: the notification daemon is
+# its `omarchy.notifications` plugin (shell/plugins/notifications/Service.qml)
+# and the tray host lives in the bar (Quickshell.Services.SystemTray).
+#
+#   omarchy toggle bar off      # releases the tray host, keeps the Omarchy menu/keys
+#
+# That leaves the notification name contested. Pick one side:
+#   - keep omarchy's daemon:  [notification] enable_daemon = false
+#     (Noctalia drops its D-Bus service, application_services.cpp:170-178;
+#      toasts then look like Omarchy's, not Noctalia's)
+#   - keep Noctalia's daemon: stop omarchy-shell (loses the Omarchy menu and its
+#      keybindings)
+# Left at the default (Noctalia's daemon on) because this config is about the bar.
+# [notification]
+# enable_daemon = false
+
+[widget.notification]
+hide_when_no_unread = true
+
+[widget.cpu]
+visualization = "none"
+type = "sysmon"
+stat = "cpu_usage"
+font_weight = 700
+
+[widget.disk]
+visualization = "none"
+type = "sysmon"
+stat = "disk_free"
+path = "/"
+font_weight = 700

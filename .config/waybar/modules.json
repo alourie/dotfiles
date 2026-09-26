@@ -13,7 +13,7 @@
   },
   "tray": {
     "icon-size": 21,
-    "spacing": 17
+    "spacing": 19
   },
   "clock": {
     "timezone": "Australia/Adelaide",
@@ -64,7 +64,7 @@
     "on-click": "pavucontrol"
   },
   "sway/language":  {
-    "format": "{short}",
+    "format": "{short} ",
   },
   "custom/lock": {
     "tooltip": false,
@@ -72,7 +72,7 @@
     "format": ""
   },
   "idle_inhibitor": {
-      "format": "{icon}",
+      "format": " {icon}",
       "format-icons": {
           "activated": " ",
           "deactivated": " "
