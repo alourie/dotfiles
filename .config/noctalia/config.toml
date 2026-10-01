@@ -91,7 +91,7 @@ font_family        = "JetBrainsMono Nerd Font"
 # stays pinned to the midline by `anchor`, and everything else flanks it.
 start  = ["workspaces"]
 center = ["tray", "clock"]
-end    = ["menu-gap", "cpu", "disk", "battery", "caffeine", "nightlight", "network", "volume", "keyboard_layout", "notifications"]
+end    = ["menu-gap", "cpu", "disk", "battery", "caffeine", "nightlight", "network", "bluetooth", "volume", "keyboard_layout", "notifications"]
 
 # Deliberately not on the bar (no purpose match in the omarchy default layout):
 #   media, notifications, clipboard, wallpaper, control-center, session,
