@@ -25,7 +25,7 @@ function install_arch() {
     fi
 
     # Install omarchy
-    wget -qO- https://raw.githubusercontent.com/alourie/omarchy/refs/heads/main/boot.sh | bash
+    wget -qO- https://raw.githubusercontent.com/alourie/omarchy/refs/heads/own-stuff/boot.sh | bash
 }
 
 function setup_npm() {
