@@ -24,8 +24,13 @@ function install_arch() {
         rm -rf paru
     fi
 
-    # Install omarchy
-    wget -qO- https://raw.githubusercontent.com/alourie/omarchy/refs/heads/own-stuff/boot.sh | bash
+    # Install stuff
+    for f in $HOME/Projects/install-arch/*.sh; do source "$f"; done
+    # Ensure locate is up to date now that everything has been installed
+    sudo updatedb
+
+    echo "All done"
+
 }
 
 function setup_npm() {
