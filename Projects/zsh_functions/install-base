@@ -25,7 +25,8 @@ function install_arch() {
     fi
 
     # Install stuff
-    for f in $HOME/Projects/personal/install-arch/*.sh; do source "$f"; done
+    python3 $HOME/Projects/personal/install-arch/install.py
+    
     # Ensure locate is up to date now that everything has been installed
     sudo updatedb
 

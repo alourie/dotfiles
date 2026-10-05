@@ -1,4 +1,4 @@
-paru -Sy --noconfirm --needed woff2-font-awesome noto-fonts noto-fonts-emoji noto-fonts-cjk noto-fonts-extra ttf-jetbrains-mono-nerd nerd-fonts-inter
+paru -Sy --noconfirm --needed ttf-jetbrains-mono-nerd nerd-fonts-inter
 
 # # ia Writer mono???
 # mkdir -p ~/.local/share/fonts

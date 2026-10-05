@@ -3,4 +3,4 @@ paru -Sy --noconfirm --needed \
   fd fzf ripgrep zoxide bat \
   wl-clipboard fastfetch \
   man less whois plocate \
-  ghostty
+  ghostty starship

@@ -1,5 +1,5 @@
 paru -S --noconfirm --needed \
   brightnessctl playerctl pamixer pavucontrol wireplumber \
-  wl-clip-persist wl-copy \
+  wl-clip-persist \
   nautilus sushi  \
   evince imv mpv
