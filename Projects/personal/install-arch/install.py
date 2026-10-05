@@ -22,6 +22,7 @@ system_list.extend(
         "whois",
         "plocate",
         "ghostty",
+        "tmux",
         "starship",
     ]
 )
