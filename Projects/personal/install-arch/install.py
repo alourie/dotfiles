@@ -4,12 +4,11 @@ paru_list: list(str) = []
 system_list: list(str) = []
 
 ####   terminal
-paru_list.extend(
+system_list.extend(
     [
         "wget",
         "curl",
         "unzip",
-        "inetutils",
         "fd",
         "fzf",
         "ripgrep",
@@ -34,7 +33,7 @@ system_list.extend(["pass", "qpdf", "base-devel"])
 
 ####   bluetooth
 # Install bluetooth controls
-paru_list.extend(
+system_list.extend(
     [
         "bluez",
         "bluez-utils",
@@ -42,7 +41,7 @@ paru_list.extend(
 )
 
 ####   desktop
-paru_list.extend(
+system_list.extend(
     [
         "brightnessctl",
         "playerctl",
@@ -59,9 +58,8 @@ paru_list.extend(
 )
 
 ####   development
-paru_list.extend(
+system_list.extend(
     [
-        "cargo",
         "clang",
         "llvm",
         "imagemagick",
@@ -88,19 +86,19 @@ paru_list.extend(
 )
 
 ####   nvim
-paru_list.extend(
+system_list.extend(
     [
         "neovim",
         "luarocks",
         "tree-sitter-cli",
-        "nvim-treesitter",
+        "tree-sitter",
     ]
 )
 
 ####   power
 # Setting the performance profile can make a big difference. By default, most systems seem to start in balanced mode,
 # even if they're not running off a battery. So let's make sure that's changed to performance.
-paru_list.extend(
+system_list.extend(
     [
         "power-profiles-daemon",
     ]
@@ -121,7 +119,7 @@ paru_list.extend(
 # sudo systemctl enable --now cups.service
 
 ####   sway
-paru_list.extend(
+system_list.extend(
     [
         "mako",
         "uwsm",
@@ -137,7 +135,7 @@ paru_list.extend(
 
 ####   theme
 # Use dark mode for QT apps too (like VLC and kdenlive)
-paru_list.extend(
+system_list.extend(
     [
         "qt6ct",
     ]
