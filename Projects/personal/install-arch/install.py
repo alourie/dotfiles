@@ -81,7 +81,7 @@ system_list.extend(
 paru_list.extend(
     [
         "ttf-jetbrains-mono-nerd",
-        "nerd-fonts-inter",
+        # "nerd-fonts-inter",
     ]
 )
 
