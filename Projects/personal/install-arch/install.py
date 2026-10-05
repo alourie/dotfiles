@@ -1,3 +1,4 @@
+import os
 import subprocess
 
 paru_list: list(str) = []
@@ -67,9 +68,9 @@ system_list.extend(
         "git-delta",
         "github-cli",
         "podman",
-        "jre-jetbrains",
     ]
 )
+paru_list.append("jre-jetbrains")
 
 # Maybe with mise?
 # system_list.extend(
@@ -173,7 +174,10 @@ def install_arch():
     run("sudo systemctl enable --now bluetooth.service")
 
     ####   mimetypes
-    run("update-desktop-database ~/.local/share/applications")
+    if os.path.exists(
+        os.path.join(os.environ.get("HOME"), ".local", "share", "applications")
+    ):
+        run("update-desktop-database ~/.local/share/applications")
 
     # Open all images with imv
     (
