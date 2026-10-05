@@ -1,0 +1,15 @@
+# vim: filetype=zsh
+#!/usr/bin/env zsh
+
+echo "Updating window $1" > /tmp/debug-tmux
+
+if [ ! -z $1 ]; then 
+    window="-t $1"
+fi
+
+if [[ ! -z "${window}" || ! -z "${TMUX}" ]]; then
+    name=$(get-git-path)
+    if [ ! -z $name ]; then
+        tmux rename-window $window $name
+    fi
+fi
