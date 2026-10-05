@@ -198,7 +198,14 @@ def install_arch():
     run("sudo sysctl kernel.unprivileged_userns_clone=1")
 
     # select default session for uwsm
-    run("uwsm select")
+    uswm_path = os.path.join(os.environ.get("HOME"), ".config", "uswm")
+    if not os.path.exist(uswm_path):
+        os.mkdir(uswm_path)
+    with open(os.path.join(uswm_path, "default-id"), "w") as f:
+        f.writelines(["sway.desktop"])
+    run("sudo systemctl disable --now ly.service")
+
+    print("All done, restart")
 
 
 if __name__ == "__main__":
