@@ -1,3 +1,4 @@
+import getpass
 import os
 import subprocess
 
@@ -26,7 +27,6 @@ system_list.extend(
         "kubectl",
         "pass",
         "base-devel",
-        "paru",
         "starship",
     ]
 )
@@ -157,11 +157,9 @@ system_list.extend(["qt6ct", "qpdf"])
 # paru_list.extend("gum")
 
 
-def run(cmd: str, with_output: bool = False) -> str:
+def run(cmd: str):
     # print(cmd.split(" "))
-    out = subprocess.check_output(cmd.split(" "), text=True).strip()
-    print(out)
-    return out if with_output else ""
+    print(subprocess.check_output(cmd.split(" "), text=True).strip())
 
 
 def paru():
@@ -211,8 +209,7 @@ def install_arch():
         f.writelines(["sway.desktop"])
 
     # Setup shell just in case
-    user = run("whoami")
-    run(f"sudo chsh -s /usr/bin/zsh {user}", with_output=True)
+    run(f"sudo chsh -s /usr/bin/zsh {getpass.getuser()}")
 
 
 if __name__ == "__main__":

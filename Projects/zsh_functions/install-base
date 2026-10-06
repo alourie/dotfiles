@@ -3,7 +3,7 @@
 function install_arch() {
     # Deps list, it's for arch; will need some update for debians/fedoras
     echo "Installing a basic arch"
-    APPS="git wget curl base-devel rustup"
+    APPS="git wget curl base-devel rustup paru"
     for app in ${(@s/ /)APPS}; do
         if ! command -v $app > /dev/null; then
             # Not installed, just do all
