@@ -3,7 +3,7 @@
 function install_arch() {
     # Deps list, it's for arch; will need some update for debians/fedoras
     echo "Installing a basic arch"
-    APPS="git wget curl base-devel"
+    APPS="git wget curl base-devel rustup"
     for app in ${(@s/ /)APPS}; do
         if ! command -v $app > /dev/null; then
             # Not installed, just do all
@@ -16,13 +16,13 @@ function install_arch() {
     install_rust
 
     # And install paru
-    if ! command -v paru > /dev/null; then
-        git clone https://aur.archlinux.org/paru.git
-        cd paru
-        makepkg -si
-        cd ..
-        rm -rf paru
-    fi
+    #if ! command -v paru > /dev/null; then
+    #    git clone https://aur.archlinux.org/paru.git
+    #    cd paru
+    #    makepkg -si
+    #    cd ..
+    #    rm -rf paru
+    #fi
 
     # Install stuff
     python3 -u $HOME/Projects/personal/install-arch/install.py

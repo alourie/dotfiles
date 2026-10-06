@@ -26,6 +26,7 @@ system_list.extend(
         "kubectl",
         "pass",
         "base-devel",
+        "paru",
         "starship",
     ]
 )
