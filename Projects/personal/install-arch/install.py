@@ -200,7 +200,7 @@ def install_arch():
 
     # select default session for uwsm
     uswm_path = os.path.join(os.environ.get("HOME"), ".config", "uswm")
-    if not os.path.exist(uswm_path):
+    if not os.path.exists(uswm_path):
         os.mkdir(uswm_path)
     with open(os.path.join(uswm_path, "default-id"), "w") as f:
         f.writelines(["sway.desktop"])
