@@ -236,6 +236,7 @@ bindsym --to-code {
     $hyper+alt+0 exec grim -g "$(slurp)" -t png - | wl-copy -t image/png
     # VMs list
     $hyper+a exec /home/alourie/Projects/scripts/start_vm.sh
+    $hyper+ctrl+a exec $HOME/Projects/scripts/audio-switch-lenovo.sh pick
 
 
 
