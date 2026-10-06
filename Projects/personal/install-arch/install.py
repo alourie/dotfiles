@@ -30,6 +30,9 @@ system_list.extend(
     ]
 )
 
+# backup
+system_list.extend(["borg", "borgmatic"])
+
 #   backgrounds
 # CURRENTLY NOOP
 
@@ -137,6 +140,9 @@ system_list.extend(
 
 #   theme
 # Use dark mode for QT apps too (like VLC and kdenlive)
+
+
+# extras
 system_list.extend(["qt6ct", "qpdf"])
 
 # Prefer dark mode everything
@@ -150,9 +156,11 @@ system_list.extend(["qt6ct", "qpdf"])
 # paru_list.extend("gum")
 
 
-def run(cmd: str):
+def run(cmd: str, with_output: bool = False) -> str:
     # print(cmd.split(" "))
-    print(subprocess.check_output(cmd.split(" "), text=True).strip())
+    out = subprocess.check_output(cmd.split(" "), text=True).strip()
+    print(out)
+    return out if with_output else ""
 
 
 def paru():
@@ -203,7 +211,7 @@ def install_arch():
 
     # Setup shell just in case
     user = run("whoami")
-    run(f"sudo chsh -s /usr/bin/zsh {user}")
+    run(f"sudo chsh -s /usr/bin/zsh {user}", with_output=True)
 
 
 if __name__ == "__main__":
