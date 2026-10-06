@@ -128,10 +128,13 @@ ex() {
 # ---------------------------------------------------------------------------
 export DOTS="$HOME/.dots"
 if [[ ! -d "$DOTS" ]]; then
+  echo "dots are not on the system, so this is the first time..."
   (( $+commands[git] )) || sudo pacman -S --needed git
   git clone --bare https://github.com/alourie/dotfiles "$DOTS"
   config config --local status.showUntrackedFiles no
   config checkout || echo "config checkout hit conflicts: move the listed files aside and re-run 'config checkout'"
+  echo "Now that dots are here, run install-base to bring all the things"
+  exit 0
 fi
 
 # ---------------------------------------------------------------------------
@@ -163,7 +166,6 @@ zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:*' use-cache yes
 zstyle ':completion:*' cache-path ~/.cache/zsh/zcompcache
-compdef k=kubectl
 
 # command-not-found via pkgfile (needs: pacman -S pkgfile && sudo pkgfile -u)
 [[ -f /usr/share/doc/pkgfile/command-not-found.zsh ]] && source /usr/share/doc/pkgfile/command-not-found.zsh

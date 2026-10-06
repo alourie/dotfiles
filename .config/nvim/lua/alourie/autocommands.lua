@@ -41,7 +41,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 })
 
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-	pattern = { "*.rs", "*.lua", "*.tf" },
+	pattern = { "*.rs", "*.lua", "*.tf", "*.py" },
 	callback = function()
 		vim.lsp.buf.format()
 	end,

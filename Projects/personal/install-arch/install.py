@@ -4,7 +4,7 @@ import subprocess
 paru_list: list(str) = []
 system_list: list(str) = []
 
-####   terminal
+#   terminal/basic
 system_list.extend(
     [
         "wget",
@@ -23,17 +23,17 @@ system_list.extend(
         "plocate",
         "ghostty",
         "tmux",
+        "kubectl",
+        "pass",
+        "base-devel",
         "starship",
     ]
 )
 
-####   backgrounds
+#   backgrounds
 # CURRENTLY NOOP
 
-####   base
-system_list.extend(["pass", "qpdf", "base-devel"])
-
-####   bluetooth
+#   bluetooth
 # Install bluetooth controls
 system_list.extend(
     [
@@ -42,7 +42,7 @@ system_list.extend(
     ]
 )
 
-####   desktop
+#   desktop
 system_list.extend(
     [
         "brightnessctl",
@@ -59,7 +59,7 @@ system_list.extend(
     ]
 )
 
-####   development
+#   development
 system_list.extend(
     [
         "clang",
@@ -79,7 +79,7 @@ paru_list.append("jre-jetbrains")
 #     "npm"
 # )
 
-####   fonts
+#   fonts
 paru_list.extend(
     [
         "ttf-jetbrains-mono-nerd",
@@ -87,7 +87,7 @@ paru_list.extend(
     ]
 )
 
-####   nvim
+#   nvim
 system_list.extend(
     [
         "neovim",
@@ -97,7 +97,7 @@ system_list.extend(
     ]
 )
 
-####   power
+#   power
 # Setting the performance profile can make a big difference. By default, most systems seem to start in balanced mode,
 # even if they're not running off a battery. So let's make sure that's changed to performance.
 system_list.extend(
@@ -114,13 +114,13 @@ system_list.extend(
 #   powerprofilesctl set performance
 # fi
 
-####   printer
+#   printer
 # paru_list.extend(
 #     "cups","cups-pdf","cups-filters","system-config-printer",
 # )
 # sudo systemctl enable --now cups.service
 
-####   sway
+#   sway
 system_list.extend(
     [
         "mako",
@@ -135,20 +135,16 @@ system_list.extend(
     ]
 )
 
-####   theme
+#   theme
 # Use dark mode for QT apps too (like VLC and kdenlive)
-system_list.extend(
-    [
-        "qt6ct",
-    ]
-)
+system_list.extend(["qt6ct", "qpdf"])
 
 # Prefer dark mode everything
 # sudo pacman -S --noconfirm gnome-themes-extra # Adds Adwaita-dark theme
 # gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"
 # gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
 
-####   xtras
+#   xtras
 # paru -S --noconfirm --needed \
 #   libreoffice
 # paru_list.extend("gum")
@@ -174,7 +170,7 @@ def install_arch():
     # Turn on bluetooth by default
     run("sudo systemctl enable --now bluetooth.service")
 
-    ####   mimetypes
+    #   mimetypes
     if os.path.exists(
         os.path.join(os.environ.get("HOME"), ".local", "share", "applications")
     ):
@@ -204,9 +200,10 @@ def install_arch():
         os.mkdir(uswm_path)
     with open(os.path.join(uswm_path, "default-id"), "w") as f:
         f.writelines(["sway.desktop"])
-    run("sudo systemctl disable --now ly.service")
 
-    print("All done, restart")
+    # Setup shell just in case
+    user = run("whoami")
+    run(f"sudo chsh -s /usr/bin/zsh {user}")
 
 
 if __name__ == "__main__":
