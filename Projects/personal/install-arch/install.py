@@ -3,10 +3,10 @@ import os
 import subprocess
 
 paru_list: list(str) = []
-system_list: list(str) = []
+pacman_list: list(str) = []
 
 #   terminal/basic
-system_list.extend(
+pacman_list.extend(
     [
         "wget",
         "curl",
@@ -32,14 +32,14 @@ system_list.extend(
 )
 
 # backup
-system_list.extend(["borg", "borgmatic"])
+pacman_list.extend(["borg", "borgmatic"])
 
 #   backgrounds
 # CURRENTLY NOOP
 
 #   bluetooth
 # Install bluetooth controls
-system_list.extend(
+pacman_list.extend(
     [
         "bluez",
         "bluez-utils",
@@ -47,7 +47,7 @@ system_list.extend(
 )
 
 #   desktop
-system_list.extend(
+pacman_list.extend(
     [
         "brightnessctl",
         "playerctl",
@@ -64,7 +64,7 @@ system_list.extend(
 )
 
 #   development
-system_list.extend(
+pacman_list.extend(
     [
         "clang",
         "llvm",
@@ -92,7 +92,7 @@ paru_list.extend(
 )
 
 #   nvim
-system_list.extend(
+pacman_list.extend(
     [
         "neovim",
         "luarocks",
@@ -104,7 +104,7 @@ system_list.extend(
 #   power
 # Setting the performance profile can make a big difference. By default, most systems seem to start in balanced mode,
 # even if they're not running off a battery. So let's make sure that's changed to performance.
-system_list.extend(
+pacman_list.extend(
     [
         "power-profiles-daemon",
     ]
@@ -125,7 +125,7 @@ system_list.extend(
 # sudo systemctl enable --now cups.service
 
 #   sway
-system_list.extend(
+pacman_list.extend(
     [
         "mako",
         "uwsm",
@@ -144,7 +144,7 @@ system_list.extend(
 
 
 # extras
-system_list.extend(["qt6ct", "qpdf"])
+pacman_list.extend(["qt6ct", "qpdf"])
 
 # Prefer dark mode everything
 # sudo pacman -S --noconfirm gnome-themes-extra # Adds Adwaita-dark theme
@@ -167,7 +167,7 @@ def paru():
 
 
 def pacman():
-    run(f"sudo pacman -Sy --noconfirm --needed {' '.join(system_list)}")
+    run(f"sudo pacman -Sy --noconfirm --needed {' '.join(pacman_list)}")
 
 
 def install_arch():

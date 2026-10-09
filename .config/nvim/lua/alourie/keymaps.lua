@@ -82,11 +82,13 @@ keymap("n", "<leader>lf", ":lua require('conform').format()<CR>", opts)
 keymap("n", "<leader>gg", "<cmd>Gitsigns toggle_current_line_blame<CR>", opts)
 
 -- Comment
-keymap("n", "<leader>/", function()
-	require("Comment.api").toggle.linewise.current()
-end, { desc = "Toggle comment" }, opts)
-keymap("x", "<leader>/", function()
-	-- ESC forces Neovim to register the visual selection bounds before running the API
-	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<ESC>", true, false, true), "x", false)
-	require("Comment.api").toggle.linewise(vim.fn.visualmode())
-end, { desc = "Toggle comment in selection" }, opts)
+-- keymap("n", "<leader>/", function()
+-- 	require("Comment.api").toggle.linewise.current()
+-- end, { desc = "Toggle comment" }, opts)
+-- keymap("x", "<leader>/", function()
+-- 	-- ESC forces Neovim to register the visual selection bounds before running the API
+-- 	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<ESC>", true, false, true), "x", false)
+-- 	require("Comment.api").toggle.linewise(vim.fn.visualmode())
+-- end, { desc = "Toggle comment in selection" }, opts)
+vim.keymap.set("n", "<leader>/", "gcc", { remap = true })
+vim.keymap.set("x", "<leader>/", "gc", { remap = true })

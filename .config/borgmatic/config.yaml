@@ -1,0 +1,38 @@
+source_directories:
+  - /home/alourie/Projects/personal
+  - /home/alourie/Documents/
+  - /home/alourie/Downloads/
+  - /home/alourie/.config/
+
+repositories:
+  - path: ssh://borg@backup/backup/laptop
+    label: qnap
+
+exclude_patterns:
+  - "**/node_modules"
+  - "**/.terraform"
+  - "**/dist"
+  - "**/build"
+  - "**/target"
+  - "**/*.qcow2"
+  - "**/*.vdi"
+  - "**/.m2"
+
+encryption_passcommand: "pass show borg"   # deferred — pass not yet migrated; placeholder
+
+ssh_command: "ssh -i /home/alourie/.ssh/borg.pub -o IdentitiesOnly=yes"
+
+keep_daily: 7
+keep_weekly: 4
+keep_monthly: 6
+
+checks:
+  - name: repository
+  - name: archives
+    frequency: 2 weeks
+
+commands:
+  - after: action
+    when: [create]
+    run:
+      - mkdir -p /home/alourie/.local/state/borg-backup && touch /home/alourie/.local/state/borg-backup/last-run

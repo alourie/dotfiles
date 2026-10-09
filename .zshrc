@@ -11,7 +11,7 @@ export PROJECTS="$HOME/Projects"
 export LANG=en_US.UTF-8     # LC_ALL intentionally not set; put locale in ~/.config/locale.conf
 
 # Editor
-export NVIM_APPNAME=nvim-fixed
+#export NVIM_APPNAME=nvim-fixed
 export EDITOR=nvim
 if [ -f "$PROJECTS/zsh_functions/mvim" ]; then
     export EDITOR="$PROJECTS/zsh_functions/mvim"   # must be executable + have a shebang
